@@ -48,12 +48,19 @@ gem "bootsnap", require: false
 # Use Sass to process CSS
 # gem "sassc-rails"
 
+# gem 'devise', '~> 4.9', '>= 4.9.2'
+gem 'simple_form', '~> 5.2'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
 end
 
 group :development do
+  gem 'rubocop-performance', '~> 1.19'
+  gem 'rubocop-rails', '~> 2.21'
+  gem 'rubocop-rspec', '~> 2.24'
+
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
 
@@ -67,6 +74,11 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
+  gem 'rspec-rails', '~> 6.0', '>= 6.0.3'
   gem "selenium-webdriver"
+end
 
+group :development, :test do
+  gem 'dotenv', '~> 2.8', '>= 2.8.1'
+  gem 'factory_bot_rails', '~> 6.2'
 end
