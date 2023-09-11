@@ -8,6 +8,7 @@ AllCops:
   Exclude:
     - '.git/**/*'
     - '.idea/**/*'
+    - 'bin/**/*'
     - 'init/*'
     - 'Rakefile'
     - 'vendor/**/*'
