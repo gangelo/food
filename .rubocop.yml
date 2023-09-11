@@ -1,0 +1,15 @@
+require:
+  - rubocop-performance
+  - rubocop-rspec
+
+AllCops:
+  TargetRubyVersion: 3.0.4
+  NewCops: enable
+  Exclude:
+    - '.git/**/*'
+    - '.idea/**/*'
+    - 'init/*'
+    - 'Rakefile'
+    - 'vendor/**/*'
+    - 'scratch*.rb'
+    - 'snippets*.rb'
