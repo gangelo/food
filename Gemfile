@@ -41,6 +41,9 @@ gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
 
+# For authentication
+gem 'devise', '~> 4.9', '>= 4.9.2'
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
@@ -50,7 +53,7 @@ gem 'bootsnap', require: false
 # Use Sass to process CSS
 gem 'sassc-rails', '~> 2.1', '>= 2.1.2'
 
-# gem 'devise', '~> 4.9', '>= 4.9.2'
+# For forms
 gem 'simple_form', '~> 5.2'
 
 group :development, :test do
@@ -58,6 +61,7 @@ group :development, :test do
   gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'dotenv', '~> 2.8', '>= 2.8.1'
   gem 'factory_bot_rails', '~> 6.2'
+  gem 'ffaker'
 end
 
 group :development do

@@ -9,6 +9,7 @@ AllCops:
     - '.git/**/*'
     - '.idea/**/*'
     - 'bin/**/*'
+    - 'db/**/*'
     - 'init/*'
     - 'Rakefile'
     - 'vendor/**/*'
