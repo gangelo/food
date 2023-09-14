@@ -62,6 +62,7 @@ group :development, :test do
   gem 'dotenv', '~> 2.8', '>= 2.8.1'
   gem 'factory_bot_rails', '~> 6.2'
   gem 'ffaker'
+  gem 'rspec-rails', '~> 6.0', '>= 6.0.3'
 end
 
 group :development do
@@ -82,6 +83,6 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara'
-  gem 'rspec-rails', '~> 6.0', '>= 6.0.3'
   gem 'selenium-webdriver'
+  gem 'shoulda-matchers'
 end
