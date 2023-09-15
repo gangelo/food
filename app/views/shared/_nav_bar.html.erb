@@ -6,7 +6,7 @@
         </a>
 
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
+          <li> <%= link_to "Home", root_path, class: "nav-link px-2 text-secondary" %></li>
           <li><a href="#" class="nav-link px-2 text-white">Features</a></li>
           <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
           <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
@@ -18,8 +18,12 @@
         </form>
 
         <div class="text-end">
+          <% if user_signed_in? %>
+          <!-- TODO: Profile here /-->
+          <% else %>
           <%= link_to "Login", new_user_session_path, class: "btn btn-outline-light me-2" %>
           <%= link_to "Sign-up", new_user_registration_path, class: "btn btn-warning" %>
+          <% end %>
         </div>
       </div>
     </div>
