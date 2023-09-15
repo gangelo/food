@@ -18,8 +18,8 @@
         </form>
 
         <div class="text-end">
-          <button type="button" class="btn btn-outline-light me-2">Login</button>
-          <button type="button" class="btn btn-warning">Sign-up</button>
+          <%= link_to "Login", new_user_session_path, class: "btn btn-outline-light me-2" %>
+          <%= link_to "Sign-up", new_user_registration_path, class: "btn btn-warning" %>
         </div>
       </div>
     </div>
