@@ -31,3 +31,13 @@
 
 en:
   hello: "Hello world"
+  activerecord:
+    attributes:
+      user:
+        email: "Email"
+        password: "Password"
+        password_confirmation: "Password confirmation"
+        username: "Username"
+  errors:
+    messages:
+      password_complexity: "must include at least one upper and lowercase letter, one number, and one special character (!, @, #, $, %, ^, &, or *)"

@@ -37,5 +37,27 @@ RSpec.describe User do
         expect(user).to validate_length_of(:password).is_at_least(8).is_at_most(128)
       end
     end
+
+    describe '#password_confirmation' do
+      it 'validates the length' do
+        expect(user).to validate_presence_of(:password_confirmation).on(:create)
+      end
+    end
+
+    describe 'password complexity' do
+      it 'validates the password complexity'
+    end
+  end
+
+  describe 'callbacks' do
+    describe 'before_save' do
+      subject(:user) { build(:user, email: email) }
+
+      let(:email) { 'UPCASE.EMAIL@SOMEWHERE.COM' }
+
+      it 'downcases the email' do
+        expect { user.save }.to change(user, :email).from(email).to(email.downcase)
+      end
+    end
   end
 end
