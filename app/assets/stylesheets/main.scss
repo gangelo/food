@@ -1,5 +1,5 @@
 .body {
-  margin: 10px;
+  margin: 0 10px;
 }
 
 .foodme-name {
@@ -23,7 +23,7 @@
   }
 }
 
-.form-signin {
+.form-signin, .form-login {
   max-width: 330px;
 
   .help-links {

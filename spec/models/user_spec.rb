@@ -20,6 +20,11 @@ RSpec.describe User do
       it 'validates the length' do
         expect(user).to validate_length_of(:email).is_at_least(3).is_at_most(320)
       end
+
+      it 'validates the uniqueness' do
+        expect(user).to validate_uniqueness_of(:email).case_insensitive
+      end
+
     end
 
     describe '#username' do
@@ -28,7 +33,7 @@ RSpec.describe User do
       end
 
       it 'validates the uniqueness' do
-        expect(user).to validate_uniqueness_of(:username)
+        expect(user).to validate_uniqueness_of(:username).case_insensitive
       end
     end
 

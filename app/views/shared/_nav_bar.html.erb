@@ -1,4 +1,5 @@
-<header class="p-3 text-bg-dark">
+<nav data-controller="nav-bar">
+  <header class="p-3 text-bg-dark">
     <div class="container">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
         <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
@@ -7,23 +8,53 @@
 
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
           <li><%= link_to "Home", root_path, class: "nav-link px-2 text-secondary" %></li>
+          <% if user_signed_in? %>
+          <li><a href="#" class="nav-link px-2 text-white">My Stores</a></li>
+          <li><a href="#" class="nav-link px-2 text-white">Shopping lists</a></li>
+          <li><a href="#" class="nav-link px-2 text-white">Items</a></li>
+          <li><a href="#" class="nav-link px-2 text-white">Labels</a></li>
+          <% else %>
           <li><a href="#" class="nav-link px-2 text-white">Features</a></li>
           <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
           <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
           <li><a href="#" class="nav-link px-2 text-white">About</a></li>
+          <% end %>
         </ul>
 
         <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-          <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search">
+          <input type="search" id="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search">
         </form>
         <div class="text-end">
           <% if user_signed_in? %>
-          <!-- TODO: Profile here /-->
+          <%= link_to "Logout",
+                      destroy_user_session_path,
+                      class: "btn btn-outline-light me-2",
+                      data: {
+                        turbo_method: :delete,
+                        turbo_confirm: "Are you sure?"
+                      }
+          %>
+          <% active = false %>
+          <%= link_to "Profile",
+                      root_path,
+                      class: ["btn btn-warning", active: active, disabled: active],
+                      data: { action: "nav-bar#navigate" }
+          %>
           <% else %>
-          <%= link_to "Login", new_user_session_path, class: "btn btn-outline-light me-2 #{disabled_if_current_page(new_user_session_path)}" %>
-          <%= link_to "Sign-up", new_user_registration_path, class: "btn btn-warning #{disabled_if_current_page(new_user_registration_path)}" %>
+          <% active = current_page?(new_user_session_path) %>
+          <%= link_to "Login",
+                      new_user_session_path,
+                      class: ["btn btn-outline-light me-2", active: active, disabled: active],
+                      data: { action: "nav-bar#navigate" }
+          %>
+          <% active = current_page?(new_user_registration_path) %>
+          <%= link_to "Sign-up", new_user_registration_path,
+                      class: ["btn btn-warning", active: active, disabled: active],
+                      data: { action: "nav-bar#navigate" }
+          %>
           <% end %>
         </div>
       </div>
     </div>
   </header>
+</nav>
