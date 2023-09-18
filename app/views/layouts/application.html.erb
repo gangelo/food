@@ -11,16 +11,12 @@
   </head>
 
   <body>
-    <%# <turbo-frame id="main" target="_top"> %>
-      <%#= turbo_frame_tag "nav-bar", src: "shared/nav_bar" %>
-      <div data-controller="nav-bar">
-        <%= render partial: 'shared/nav_bar' %>
-        <%#= turbo_frame_tag "nav-bar", src: "shared/nav_bar" %>
-      </div>
-      <%= render partial: 'shared/flash' %>
-      <div class="body">
-        <%= yield %>
-      </div>
-    <%# </turbo-frame> %>
+    <div data-controller="nav-bar">
+      <%= render partial: 'shared/nav_bar' %>
+    </div>
+    <%= render partial: 'shared/flash' %>
+    <div class="body">
+      <%= yield %>
+    </div>
   </body>
 </html>
