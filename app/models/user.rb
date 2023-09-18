@@ -18,10 +18,10 @@ class User < ApplicationRecord
   # Should be the same as the email regex in config/initializers/devise.rb
   validates :email, length: { minimum: 3, maximum: 320 }, unless: -> { email.blank? }
 
-  validates :username, uniqueness: true, length: { minimum: 4, maximum: 64 }, unless: -> { username.blank? }
+  validates :username, uniqueness: { case_sensitive: false }, length: { minimum: 4, maximum: 64 }, unless: -> { username.blank? }
   validates :username, presence: true, if: -> { username.blank? }
 
-  validate :password_complexity, on: :create, if: -> { password.present? }
+  validate :password_complexity, if: -> { password.present? }
 
   class << self
     def find_for_database_authentication(warden_conditions)

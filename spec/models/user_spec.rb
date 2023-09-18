@@ -3,16 +3,34 @@
 RSpec.describe User do
   subject(:user) { build(:user) }
 
+  RSpec.shared_examples 'the password complexity is validated' do
+    let(:expected_error) do
+      /Password must include at least one upper and lowercase letter, one number, and one special character/
+    end
+
+    it 'validates the password complexity' do
+      expect(user.errors.full_messages).to include(expected_error)
+    end
+  end
+
   describe 'validations' do
     describe '#first_name' do
+      it 'validates presence' do
+        expect(user).to validate_presence_of(:first_name)
+      end
+
       it 'validates the length' do
-        expect(user).to validate_length_of(:first_name).is_at_least(1).is_at_most(64)
+        expect(user).to validate_length_of(:first_name).is_at_most(64)
       end
     end
 
     describe '#last_name' do
+      it 'validates presence' do
+        expect(user).to validate_presence_of(:last_name)
+      end
+
       it 'validates the length' do
-        expect(user).to validate_length_of(:last_name).is_at_least(1).is_at_most(64)
+        expect(user).to validate_length_of(:last_name).is_at_most(64)
       end
     end
 
@@ -24,7 +42,6 @@ RSpec.describe User do
       it 'validates the uniqueness' do
         expect(user).to validate_uniqueness_of(:email).case_insensitive
       end
-
     end
 
     describe '#username' do
@@ -43,14 +60,27 @@ RSpec.describe User do
       end
     end
 
-    describe '#password_confirmation' do
-      it 'validates the length' do
-        expect(user).to validate_presence_of(:password_confirmation).on(:create)
-      end
-    end
-
     describe 'password complexity' do
-      it 'validates the password complexity'
+      context 'when creating the user' do
+        subject(:user) { build(:user, password: 'not complex') }
+
+        before do
+          user.save
+        end
+
+        it_behaves_like 'the password complexity is validated'
+      end
+
+      context 'when updating an existing user' do
+        subject(:user) { create(:user) }
+
+        before do
+          user.password = 'not complex'
+          user.save
+        end
+
+        it_behaves_like 'the password complexity is validated'
+      end
     end
   end
 
