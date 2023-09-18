@@ -31,10 +31,23 @@
   }
 }
 
-.form-edit-registration, .edit-registration {
+.form-edit-registration,
+.edit-registration,
+.form-forgot-password,
+.form-change-your-password,
+.form-resend-confirmation-instructions {
   max-width: 400px;
 
   .help-links {
     margin-top: 2rem;
   }
+}
+
+
+// Override Bootstrap's default form validation styles
+abbr[title] {
+  text-decoration: none;
+  border-bottom: none;
+  cursor: help;
+  color: var(--bs-red);
 }

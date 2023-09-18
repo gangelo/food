@@ -1,22 +1,20 @@
 <main class="devise-form form-login m-auto">
   <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-    <h2 class="h2 mb-3 fw-normal">Log in</h2>
+    <div class="h2 mb-3 fw-normal">Log in</div>
     <div class="form-inputs">
       <%= f.input :email_or_username,
-                  label: false,
+                  label: "Email or username",
                   required: true,
                   autofocus: true,
                   input_html: {
                                 autocomplete: "email",
-                                placeholder: "Email address or username"
                               }
       %>
       <%= f.input :password,
-                  label: false,
+                  label: "Password",
                   required: true,
                   input_html: {
                                 autocomplete: "current-password",
-                                placeholder: "Password"
                               }
       %>
       <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
