@@ -34,12 +34,13 @@
                       class: "btn btn-outline-light me-2",
                       data: {
                         turbo_method: :delete,
+                        confirm: "Are you sure?",
                         turbo_confirm: "Are you sure?"
                       }
           %>
           <% active = false %>
           <%= link_to "Profile",
-                      root_path,
+                      edit_user_registration_path,
                       class: ["btn btn-warning", active: active, disabled: active],
                       data: { action: "nav-bar#navigate" }
           %>

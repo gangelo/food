@@ -1,4 +1,4 @@
-<main class="devise-form form-login w-100 m-auto">
+<main class="devise-form form-login m-auto">
   <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <h2 class="h2 mb-3 fw-normal">Log in</h2>
     <div class="form-inputs">
@@ -23,7 +23,7 @@
     </div>
 
     <div class="form-actions">
-      <%= f.button :submit, "Log in", class: "btn btn-primary w-100" %>
+      <%= f.button :submit, "Log in", class: "btn btn-primary" %>
     </div>
   <% end %>
 

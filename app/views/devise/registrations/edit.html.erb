@@ -1,6 +1,6 @@
-<main class="devise-form form-edit-registration w-100 m-auto">
+<main class="devise-form form-edit-registration m-auto">
   <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-    <h2 class="h2 mb-3 fw-normal">Edit <%= resource_name.to_s.humanize %></h2>
+    <div class="h2 mb-3 fw-normal">Edit <%= resource_name.to_s.humanize %></div>
 
     <%= f.error_notification %>
 
@@ -25,13 +25,27 @@
     </div>
 
     <div class="form-actions">
-      <%= f.button :submit, "Update" %>
+      <%= f.button :submit, "Update", class: "btn btn-primary" %>
     </div>
   <% end %>
 </main>
 
-<h3>Cancel my account</h3>
+<main class="devise-form edit-registration w-100 m-auto">
+  <div class="h3 mb-3 fw-normal">Cancel my account</div>
 
-<div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
+  <div>Unhappy? <%= button_to "Cancel my account",
+                              registration_path(resource_name),
+                              method: :delete,
+                              class: "btn btn-danger",
+                              data: {
+                                confirm: "Are you sure?",
+                                turbo_confirm: "Are you sure?"
+                              }
 
-<%= link_to "Back", :back %>
+                %>
+  </div>
+
+  <div class="help-links">
+    <%= link_to "Back", :back %>
+  </div>
+</main>

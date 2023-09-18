@@ -15,23 +15,20 @@ class User < ApplicationRecord
   validates :first_name, presence: true, length: { maximum: 64 }
   validates :last_name, presence: true, length: { maximum: 64 }
 
-  # validates :first_name, length: { minimum: 1, maximum: 64 }, unless: -> { first_name.blank? }
-  # validates :first_name, presence: true, if: -> { first_name.blank? }
-  # validates :last_name, length: { minimum: 1, maximum: 64 }, unless: -> { last_name.blank? }
-  # validates :last_name, presence: true, if: -> { last_name.blank? }
   # Should be the same as the email regex in config/initializers/devise.rb
-  validates :email, length: { minimum: 3, maximum: 320 }
-  validates :username, uniqueness: true, length: { minimum: 4, maximum: 64 }
-  # Should be the same as the password length in config/initializers/devise.rb
-  validates :password, length: { minimum: 8, maximum: 128 }
-  validates :password_confirmation, presence: true, on: :create
+  validates :email, length: { minimum: 3, maximum: 320 }, unless: -> { email.blank? }
+
+  validates :username, uniqueness: true, length: { minimum: 4, maximum: 64 }, unless: -> { username.blank? }
+  validates :username, presence: true, if: -> { username.blank? }
+
   validate :password_complexity, on: :create, if: -> { password.present? }
 
   class << self
     def find_for_database_authentication(warden_conditions)
       conditions = warden_conditions.dup
-      if email_or_username = conditions.delete(:email_or_username)
-        where(conditions.to_hash).where(["lower(username) = :value OR lower(email) = :value", { value: email_or_username.downcase }]).first
+      if (email_or_username = conditions.delete(:email_or_username))
+        where(conditions.to_hash).where(['lower(username) = :value OR lower(email) = :value',
+                                         { value: email_or_username.downcase }]).first
       else
         where(conditions.to_hash).first
       end
