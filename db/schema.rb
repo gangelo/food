@@ -10,9 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_13_211453) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_19_163230) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "stores", force: :cascade do |t|
+    t.string "name", limit: 64, default: "", null: false
+    t.string "street_1", limit: 64, default: "", null: false
+    t.string "street_2", limit: 64
+    t.string "city", limit: 64, default: "", null: false
+    t.string "state", limit: 2, default: "", null: false
+    t.string "zip_code", limit: 10, default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name", "zip_code"], name: "index_stores_on_name_and_zip_code", unique: true
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "first_name", limit: 64, default: "", null: false
