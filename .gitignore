@@ -30,5 +30,7 @@
 /node_modules
 
 readme.txt
+scratch.rb
+snippets.rb
 yarn-error.log
 coverage

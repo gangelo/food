@@ -6,6 +6,9 @@ class Store < ApplicationRecord
 
   belongs_to :state
 
+  has_many :user_stores
+  has_many :users, through: :user_stores, source: :user
+
   validates :name, :street1, :city, presence: true, length: { maximum: 64 }
   validates :street2, length: { maximum: 64 }, allow_blank: true
 

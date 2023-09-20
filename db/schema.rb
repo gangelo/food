@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_19_213615) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_20_005823) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -34,6 +34,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_19_213615) do
     t.datetime "updated_at", null: false
     t.index ["name", "zip_code"], name: "index_stores_on_name_and_zip_code", unique: true
     t.index ["state_id"], name: "index_stores_on_state_id"
+  end
+
+  create_table "user_stores", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "store_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["store_id"], name: "index_user_stores_on_store_id"
+    t.index ["user_id", "store_id"], name: "index_user_stores_on_user_id_and_store_id", unique: true
+    t.index ["user_id"], name: "index_user_stores_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -67,4 +77,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_19_213615) do
   end
 
   add_foreign_key "stores", "states"
+  add_foreign_key "user_stores", "stores"
+  add_foreign_key "user_stores", "users"
 end

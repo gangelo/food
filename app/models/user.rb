@@ -4,6 +4,9 @@
 class User < ApplicationRecord
   before_save :downcase_email
 
+  has_many :user_stores
+  has_many :stores, through: :user_stores, source: :store
+
   # Include default devise modules. Others available are: :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
