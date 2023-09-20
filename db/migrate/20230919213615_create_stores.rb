@@ -1,11 +1,11 @@
-class Store < ActiveRecord::Migration[7.0]
+class CreateStores < ActiveRecord::Migration[7.0]
   def change
     create_table :stores do |t|
+      t.references :state, foreign_key: true # Creates a state_id column and sets up the foreign key
       t.string :name,     limit: 64, null: false, default: ''
-      t.string :street_1, limit: 64, null: false, default: ''
-      t.string :street_2, limit: 64, default: nil
+      t.string :street1,  limit: 64, null: false, default: ''
+      t.string :street2,  limit: 64, default: nil
       t.string :city,     limit: 64, null: false, default: ''
-      t.string :state,    limit: 2, null: false, default: ''
       t.string :zip_code, limit: 10, null: false, default: ''
       t.timestamps
     end
