@@ -21,8 +21,9 @@ class User < ApplicationRecord
   # Should be the same as the email regex in config/initializers/devise.rb
   validates :email, length: { minimum: 3, maximum: 320 }, unless: -> { email.blank? }
 
-  validates :username, uniqueness: { case_sensitive: false }, length: { minimum: 4, maximum: 64 }, unless: -> { username.blank? }
   validates :username, presence: true, if: -> { username.blank? }
+  validates :username, length: { minimum: 4, maximum: 64 }, unless: -> { username.blank? }
+  validates :username, uniqueness: { case_sensitive: false }, unless: -> { username.blank? }
 
   validate :password_complexity, if: -> { password.present? }
 
@@ -32,7 +33,16 @@ class User < ApplicationRecord
       if (email_or_username = conditions.delete(:email_or_username))
         where(conditions.to_hash).where(['lower(username) = :value OR lower(email) = :value',
                                          { value: email_or_username.downcase }]).first
+      # NOTE: We can tell Devise to allow case-insensitive username authentication using
+      # `config.case_insensitive_keys = [:email, :username]` in the config/initializers/devise.rb
+      # initializer. However, doing so would cause Devise to downcase the username whenever a
+      # user is created or updated. We do not want to do this because we want to preserve the
+      # case of the username the user entered. Therefore, we have to manually downcase the
+      # username here to allow case-insensitive username authentication.
+      elsif (username = conditions.delete(:username))
+        where(conditions.to_hash).where(['lower(username) = :value', { value: username.downcase }]).first
       else
+        # NOTE: case-insensitive email authentication is already handled by Devise here.
         where(conditions.to_hash).first
       end
     end

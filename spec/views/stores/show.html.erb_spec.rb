@@ -1,18 +1,20 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "stores/show", type: :view do
-  before(:each) do
+RSpec.describe 'stores/show' do
+  before do
     assign(:store, Store.create!(
-      name: "Name",
-      street1: "Street 1",
-      street2: "Street 2",
-      city: "City",
-      state: "State",
-      zip_code: "Zip Code"
-    ))
+                     name: 'Name',
+                     street1: 'Street 1',
+                     street2: 'Street 2',
+                     city: 'City',
+                     state: 'State',
+                     zip_code: 'Zip Code'
+                   ))
   end
 
-  it "renders attributes in <p>" do
+  it 'renders attributes in <p>' do
     render
     expect(rendered).to match(/Name/)
     expect(rendered).to match(/Street 1/)

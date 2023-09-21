@@ -8,10 +8,13 @@ AllCops:
   Exclude:
     - '.git/**/*'
     - '.idea/**/*'
+    - 'Rakefile'
     - 'bin/**/*'
+    - 'config/initializers/devise.rb'
     - 'db/**/*'
     - 'init/*'
-    - 'Rakefile'
-    - 'vendor/**/*'
     - 'scratch*.rb'
     - 'snippets*.rb'
+    - 'vendor/**/*'
+RSpec/NestedGroups:
+  Max: 4

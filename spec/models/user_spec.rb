@@ -95,4 +95,94 @@ RSpec.describe User do
       end
     end
   end
+
+  describe 'class methods' do
+    describe '.find_for_database_authentication' do
+      subject(:user) { create(:user, username: username, email: email) }
+
+      before do
+        user
+      end
+
+      let(:username) { 'testuser' }
+      let(:email) { 'test@example.com' }
+
+      context "when searching by username using 'email_or_username: <username>'" do
+        it 'returns the correct user when using :email_or_username' do
+          found_user = described_class.find_for_database_authentication(email_or_username: username)
+          expect(found_user).to eq(user)
+        end
+      end
+
+      context "when searching by username using 'username: <username>'" do
+        it 'returns the correct user' do
+          found_user = described_class.find_for_database_authentication(username: username)
+          expect(found_user).to eq(user)
+        end
+      end
+
+      context "when searching case-insensitive by username using 'email_or_username: <username>'" do
+        it 'returns the correct user' do
+          found_user = described_class.find_for_database_authentication(email_or_username: username.upcase)
+          expect(found_user).to eq(user)
+        end
+      end
+
+      context "when searching case-insensitive by username using 'username: <username>'" do
+        it 'returns the correct user when using :username' do
+          found_user = described_class.find_for_database_authentication(username: username.upcase)
+          expect(found_user).to eq(user)
+        end
+      end
+
+      context "when searching by email using 'email_or_username: <email>'" do
+        it 'returns the correct user' do
+          found_user = described_class.find_for_database_authentication(email_or_username: email)
+          expect(found_user).to eq(user)
+        end
+      end
+
+      context "when searching by email using 'email: <email>'" do
+        it 'returns the correct user' do
+          found_user = described_class.find_for_database_authentication(email: email)
+          expect(found_user).to eq(user)
+        end
+      end
+
+      context "when searching case-insensitive by email using 'email_or_username: <email>'" do
+        it 'returns the correct user' do
+          found_user = described_class.find_for_database_authentication(email_or_username: email.upcase)
+          expect(found_user).to eq(user)
+        end
+      end
+
+      context "when searching case-insensitive by email using 'email: <email>'" do
+        it 'returns the correct user when using :email' do
+          found_user = described_class.find_for_database_authentication(email: email.upcase)
+          expect(found_user).to be_nil
+        end
+      end
+
+      context "when searching username using 'email_or_username: <username>' with invalid username" do
+        it 'returns nil' do
+          found_user = described_class.find_for_database_authentication(email_or_username: 'nonexistent')
+          expect(found_user).to be_nil
+        end
+      end
+
+      context "when searching email using 'email: <email>' with invalid email" do
+        it 'returns nil' do
+          found_user = described_class.find_for_database_authentication(email: 'wrong@example.com')
+          expect(found_user).to be_nil
+        end
+      end
+
+      context "when searching username using 'username: <username>' with invalid username" do
+        it 'returns nil' do
+          found_user = described_class.find_for_database_authentication(username: 'nonexistent')
+          expect(found_user).to be_nil
+        end
+      end
+    end
+  end
 end

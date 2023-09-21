@@ -58,6 +58,9 @@ Devise.setup do |config|
   # Configure which authentication keys should be case-insensitive.
   # These keys will be downcased upon creating or modifying a user and when used
   # to authenticate or find a user. Default is :email.
+  # NOTE: We allow case-insensitive username logins; however, we do not want to
+  # add a username downcase callback because we want to preserve the case of the
+  # username as the user entered it. See User#find_for_database_authentication.
   config.case_insensitive_keys = [:email]
 
   # Configure which authentication keys should have whitespace stripped.
@@ -183,7 +186,6 @@ Devise.setup do |config|
   # Email regex used to validate email formats. It simply asserts that
   # one (and only one) @ exists in the given string. This is mainly
   # to give user feedback and not to assert the e-mail validity.
-  # config.email_regexp = /\A[^@\s]+@[^@\s]+\z/
   config.email_regexp = URI::MailTo::EMAIL_REGEXP
 
   # ==> Configuration for :timeoutable
