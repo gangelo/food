@@ -1,14 +1,28 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Stores</h1>
+<div class="h1 mb-3 fw-normal">My Stores</div>
 
-<div id="stores">
+<div id="stores" class="container">
+  <div class="row mb-3">
+    <div class="col-3 themed-grid-col">Name</div>
+    <div class="col-3 themed-grid-col">Street</div>
+    <div class="col-2 themed-grid-col">City</div>
+    <div class="col-1 themed-grid-col">State</div>
+    <div class="col-1 themed-grid-col">Zip code</div>
+    <div class="col-2 themed-grid-col">Actions</div>
+  </div>
   <% @stores.each do |store| %>
-    <%= render store %>
-    <p>
-      <%= link_to "Show this store", store %>
-    </p>
+    <div class="row mb-3">
+      <div class="col-3 themed-grid-col"><%= store.name %></div>
+      <div class="col-3 themed-grid-col"><%= "#{store.street1} #{store.street2}" %></div>
+      <div class="col-2 themed-grid-col"><%= store.city %></div>
+      <div class="col-1 themed-grid-col"><%= store.state.postal_abbreviation %></div>
+      <div class="col-1 themed-grid-col"><%= store.zip_code %></div>
+      <div class="col-2 themed-grid-col"><%= link_to "View", new_store_path %></div>
+    </div>
   <% end %>
 </div>
 
-<%= link_to "New store", new_store_path %>
+  <div class="help-links">
+    <%= link_to "New store", new_store_path, class: "btn btn-primary" %>
+  <div>

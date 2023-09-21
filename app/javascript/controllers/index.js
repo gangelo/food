@@ -9,3 +9,6 @@ application.register("hello", HelloController)
 
 import NavBarController from "./nav_bar_controller"
 application.register("nav-bar", NavBarController)
+
+import ZipCodeController from "./zip_code_controller";
+application.register("zip-code", ZipCodeController);

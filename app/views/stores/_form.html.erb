@@ -1,18 +1,53 @@
 
-<%= simple_form_for(@store) do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+<div data-controller="zip-code">
+  <main class="devise-form form-store-new m-auto">
+    <%= simple_form_for(@store) do |f| %>
+      <div class="h2 mb-3 fw-normal"><%= header_text %></div>
 
-  <div class="form-inputs">
-    <%= f.input :name %>
-    <%= f.input :street1 %>
-    <%= f.input :street2 %>
-    <%= f.input :city %>
-    <%= f.input :state %>
-    <%= f.input :zip_code %>
-  </div>
+      <%= f.error_notification %>
+      <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
-<% end %>
+      <div class="form-inputs">
+        <%= f.input :name %>
+        <%= f.input :street1 %>
+        <%= f.input :street2 %>
+        <%= f.input :zip_code,
+                    input_html: {
+                      data: {
+                        action: "blur->zip-code#fetchCityAndState"
+                      }
+                    }
+        %>
+        <%= f.input :city,
+                    input_html: {
+                      data: {
+                        "zip-code-target": "city"
+                      }
+                    }
+        %>
+        <%= f.association :state,
+                          label_method: lambda { |state|
+                            "#{state.name} (#{state.postal_abbreviation})"
+                          },
+                          prompt: "Select a state",
+                          input_html: {
+                            data: {
+                              "zip-code-target": "state"
+                            }
+                          }
+        %>
+      </div>
+
+      <div class="form-actions">
+          <%= f.button :submit,
+                      class: "btn btn-primary",
+                      data: { turbo_disable_with: "Saving..."}
+          %>
+        </div>
+    <% end %>
+
+    <div class="help-links">
+      <%= link_to "Back", back_path %>
+    </div>
+  </main>
+</div>
