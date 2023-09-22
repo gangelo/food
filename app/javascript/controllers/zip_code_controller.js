@@ -11,15 +11,15 @@ export default class extends Controller {
     zipCode = zipCode.replace(/\s+/g, ""); // Remove all whitespace
     this.zipCodeTarget.value = zipCode;
 
-    this.clearAdjacentErrorDivs();
-    this.showSpinner();
+    this.clearErrors();
+    this.displaySpinner();
     this.cityTarget.value = "";
     this.stateTarget.options[0].selected = true;
 
     // Validate zipCode
     if (zipCode.length !== 5 || isNaN(zipCode)) {
-      this.displayFetchError(`Zip code is invalid.`);
-      this.hideSpinner();
+      this.displayError(`Zip code is invalid.`);
+      this.clearSpinner();
       return;
     }
 
@@ -38,32 +38,28 @@ export default class extends Controller {
             }
           }
         } else {
-          this.displayFetchError(
-            `Failed to locate city and state for ${zipCode}.`
-          );
+          this.displayError(data.message);
         }
       } else {
-        this.displayFetchError(
-          `Failed to locate city and state for ${zipCode}.`
-        );
+        this.displayError(`Failed to locate city and state for ${zipCode}.`);
       }
     } catch (error) {
-      this.displayFetchError(
+      this.displayError(
         `There was an error trying to locate city and state for ${zipCode}: ${error}`
       );
     }
 
-    this.hideSpinner();
+    this.clearSpinner();
   }
 
-  clearAdjacentErrorDivs() {
+  clearErrors() {
     this.zipCodeTarget.classList.remove("is-invalid");
     while (this.zipCodeTarget.nextElementSibling && this.zipCodeTarget.nextElementSibling.classList.contains('invalid-feedback')) {
         this.zipCodeTarget.nextElementSibling.remove();
     }
 }
 
-  displayFetchError(error) {
+  displayError(error) {
     // Add a Bootstrap "is-invalid" class to the inputs
     this.zipCodeTarget.classList.add("is-invalid");
 
@@ -74,7 +70,7 @@ export default class extends Controller {
     );
   }
 
-  showSpinner() {
+  displaySpinner() {
     // Add the Bootstrap "disabled" class to the inputs
     this.submitButtonTarget.disabled = true;
     this.cityTarget.disabled = true;
@@ -86,7 +82,7 @@ export default class extends Controller {
     this.cityTarget.placeholder = "Loading...";
   }
 
-  hideSpinner() {
+  clearSpinner() {
     // Remove the Bootstrap "disabled" class from the inputs
     this.submitButtonTarget.disabled = false;
     this.cityTarget.disabled = false;
