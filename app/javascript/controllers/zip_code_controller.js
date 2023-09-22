@@ -11,7 +11,7 @@ export default class extends Controller {
     zipCode = zipCode.replace(/\s+/g, ""); // Remove all whitespace
     this.zipCodeTarget.value = zipCode;
 
-    this.clearErrors();
+    this.clearErrors([this.zipCodeTarget, this.cityTarget, this.stateTarget]);
     this.displaySpinner();
     this.cityTarget.value = "";
     this.stateTarget.options[0].selected = true;
@@ -52,12 +52,21 @@ export default class extends Controller {
     this.clearSpinner();
   }
 
-  clearErrors() {
-    this.zipCodeTarget.classList.remove("is-invalid");
-    while (this.zipCodeTarget.nextElementSibling && this.zipCodeTarget.nextElementSibling.classList.contains('invalid-feedback')) {
-        this.zipCodeTarget.nextElementSibling.remove();
-    }
-}
+  clearErrors(targets) {
+    targets.forEach((target) => {
+      target.classList.remove("is-invalid");
+      while (
+        target.nextElementSibling &&
+        target.nextElementSibling.classList.contains("invalid-feedback")
+      ) {
+        target.nextElementSibling.remove();
+      }
+    });
+    // this.zipCodeTarget.classList.remove("is-invalid");
+    // while (this.zipCodeTarget.nextElementSibling && this.zipCodeTarget.nextElementSibling.classList.contains('invalid-feedback')) {
+    //     this.zipCodeTarget.nextElementSibling.remove();
+    // }
+  }
 
   displayError(error) {
     // Add a Bootstrap "is-invalid" class to the inputs

@@ -12,6 +12,7 @@
         <%= f.input :street1 %>
         <%= f.input :street2 %>
         <%= f.input :zip_code,
+                    required: true,
                     input_html: {
                       data: {
                         "zip-code-target": "zipCode",
@@ -40,14 +41,13 @@
       </div>
 
       <div class="form-actions">
-          <%= f.button :submit,
-                      class: "btn btn-primary",
-                      data: {
-                        "zip-code-target": "submitButton",
-                        turbo_disable_with: "Saving..."
-                      }
-          %>
-        </div>
+        <%= f.button :submit,
+                     class: "btn btn-primary",
+                     data: {
+                      "zip-code-target": "submitButton"
+                     }
+        %>
+      </div>
     <% end %>
 
     <div class="help-links">
