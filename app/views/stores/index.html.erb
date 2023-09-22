@@ -18,11 +18,17 @@
       <div class="col-2 themed-grid-col"><%= store.city %></div>
       <div class="col-1 themed-grid-col"><%= store.state.postal_abbreviation %></div>
       <div class="col-1 themed-grid-col"><%= store.zip_code %></div>
-      <div class="col-2 themed-grid-col"><%= link_to "View", new_store_path %></div>
+      <div class="col-2 themed-grid-col">
+        <%= link_to store_path(store), class: "btn btn-outline-secondary btn-sm" do %>
+          <i class="bi bi-eye-fill"></i> View
+        <% end %>
+      </div>
     </div>
   <% end %>
 </div>
 
   <div class="help-links">
-    <%= link_to "New store", new_store_path, class: "btn btn-primary" %>
+    <%= link_to new_store_path, class: "btn btn-primary" do %>
+      <i class="bi bi-building-fill-add"></i> Add a store
+    <% end %>
   <div>
