@@ -8,7 +8,10 @@ export default class extends Controller {
 
   async fetchCityAndStateFromZipCode(event) {
     let zipCode = event.target.value;
+    zipCode = zipCode.replace(/\s+/g, ""); // Remove all whitespace
+    this.zipCodeTarget.value = zipCode;
 
+    this.clearAdjacentErrorDivs();
     this.showSpinner();
     this.cityTarget.value = "";
     this.stateTarget.options[0].selected = true;
@@ -50,35 +53,20 @@ export default class extends Controller {
       );
     }
 
-    // try {
-    //   let response = await fetch(`http://api.zippopotam.us/us/${zipCode}`);
-    //   if (response.ok) {
-    //     let data = await response.json();
-    //     this.cityTarget.value = data.places[0]["place name"];
-    //     let stateLabel = `${data.places[0]["state"]} (${data.places[0]["state abbreviation"]})`;
-    //     for (let option of this.stateTarget.options) {
-    //       if (option.text === stateLabel) {
-    //         option.selected = true;
-    //         break;
-    //       }
-    //     }
-    //   } else {
-    //     this.displayFetchError(
-    //       `Failed to locate city and state for ${zipCode}.`
-    //     );
-    //   }
-    // } catch (error) {
-    //   this.displayFetchError(
-    //     `There was an error trying to locate city and state for ${zipCode}: ${error}`
-    //   );
-    // }
-
     this.hideSpinner();
   }
+
+  clearAdjacentErrorDivs() {
+    this.zipCodeTarget.classList.remove("is-invalid");
+    while (this.zipCodeTarget.nextElementSibling && this.zipCodeTarget.nextElementSibling.classList.contains('invalid-feedback')) {
+        this.zipCodeTarget.nextElementSibling.remove();
+    }
+}
 
   displayFetchError(error) {
     // Add a Bootstrap "is-invalid" class to the inputs
     this.zipCodeTarget.classList.add("is-invalid");
+
     // Add an error div with the error message
     this.zipCodeTarget.insertAdjacentHTML(
       "afterend",
