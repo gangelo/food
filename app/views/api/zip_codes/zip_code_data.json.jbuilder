@@ -1,12 +1,7 @@
-json.extract! @response, :success, :status_code, :message
+# frozen_string_literal: true
 
-json.data do
-  json.city @response[:data][:city]
-  json.state @response[:data][:state]
-  json.zip_code @response[:data][:zip_code]
-  json.country @response[:data][:country]
-  json.latitude @response[:data][:latitude]
-  json.longitude @response[:data][:longitude]
-  json.country_abbreviation @response[:data][:country_abbreviation]
-  json.state_abbreviation @response[:data][:state_abbreviation]
-end
+json.key_format! camelize: :lower
+json.deep_format_keys!
+
+json.extract! @response, :success, :status_code, :message
+json.merge! @response[:data]

@@ -27,10 +27,10 @@ export default class extends Controller {
       let response = await fetch(`/api/zip_codes/zip_code_data/${zipCode}`);
       if (response.ok) {
         let data = await response.json();
+        console.log("data", data);
         if (data.success) {
-          // Check if the success property is true
-          this.cityTarget.value = data.data.city; // Access city using data.data.city
-          let stateLabel = `${data.data.state} (${data.data.state_abbreviation})`; // Use data.data.state and data.data.state_abbreviation
+          this.cityTarget.value = data.city; // Access city using data.city
+          let stateLabel = `${data.state} (${data.stateAbbreviation})`; // Use data.state and data.stateAbbreviation
           for (let option of this.stateTarget.options) {
             if (option.text === stateLabel) {
               option.selected = true;
