@@ -14,7 +14,8 @@
         <%= f.input :zip_code,
                     input_html: {
                       data: {
-                        action: "blur->zip-code#fetchCityAndState"
+                        "zip-code-target": "zipCode",
+                        action: "blur->zip-code#fetchCityAndStateFromZipCode"
                       }
                     }
         %>
@@ -41,7 +42,10 @@
       <div class="form-actions">
           <%= f.button :submit,
                       class: "btn btn-primary",
-                      data: { turbo_disable_with: "Saving..."}
+                      data: {
+                        "zip-code-target": "submitButton",
+                        turbo_disable_with: "Saving..."
+                      }
           %>
         </div>
     <% end %>

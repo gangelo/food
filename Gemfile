@@ -44,6 +44,8 @@ gem 'redis', '~> 4.0'
 # For authentication
 gem 'devise', '~> 4.9', '>= 4.9.2'
 
+gem 'httparty', '~> 0.21.0'
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
@@ -59,7 +61,7 @@ gem 'simple_form', '~> 5.2'
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri mingw x64_mingw]
-  gem 'dotenv', '~> 2.8', '>= 2.8.1'
+  gem 'dotenv-rails', '~> 2.8', '>= 2.8.1'
   gem 'factory_bot_rails', '~> 6.2'
   gem 'ffaker'
   gem 'pry-byebug', '~> 3.10', '>= 3.10.1'
@@ -89,4 +91,5 @@ group :test do
   gem 'selenium-webdriver'
   gem 'shoulda-matchers', '~> 5.3'
   gem 'simplecov', '~> 0.22.0', require: false
+  gem 'webmock', '~> 3.19', '>= 3.19.1'
 end
