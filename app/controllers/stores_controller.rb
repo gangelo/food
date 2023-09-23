@@ -6,7 +6,7 @@ class StoresController < ApplicationController
 
   # GET /stores or /stores.json
   def index
-    @resources = Store.all.presenter(current_user)
+    @resource = current_user.stores.presenter(current_user)
   end
 
   # GET /stores/1 or /stores/1.json
@@ -15,6 +15,7 @@ class StoresController < ApplicationController
   # GET /stores/new
   def new
     @store = Store.new
+    @states = State.all
   end
 
   # GET /stores/1/edit
@@ -22,6 +23,7 @@ class StoresController < ApplicationController
 
   # POST /stores or /stores.json
   def create
+    Rails.logger.debug("xyzzy: store_params: #{store_params.inspect}")
     @store = Store.new(store_params)
 
     respond_to do |format|
@@ -60,7 +62,7 @@ class StoresController < ApplicationController
 
   # GET /stores/add
   def add
-    @resources = Store.all.presenter(current_user)
+    @resource = Store.all.presenter(current_user)
   end
 
   # GET /stores/search
@@ -76,6 +78,6 @@ class StoresController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def store_params
-    params.require(:store).permit(:name, :street1, :street2, :city, :state_id, :zip_code)
+    params.require(:store).permit(:store_name, :address, :address2, :city, :state_id, :zip_code)
   end
 end

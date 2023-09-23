@@ -71,10 +71,10 @@ def seed_us_states
 end
 
 def seed_stores
-  store = Store.find_or_initialize_by(store_name: 'Kings', street1: '115 Hawkins Pl', city: 'Boonton', zip_code: '07005')
+  store = Store.find_or_initialize_by(store_name: 'Kings', address: '115 Hawkins Pl', city: 'Boonton', zip_code: '07005')
   store.update(state: State.find_by(postal_abbreviation: 'NJ'))
 
-  store = Store.find_or_initialize_by(store_name: 'ACME', street1: '550 Myrtle Ave', city: 'Boonton', zip_code: '07005')
+  store = Store.find_or_initialize_by(store_name: 'ACME', address: '550 Myrtle Ave', city: 'Boonton', zip_code: '07005')
   store.update(state: State.find_by(postal_abbreviation: 'NJ'))
 end
 

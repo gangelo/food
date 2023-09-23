@@ -1,17 +1,18 @@
-<main class="form form-add-stores m-auto">
+<main class="form form-list-stores m-auto">
   <div data-controller="filter">
     <div class="h1 mb-3 fw-normal"><i class="bi bi-building-fill-check"></i> Add a Store</div>
-    <%= render @resources %>
+    <%= render partial: "stores", locals: { stores: @resource } %>
   </div>
-  <% unless @resources.any? %>
+  <% unless @resource.stores.any? %>
   <div>
-    There are currently have no stores in the <%= render partial: "shared/site_name", locals: { primary_css_class: "food dark" } %> universe! Save the world and add some!
+    The <%= render partial: "shared/site_name", locals: { mode: :dark } %>
+    universe currently has no stores! Save the world and add some!
   </div>
   <% end %>
 </main>
 
 <div class="help-links">
-  <%= link_to add_stores_path, class: "btn btn-primary" do %>
-    <i class="bi bi-building-fill-add"></i> Add a store
+  <%= link_to new_store_path, class: "btn btn-primary" do %>
+    <i class="bi bi-building-fill-add"></i> New store
   <% end %>
-<div>
+</div>

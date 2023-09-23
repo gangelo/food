@@ -6,8 +6,8 @@ RSpec.describe 'stores/show' do
   before do
     assign(:store, Store.create!(
                      name: 'Name',
-                     street1: 'Street 1',
-                     street2: 'Street 2',
+                     address: 'Address',
+                     address2: 'Address 2',
                      city: 'City',
                      state: 'State',
                      zip_code: 'Zip Code'
@@ -17,8 +17,8 @@ RSpec.describe 'stores/show' do
   it 'renders attributes in <p>' do
     render
     expect(rendered).to match(/Name/)
-    expect(rendered).to match(/Street 1/)
-    expect(rendered).to match(/Street 2/)
+    expect(rendered).to match(/Address/)
+    expect(rendered).to match(/Address 2/)
     expect(rendered).to match(/City/)
     expect(rendered).to match(/State/)
     expect(rendered).to match(/Zip Code/)

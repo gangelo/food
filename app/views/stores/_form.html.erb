@@ -1,44 +1,48 @@
-
 <div data-controller="zip-code">
-  <main class="devise-form form-store-new m-auto">
-    <%= simple_form_for(@store) do |f| %>
+  <main class="devise-form form-store-new">
+    <%= simple_form_for(store, wrapper: :horizontal_form) do |f| %>
       <div class="h1 mb-3 fw-normal"><%= header_text %></div>
 
       <%= f.error_notification %>
       <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-
-      <div class="form-inputs">
-        <%= f.input :name %>
-        <%= f.input :street1 %>
-        <%= f.input :street2 %>
-        <%= f.input :zip_code,
-                    required: true,
-                    input_html: {
-                      data: {
-                        "zip-code-target": "zipCode",
-                        action: "blur->zip-code#fetchCityAndStateFromZipCode"
-                      }
+      <%= f.input :store_name,
+                  label: "Name",
+                  autofocus: true
+      %>
+      <%= f.input :address,
+                  label: "Address"
+      %>
+      <%= f.input :address2,
+                  label: "Address 2"
+      %>
+      <%= f.input :zip_code,
+                  required: true,
+                  input_html: {
+                    data: {
+                      "zip-code-target": "zipCode",
+                      action: "blur->zip-code#fetchCityAndStateFromZipCode"
                     }
-        %>
-        <%= f.input :city,
-                    input_html: {
-                      data: {
-                        "zip-code-target": "city"
-                      }
+                  }
+      %>
+      <%= f.input :city,
+                  input_html: {
+                    data: {
+                      "zip-code-target": "city"
                     }
-        %>
-        <%= f.association :state,
-                          label_method: lambda { |state|
-                            "#{state.name} (#{state.postal_abbreviation})"
-                          },
-                          prompt: "Select a state",
-                          input_html: {
-                            data: {
-                              "zip-code-target": "state"
-                            }
+                  }
+      %>
+      <%= f.association :state,
+                        wrapper: :horizontal_form,
+                        label_method: lambda { |state|
+                          "#{state.state_name} (#{state.postal_abbreviation})"
+                        },
+                        prompt: "Select a state",
+                        input_html: {
+                          data: {
+                            "zip-code-target": "state"
                           }
-        %>
-      </div>
+                        }
+      %>
 
       <div class="form-actions">
         <%= f.button :submit,

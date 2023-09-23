@@ -1,17 +1,20 @@
+<%
+add_a_store_button_text = "Add a store"
+%>
 <main class="form form-list-stores m-auto">
   <div data-controller="filter">
     <div class="h1 mb-3 fw-normal"><i class="bi bi-building-fill"></i> My Stores</div>
-    <%= render @resources %>
+    <%= render partial: "stores", locals: { stores: @resource } %>
   </div>
-  <% unless @resources.any? %>
+  <% unless @resource.stores.any? %>
   <div>
-    You currently have no stores.
+    You currently have no stores. You can add one by clicking the <strong><i class="bi bi-building-fill-add"></i> <%= add_a_store_button_text %></strong> button below.
   </div>
   <% end %>
 </main>
 
 <div class="help-links">
   <%= link_to add_stores_path, class: "btn btn-primary" do %>
-    <i class="bi bi-building-fill-add"></i> Add a store
+    <i class="bi bi-building-fill-add"></i> <%= add_a_store_button_text %>
   <% end %>
-<div>
+</div>

@@ -1,3 +1,7 @@
+body {
+  background-color: var(--bs-gray-100);
+}
+
 .body {
   margin: 0 10px;
 }
@@ -41,8 +45,12 @@
   }
 }
 
-.form-signin, .form-login {
+.form-login {
   max-width: 330px;
+}
+
+.form-signin {
+  max-width: 100%;
 }
 
 .form-edit-registration,
@@ -51,12 +59,19 @@
 .form-change-your-password,
 .form-resend-confirmation-instructions,
 .form-resend-unlock-instructions,
-.form-store-new {
+._form-store-new {
   max-width: 400px;
 }
 
 .help-links {
   margin-top: 2rem;
+}
+
+.btn-extra-sm {
+  padding: 4px 8px;
+  font-size: 0.70rem;
+  line-height: 1.0;
+  border-radius: 0.1rem;
 }
 
 // Override Bootstrap's default form validation styles

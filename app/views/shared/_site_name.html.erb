@@ -2,7 +2,12 @@
 container_css_class   ||= "site-name-container"
 primary_css_class     ||= "food"
 secondary_css_class   ||= "me"
+
+mode = mode || :light
+mode = mode.to_sym
+mode = :light unless %i[light dark].include?(mode)
 %>
-<span class="<%= container_css_class %>">
-  <span class="<%= primary_css_class %>">food</span><span class="<%= secondary_css_class %>">Me</span>
+
+<span class="<%= container_css_class %> <%= mode%>">
+  <span class="<%= primary_css_class %> <%= mode%>">food</span><span class="<%= secondary_css_class %> <%= mode%>">Me</span>
 </span>

@@ -157,8 +157,8 @@ SimpleForm.setup do |config| # rubocop:disable Metrics/BlockLength
     b.optional :pattern
     b.optional :min_max
     b.optional :readonly
-    b.use :label, class: 'col-sm-3 col-form-label'
-    b.wrapper :grid_wrapper, class: 'col-sm-9' do |ba|
+    b.use :label, class: 'col-sm-3 col-md-3 col-lg-3 col-form-label'
+    b.wrapper :grid_wrapper, class: 'col-sm-9 col-md-6 col-lg-4' do |ba|
       ba.use :input, class: 'form-control', error_class: 'is-invalid', valid_class: 'is-valid'
       ba.use :full_error, wrap_with: { class: 'invalid-feedback' }
       ba.use :hint, wrap_with: { class: 'form-text' }

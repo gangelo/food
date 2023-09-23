@@ -3,14 +3,14 @@
 # The stores presenter to display a collection of
 # StorePresenter objects.
 class StoresPresenter < SimpleDelegator
-  attr_reader :name
+  attr_reader :name, :stores
 
   def initialize(stores, current_user)
     @name = stores.model.name.pluralize
+    @stores = stores.map { |store| StorePresenter.new(store, current_user) }
 
-    super(stores.map { |store| StorePresenter.new(store, current_user) })
+    super(@stores)
 
-    @stores = stores
     @current_user = current_user
   end
 
@@ -18,15 +18,11 @@ class StoresPresenter < SimpleDelegator
     current_user.stores.count.positive?
   end
 
-  # def name
-  #   store.class.name
-  # end
-
   def to_partial_path
-    "shared/#{name.underscore}"
+    "stores/#{name.underscore}"
   end
 
   private
 
-  attr_reader :stores, :current_user
+  attr_reader :current_user
 end

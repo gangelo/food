@@ -26,8 +26,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_20_005823) do
   create_table "stores", force: :cascade do |t|
     t.bigint "state_id"
     t.string "store_name", limit: 64, default: "", null: false
-    t.string "street1", limit: 64, default: "", null: false
-    t.string "street2", limit: 64
+    t.string "address", limit: 64, default: "", null: false
+    t.string "address2", limit: 64
     t.string "city", limit: 64, default: "", null: false
     t.string "zip_code", limit: 10, default: "", null: false
     t.datetime "created_at", null: false
