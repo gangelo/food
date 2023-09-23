@@ -1,43 +1,18 @@
-<main class="form form-filter-stores m-auto">
+<main class="form form-add-stores m-auto">
   <div data-controller="filter">
-    <div class="h1 mb-3 fw-normal">Add a Store</div>
+    <div class="h1 mb-3 fw-normal"><i class="bi bi-building-fill-check"></i> Add a Store</div>
     <div style="color: green"><%= notice %></div>
-    <table id="stores" class="table">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Name</th>
-          <th scope="col">Street</th>
-          <th scope="col">City</th>
-          <th scope="col">State</th>
-          <th scope="col">Zip code</th>
-          <th scope="col">Actions</th>
-        </tr>
-      </thead>
-      <thead data-target="filter" class="d-none">
-        <tr>
-          <th data-type="name" scope="col">
-            <!-- name search input box -->
-          </th>
-          <th data-type="street" scope="col">
-            <!-- street search input box -->
-          </th>
-          <th data-type="city" scope="col">
-            <!-- city search input box -->
-          </th>
-          <th data-type="state" scope="col">
-            <!-- state search input box -->
-          </th>
-          <th data-type="zip-code" scope="col">
-            <!-- zip_code search input box -->
-          </th>
-          <th scope="col">&nbsp;</th>
-        </tr>
-      </thead>
-      <tbody data-target="filter">
-        <% @resources.each_with_index do |store, index| %>
-          <%= render "shared/store", store: store, index: index %>
-        <% end %>
-      </tbody>
-    </table>
+    <%= render @resources %>
+  </div>
+  <% unless @resources.any? %>
+  <div>
+    You currently have no stores.
+  </div>
+  <% end %>
 </main>
+
+<div class="help-links">
+  <%= link_to add_stores_path, class: "btn btn-primary" do %>
+    <i class="bi bi-building-fill-add"></i> Add a store
+  <% end %>
+<div>

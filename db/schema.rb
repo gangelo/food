@@ -15,25 +15,25 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_20_005823) do
   enable_extension "plpgsql"
 
   create_table "states", force: :cascade do |t|
-    t.string "name", limit: 14, default: "", null: false
+    t.string "state_name", limit: 14, default: "", null: false
     t.string "postal_abbreviation", limit: 2, default: "", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_states_on_name", unique: true
     t.index ["postal_abbreviation"], name: "index_states_on_postal_abbreviation", unique: true
+    t.index ["state_name"], name: "index_states_on_state_name", unique: true
   end
 
   create_table "stores", force: :cascade do |t|
     t.bigint "state_id"
-    t.string "name", limit: 64, default: "", null: false
+    t.string "store_name", limit: 64, default: "", null: false
     t.string "street1", limit: 64, default: "", null: false
     t.string "street2", limit: 64
     t.string "city", limit: 64, default: "", null: false
     t.string "zip_code", limit: 10, default: "", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name", "zip_code"], name: "index_stores_on_name_and_zip_code", unique: true
     t.index ["state_id"], name: "index_stores_on_state_id"
+    t.index ["store_name", "zip_code"], name: "index_stores_on_store_name_and_zip_code", unique: true
   end
 
   create_table "user_stores", force: :cascade do |t|

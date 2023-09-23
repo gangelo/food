@@ -6,11 +6,11 @@ class State < ApplicationRecord
 
   has_many :stores, dependent: :restrict_with_error
 
-  validates :name, uniqueness: { case_sensitive: false }, presence: true, length: { maximum: 14 }
+  validates :state_name, uniqueness: { case_sensitive: false }, presence: true, length: { maximum: 14 }
   validates :postal_abbreviation, uniqueness: { case_sensitive: false }, length: { is: 2 }
 
   def before_save_edits
-    self.name = name.titleize
+    self.state_name = state_name.titleize
     self.postal_abbreviation = postal_abbreviation.upcase
   end
 end

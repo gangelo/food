@@ -17,6 +17,10 @@ class StorePresenter < SimpleDelegator
     store.class.name
   end
 
+  def street1_with_street2
+    "#{street1} #{street2}".strip
+  end
+
   def to_partial_path
     "shared/#{name.underscore}"
   end

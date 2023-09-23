@@ -15,6 +15,3 @@ application.register("nav-bar", NavBarController)
 
 import ZipCodeController from "./zip_code_controller";
 application.register("zip-code", ZipCodeController);
-
-import FilterController from "./filter_controller";
-application.register("filter", FilterController);

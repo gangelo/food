@@ -1,31 +1,15 @@
-<p style="color: green"><%= notice %></p>
-
-<div class="h1 mb-3 fw-normal">My Stores</div>
-
-<div id="stores" class="container">
-  <div class="row mb-3">
-    <div class="col-3 themed-grid-col">Name</div>
-    <div class="col-3 themed-grid-col">Street</div>
-    <div class="col-2 themed-grid-col">City</div>
-    <div class="col-1 themed-grid-col">State</div>
-    <div class="col-1 themed-grid-col">Zip code</div>
-    <div class="col-2 themed-grid-col">Actions</div>
+<main class="form form-list-stores m-auto">
+  <div data-controller="filter">
+    <div class="h1 mb-3 fw-normal"><i class="bi bi-building-fill"></i> My Stores</div>
+    <div style="color: green"><%= notice %></div>
+    <%= render @resources %>
   </div>
-  <% @stores.each do |store| %>
-    <div class="row mb-3">
-      <div class="col-3 themed-grid-col"><%= store.name %></div>
-      <div class="col-3 themed-grid-col"><%= "#{store.street1} #{store.street2}" %></div>
-      <div class="col-2 themed-grid-col"><%= store.city %></div>
-      <div class="col-1 themed-grid-col"><%= store.state.postal_abbreviation %></div>
-      <div class="col-1 themed-grid-col"><%= store.zip_code %></div>
-      <div class="col-2 themed-grid-col">
-        <%= link_to store_path(store), class: "btn btn-outline-secondary btn-sm" do %>
-          <i class="bi bi-eye-fill"></i> View
-        <% end %>
-      </div>
-    </div>
+  <% unless @resources.any? %>
+  <div>
+    You currently have no stores.
+  </div>
   <% end %>
-</div>
+</main>
 
 <div class="help-links">
   <%= link_to add_stores_path, class: "btn btn-primary" do %>

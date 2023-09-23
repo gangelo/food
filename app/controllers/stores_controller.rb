@@ -6,7 +6,7 @@ class StoresController < ApplicationController
 
   # GET /stores or /stores.json
   def index
-    @stores = Store.all
+    @resources = Store.all.presenter(current_user)
   end
 
   # GET /stores/1 or /stores/1.json
@@ -60,7 +60,7 @@ class StoresController < ApplicationController
 
   # GET /stores/add
   def add
-    @resources = Store.all
+    @resources = Store.all.presenter(current_user)
   end
 
   # GET /stores/search

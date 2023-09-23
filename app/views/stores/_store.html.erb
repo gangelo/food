@@ -1,32 +1,20 @@
-<div id="<%= dom_id store %>">
-  <p>
-    <strong>Name:</strong>
-    <%= store.name %>
-  </p>
-
-  <p>
-    <strong>Street 1:</strong>
-    <%= store.street1 %>
-  </p>
-
-  <p>
-    <strong>Street 2:</strong>
-    <%= store.street2 %>
-  </p>
-
-  <p>
-    <strong>City:</strong>
-    <%= store.city %>
-  </p>
-
-  <p>
-    <strong>State:</strong>
-    <%= store.state %>
-  </p>
-
-  <p>
-    <strong>Zip code:</strong>
-    <%= store.zip_code %>
-  </p>
-
-</div>
+<tr id="<%= dom_id store %>" >
+  <th scope="row"><%= index + 1 %></th>
+  <td><%= store.store_name %></th>
+  <td><%= store.street1_with_street2 %></th>
+  <td><%= store.city %></th>
+  <td><%= store.state.postal_abbreviation %></th>
+  <td><%= store.zip_code %></th>
+  <td>
+    <% if store.user_store? %>
+      <span class="badge text-bg-success">
+        <i class="bi bi-check-circle-fill"></i>
+        Already added
+      </span>
+    <% else %>
+      <%= link_to store_path(store), class: "btn btn-outline-secondary btn-sm" do %>
+        <i class="bi bi-eye-fill"></i> View
+      <% end %>
+    <% end %>
+  </td>
+</tr>

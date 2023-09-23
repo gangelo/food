@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :store do
-    name { FFaker::Company.name }
+    store_name { FFaker::Company.name }
     street1 { FFaker::Address.street_address }
     street2 { FFaker::Address.secondary_address }
     city { FFaker::Address.city }

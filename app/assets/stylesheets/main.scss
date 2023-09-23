@@ -25,26 +25,21 @@
 
 .form-signin, .form-login {
   max-width: 330px;
-
-  .help-links {
-    margin-top: 2rem;
-  }
 }
 
 .form-edit-registration,
-.edit-registration,
+.form-cancel-registration,
 .form-forgot-password,
 .form-change-your-password,
 .form-resend-confirmation-instructions,
 .form-resend-unlock-instructions,
 .form-store-new {
   max-width: 400px;
-
-  .help-links {
-    margin-top: 2rem;
-  }
 }
 
+.help-links {
+  margin-top: 2rem;
+}
 
 // Override Bootstrap's default form validation styles
 abbr[title] {

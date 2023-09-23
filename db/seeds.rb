@@ -5,61 +5,61 @@
 #
 # Examples:
 #
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
+#   movies = Movie.create([{ state_name: "Star Wars" }, { state_name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
 def seed_us_states
   us_states = [
-    { name: 'Alabama', postal_abbreviation: 'AL' },
-    { name: 'Alaska', postal_abbreviation: 'AK' },
-    { name: 'Arizona', postal_abbreviation: 'AZ' },
-    { name: 'Arkansas', postal_abbreviation: 'AR' },
-    { name: 'California', postal_abbreviation: 'CA' },
-    { name: 'Colorado', postal_abbreviation: 'CO' },
-    { name: 'Connecticut', postal_abbreviation: 'CT' },
-    { name: 'Delaware', postal_abbreviation: 'DE' },
-    { name: 'Florida', postal_abbreviation: 'FL' },
-    { name: 'Georgia', postal_abbreviation: 'GA' },
-    { name: 'Hawaii', postal_abbreviation: 'HI' },
-    { name: 'Idaho', postal_abbreviation: 'ID' },
-    { name: 'Illinois', postal_abbreviation: 'IL' },
-    { name: 'Indiana', postal_abbreviation: 'IN' },
-    { name: 'Iowa', postal_abbreviation: 'IA' },
-    { name: 'Kansas', postal_abbreviation: 'KS' },
-    { name: 'Kentucky', postal_abbreviation: 'KY' },
-    { name: 'Louisiana', postal_abbreviation: 'LA' },
-    { name: 'Maine', postal_abbreviation: 'ME' },
-    { name: 'Maryland', postal_abbreviation: 'MD' },
-    { name: 'Massachusetts', postal_abbreviation: 'MA' },
-    { name: 'Michigan', postal_abbreviation: 'MI' },
-    { name: 'Minnesota', postal_abbreviation: 'MN' },
-    { name: 'Mississippi', postal_abbreviation: 'MS' },
-    { name: 'Missouri', postal_abbreviation: 'MO' },
-    { name: 'Montana', postal_abbreviation: 'MT' },
-    { name: 'Nebraska', postal_abbreviation: 'NE' },
-    { name: 'Nevada', postal_abbreviation: 'NV' },
-    { name: 'New Hampshire', postal_abbreviation: 'NH' },
-    { name: 'New Jersey', postal_abbreviation: 'NJ' },
-    { name: 'New Mexico', postal_abbreviation: 'NM' },
-    { name: 'New York', postal_abbreviation: 'NY' },
-    { name: 'North Carolina', postal_abbreviation: 'NC' },
-    { name: 'North Dakota', postal_abbreviation: 'ND' },
-    { name: 'Ohio', postal_abbreviation: 'OH' },
-    { name: 'Oklahoma', postal_abbreviation: 'OK' },
-    { name: 'Oregon', postal_abbreviation: 'OR' },
-    { name: 'Pennsylvania', postal_abbreviation: 'PA' },
-    { name: 'Rhode Island', postal_abbreviation: 'RI' },
-    { name: 'South Carolina', postal_abbreviation: 'SC' },
-    { name: 'South Dakota', postal_abbreviation: 'SD' },
-    { name: 'Tennessee', postal_abbreviation: 'TN' },
-    { name: 'Texas', postal_abbreviation: 'TX' },
-    { name: 'Utah', postal_abbreviation: 'UT' },
-    { name: 'Vermont', postal_abbreviation: 'VT' },
-    { name: 'Virginia', postal_abbreviation: 'VA' },
-    { name: 'Washington', postal_abbreviation: 'WA' },
-    { name: 'West Virginia', postal_abbreviation: 'WV' },
-    { name: 'Wisconsin', postal_abbreviation: 'WI' },
-    { name: 'Wyoming', postal_abbreviation: 'WY' }
+    { state_name: 'Alabama', postal_abbreviation: 'AL' },
+    { state_name: 'Alaska', postal_abbreviation: 'AK' },
+    { state_name: 'Arizona', postal_abbreviation: 'AZ' },
+    { state_name: 'Arkansas', postal_abbreviation: 'AR' },
+    { state_name: 'California', postal_abbreviation: 'CA' },
+    { state_name: 'Colorado', postal_abbreviation: 'CO' },
+    { state_name: 'Connecticut', postal_abbreviation: 'CT' },
+    { state_name: 'Delaware', postal_abbreviation: 'DE' },
+    { state_name: 'Florida', postal_abbreviation: 'FL' },
+    { state_name: 'Georgia', postal_abbreviation: 'GA' },
+    { state_name: 'Hawaii', postal_abbreviation: 'HI' },
+    { state_name: 'Idaho', postal_abbreviation: 'ID' },
+    { state_name: 'Illinois', postal_abbreviation: 'IL' },
+    { state_name: 'Indiana', postal_abbreviation: 'IN' },
+    { state_name: 'Iowa', postal_abbreviation: 'IA' },
+    { state_name: 'Kansas', postal_abbreviation: 'KS' },
+    { state_name: 'Kentucky', postal_abbreviation: 'KY' },
+    { state_name: 'Louisiana', postal_abbreviation: 'LA' },
+    { state_name: 'Maine', postal_abbreviation: 'ME' },
+    { state_name: 'Maryland', postal_abbreviation: 'MD' },
+    { state_name: 'Massachusetts', postal_abbreviation: 'MA' },
+    { state_name: 'Michigan', postal_abbreviation: 'MI' },
+    { state_name: 'Minnesota', postal_abbreviation: 'MN' },
+    { state_name: 'Mississippi', postal_abbreviation: 'MS' },
+    { state_name: 'Missouri', postal_abbreviation: 'MO' },
+    { state_name: 'Montana', postal_abbreviation: 'MT' },
+    { state_name: 'Nebraska', postal_abbreviation: 'NE' },
+    { state_name: 'Nevada', postal_abbreviation: 'NV' },
+    { state_name: 'New Hampshire', postal_abbreviation: 'NH' },
+    { state_name: 'New Jersey', postal_abbreviation: 'NJ' },
+    { state_name: 'New Mexico', postal_abbreviation: 'NM' },
+    { state_name: 'New York', postal_abbreviation: 'NY' },
+    { state_name: 'North Carolina', postal_abbreviation: 'NC' },
+    { state_name: 'North Dakota', postal_abbreviation: 'ND' },
+    { state_name: 'Ohio', postal_abbreviation: 'OH' },
+    { state_name: 'Oklahoma', postal_abbreviation: 'OK' },
+    { state_name: 'Oregon', postal_abbreviation: 'OR' },
+    { state_name: 'Pennsylvania', postal_abbreviation: 'PA' },
+    { state_name: 'Rhode Island', postal_abbreviation: 'RI' },
+    { state_name: 'South Carolina', postal_abbreviation: 'SC' },
+    { state_name: 'South Dakota', postal_abbreviation: 'SD' },
+    { state_name: 'Tennessee', postal_abbreviation: 'TN' },
+    { state_name: 'Texas', postal_abbreviation: 'TX' },
+    { state_name: 'Utah', postal_abbreviation: 'UT' },
+    { state_name: 'Vermont', postal_abbreviation: 'VT' },
+    { state_name: 'Virginia', postal_abbreviation: 'VA' },
+    { state_name: 'Washington', postal_abbreviation: 'WA' },
+    { state_name: 'West Virginia', postal_abbreviation: 'WV' },
+    { state_name: 'Wisconsin', postal_abbreviation: 'WI' },
+    { state_name: 'Wyoming', postal_abbreviation: 'WY' }
   ]
 
   us_states.each do |us_state|
@@ -71,10 +71,10 @@ def seed_us_states
 end
 
 def seed_stores
-  store = Store.find_or_initialize_by(name: 'Kings', street1: '115 Hawkins Pl', city: 'Boonton', zip_code: '07005')
+  store = Store.find_or_initialize_by(store_name: 'Kings', street1: '115 Hawkins Pl', city: 'Boonton', zip_code: '07005')
   store.update(state: State.find_by(postal_abbreviation: 'NJ'))
 
-  store = Store.find_or_initialize_by(name: 'ACME', street1: '550 Myrtle Ave', city: 'Boonton', zip_code: '07005')
+  store = Store.find_or_initialize_by(store_name: 'ACME', street1: '550 Myrtle Ave', city: 'Boonton', zip_code: '07005')
   store.update(state: State.find_by(postal_abbreviation: 'NJ'))
 end
 
