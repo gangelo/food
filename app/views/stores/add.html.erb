@@ -1,12 +1,11 @@
 <main class="form form-add-stores m-auto">
   <div data-controller="filter">
     <div class="h1 mb-3 fw-normal"><i class="bi bi-building-fill-check"></i> Add a Store</div>
-    <div style="color: green"><%= notice %></div>
     <%= render @resources %>
   </div>
   <% unless @resources.any? %>
   <div>
-    You currently have no stores.
+    There are currently have no stores in the <%= render partial: "shared/site_name", locals: { primary_css_class: "food dark" } %> universe! Save the world and add some!
   </div>
   <% end %>
 </main>

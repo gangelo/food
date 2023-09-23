@@ -1,7 +1,6 @@
 <main class="form form-list-stores m-auto">
   <div data-controller="filter">
     <div class="h1 mb-3 fw-normal"><i class="bi bi-building-fill"></i> My Stores</div>
-    <div style="color: green"><%= notice %></div>
     <%= render @resources %>
   </div>
   <% unless @resources.any? %>

@@ -2,8 +2,26 @@
   margin: 0 10px;
 }
 
-.foodme-name {
-  font-weight: 600;
+.site-name-container {
+  font-size: 1.10rem;
+
+  .food {
+    font-weight: 400;
+    color: var(--bs-gray-500);
+  }
+
+  .food.light {
+    @extend .text-white
+  }
+
+  .food.dark {
+    @extend .text-black
+  }
+
+  .me {
+    color: var(--bs-yellow);
+    font-weight: 800;
+  }
 }
 
 // Devise forms

@@ -1,6 +1,6 @@
 <main class="devise-form form-resend-unlock-instructions m-auto">
   <%= simple_form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
-    <div class="h2 mb-3 fw-normal">Resend unlock instructions</div>
+    <div class="h1 mb-3 fw-normal">Resend unlock instructions</div>
 
     <%= f.error_notification %>
     <%= f.full_error :unlock_token %>
