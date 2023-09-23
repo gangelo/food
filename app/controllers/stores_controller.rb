@@ -58,6 +58,15 @@ class StoresController < ApplicationController
     end
   end
 
+  # GET /stores/add
+  def add
+    @resources = Store.all
+  end
+
+  # GET /stores/search
+  def search
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.

@@ -62,10 +62,6 @@ export default class extends Controller {
         target.nextElementSibling.remove();
       }
     });
-    // this.zipCodeTarget.classList.remove("is-invalid");
-    // while (this.zipCodeTarget.nextElementSibling && this.zipCodeTarget.nextElementSibling.classList.contains('invalid-feedback')) {
-    //     this.zipCodeTarget.nextElementSibling.remove();
-    // }
   }
 
   displayError(error) {

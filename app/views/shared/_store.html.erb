@@ -1,0 +1,13 @@
+<tr>
+  <th scope="row"><%= index + 1 %></th>
+  <td><%= store.name %></th>
+  <td><%= "#{store.street1} #{store.street2}" %></th>
+  <td><%= store.city %></th>
+  <td><%= store.state.postal_abbreviation %></th>
+  <td><%= store.zip_code %></th>
+  <td>
+    <%= link_to store_path(store), class: "btn btn-outline-secondary btn-sm" do %>
+      <i class="bi bi-eye-fill"></i> View
+    <% end %>
+  </td>
+</tr>

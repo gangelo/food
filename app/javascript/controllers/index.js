@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import FilterController from "./filter_controller";
+application.register("filter", FilterController);
+
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
@@ -12,3 +15,6 @@ application.register("nav-bar", NavBarController)
 
 import ZipCodeController from "./zip_code_controller";
 application.register("zip-code", ZipCodeController);
+
+import FilterController from "./filter_controller";
+application.register("filter", FilterController);

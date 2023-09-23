@@ -1,11 +1,17 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :stores
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
   # Defines the root path route ("/")
   root 'home#index'
+
+  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+
+  resources :stores do
+    collection do
+      get 'add'
+      get 'search'
+    end
+  end
 
   # Define routes for the Api::ZipCodesController
   namespace :api, defaults: { format: 'json' } do
