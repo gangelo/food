@@ -2,11 +2,12 @@
 
 # The store controller for this application.
 class StoresController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_store, only: %i[show edit update destroy]
 
   # GET /stores or /stores.json
   def index
-    @resource = current_user.stores.presenter(current_user)
+    @resource = current_user.stores.order(:store_name).presenter(current_user)
   end
 
   # GET /stores/1 or /stores/1.json
@@ -15,7 +16,6 @@ class StoresController < ApplicationController
   # GET /stores/new
   def new
     @store = Store.new
-    @states = State.all
   end
 
   # GET /stores/1/edit
@@ -23,7 +23,6 @@ class StoresController < ApplicationController
 
   # POST /stores or /stores.json
   def create
-    Rails.logger.debug("xyzzy: store_params: #{store_params.inspect}")
     @store = Store.new(store_params)
 
     respond_to do |format|
@@ -62,12 +61,23 @@ class StoresController < ApplicationController
 
   # GET /stores/add
   def add
-    @resource = Store.all.presenter(current_user)
+    @resource = all_stores
+  end
+
+  # POST /stores/add_create
+  def add_create
+    success = UserStore.new(user_id: current_user.id, store_id: add_create_params[:store_id]).save
+    @resource = all_stores
+    if success
+      redirect_to add_create_stores_path, notice: 'Store was successfully added.'
+    else
+      # You might want to handle the error differently, perhaps redirecting back with a flash message.
+      redirect_to add_create_stores_path, alert: 'There was an error adding the store.'
+    end
   end
 
   # GET /stores/search
-  def search
-  end
+  def search; end
 
   private
 
@@ -76,8 +86,16 @@ class StoresController < ApplicationController
     @store = Store.find(params[:id])
   end
 
+  def all_stores
+    Store.all.order(:store_name).presenter(current_user)
+  end
+
   # Only allow a list of trusted parameters through.
   def store_params
     params.require(:store).permit(:store_name, :address, :address2, :city, :state_id, :zip_code)
+  end
+
+  def add_create_params
+    params.require(:store).permit(:store_id)
   end
 end

@@ -10,7 +10,7 @@ class StorePresenter < SimpleDelegator
   end
 
   def user_store?
-    current_user.user_stores.exists?(id)
+    current_user.user_stores.exists?(store_id: id)
   end
 
   def name

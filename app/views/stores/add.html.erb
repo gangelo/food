@@ -1,7 +1,7 @@
 <main class="form form-list-stores m-auto">
   <div data-controller="filter">
     <div class="h1 mb-3 fw-normal"><i class="bi bi-building-fill-check"></i> Add a Store</div>
-    <%= render partial: "stores", locals: { stores: @resource } %>
+    <%= render partial: "stores", locals: { stores: @resource, mode: :add } %>
   </div>
   <% unless @resource.stores.any? %>
   <div>

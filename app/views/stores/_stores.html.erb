@@ -32,6 +32,6 @@
     </tr>
   </thead>
   <tbody data-target="filter">
-    <%= render stores %>
+    <%= render partial: 'stores/store', collection: stores, locals: { mode: mode } %>
   </tbody>
 </table>

@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :stores do
     collection do
       get 'add'
+      post 'add_create'
       get 'search'
     end
   end
