@@ -6,21 +6,19 @@
   <td><%= store.state.postal_abbreviation %></th>
   <td><%= store.zip_code %></th>
   <td>
-    <% if store.user_store? %>
-      <span class="badge text-bg-success">
-        <i class="bi bi-check-circle-fill"></i>
-        Already added
-      </span>
-    <% elsif mode == :add %>
-      <%= simple_form_for :store, url: add_create_stores_path, method: :post do |f| %>
+    <% if mode == :add %>
+      <%= simple_form_for :store, url: user_stores_path, method: :post do |f| %>
         <%= f.input :store_id, as: :hidden, input_html: { value: store.id } %>
         <button type="submit" class="btn btn-outline-primary btn-sm">
           <i class="bi bi-building-fill-add"></i> Add
         </button>
       <% end %>
-    <% else %>
-      <%= link_to store_path(store), class: "btn btn-outline-primary btn-sm" do %>
+    <% elsif mode == :list %>
+      <%= link_to user_store_path(store), class: "btn btn-outline-primary btn-sm" do %>
         <i class="bi bi-eye-fill"></i> View
+      <% end %>
+      <%= link_to user_store_path(store), method: :delete, class: "btn btn-outline-danger btn-sm" do %>
+        <i class="bi bi-trash-fill"></i> Remove
       <% end %>
     <% end %>
   </td>

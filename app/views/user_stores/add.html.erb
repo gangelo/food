@@ -1,0 +1,22 @@
+<main class="form form-add-stores m-auto">
+  <div data-controller="filter">
+    <div class="h1 mb-3 fw-normal"><i class="bi bi-building-fill-check"></i> Add a Store</div>
+    <%= render partial: "shared/stores", locals: { stores: @resource, mode: :add } %>
+  </div>
+  <% unless @resource.any? %>
+    <div>
+      The <%= render partial: "shared/site_name", locals: { mode: :dark } %>
+      universe currently has no stores! Save the world and add some!
+    </div>
+  <% end %>
+</main>
+
+<div class="help-links">
+  <%= link_to new_user_store_path, class: "btn btn-primary" do %>
+    <i class="bi bi-building-fill-add"></i> New store
+  <% end %>
+</div>
+
+<div class="help-links marginized">
+  <%= link_to "Back", user_stores_path %>
+</div>

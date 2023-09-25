@@ -1,6 +1,6 @@
 <div data-controller="zip-code">
-  <main class="devise-form form-new-store">
-    <%= simple_form_for(store, wrapper: :horizontal_form) do |f| %>
+  <main class="form form-new-store">
+    <%= simple_form_for(store, url: user_stores_path, wrapper: :horizontal_form) do |f| %>
       <div class="h1 mb-3 fw-normal"><%= header_text %></div>
 
       <%= f.error_notification %>
@@ -51,11 +51,11 @@
                       "zip-code-target": "submitButton"
                      }
         %>
+
+        <div class="help-links marginized">
+          <%= link_to "Back", back_path %>
+        </div>
       </div>
     <% end %>
-
-    <div class="help-links">
-      <%= link_to "Back", back_path %>
-    </div>
   </main>
 </div>

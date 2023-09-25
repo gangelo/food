@@ -29,7 +29,8 @@ body {
 }
 
 // Devise forms
-.devise-form {
+.devise-form,
+.form {
   padding: 1rem;
 
   form {
@@ -58,13 +59,12 @@ body {
 .form-forgot-password,
 .form-change-your-password,
 .form-resend-confirmation-instructions,
-.form-resend-unlock-instructions,
-._form-store-new {
+.form-resend-unlock-instructions {
   max-width: 400px;
 }
 
-.help-links {
-  margin-top: 2rem;
+.help-links.marginized {
+  margin-top: 0.50rem;
 }
 
 // Override Bootstrap's default form validation styles

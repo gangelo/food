@@ -14,6 +14,15 @@ Rails.application.routes.draw do
     end
   end
 
+  scope path: 'user' do
+    resources :stores, controller: 'user_stores', as: 'user_stores' do
+      collection do
+        get 'add'
+        post 'add', action: :create
+      end
+    end
+  end
+
   # Define routes for the Api::ZipCodesController
   namespace :api, defaults: { format: 'json' } do
     get 'zip_codes/zip_code_data/:zip_code', to: 'zip_codes#zip_code_data', as: :zip_code_data

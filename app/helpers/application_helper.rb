@@ -2,6 +2,12 @@
 
 # This is the helper file for the application.
 module ApplicationHelper
+  def debug?
+    return false unless Rails.env.development? || Rails.env.test?
+
+    ENV.fetch('DEBUG', 'false') == 'true'
+  end
+
   # Returns the disabled css class to disable the control if the current page
   # is equal to path.
   #
