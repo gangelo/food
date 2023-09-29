@@ -64,8 +64,8 @@ group :development, :test do
   gem 'dotenv-rails', '~> 2.8', '>= 2.8.1'
   gem 'factory_bot_rails', '~> 6.2'
   gem 'ffaker'
-  gem 'pry-byebug', '~> 3.10', '>= 3.10.1'
-  gem 'pry-rails', '~> 0.3.9'
+  gem 'pry-byebug'
+  gem 'pry-rails'
   gem 'rspec-rails', '~> 6.0', '>= 6.0.3'
 end
 

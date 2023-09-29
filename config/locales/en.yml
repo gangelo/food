@@ -31,6 +31,14 @@
 
 en:
   hello: "Hello world"
+  views:
+    user_stores:
+      store_already_exists_modal:
+        title: "Awesome!"
+        body: >
+          A store with the name you entered already exists in zip code you specified.
+          To use this store, click the OK button. To add a different store, click the
+          Cancel button and enter a different store name and/or zip code.
   activerecord:
     attributes:
       user:
@@ -38,6 +46,9 @@ en:
         password: "Password"
         password_confirmation: "Password confirmation"
         username: "Username"
+      store:
+        base: "Store"
+        store_name: "Store name"
   errors:
     messages:
       password_complexity: "must include at least one upper and lowercase letter, one number, and one special character (!, @, #, $, %, ^, &, or *)"

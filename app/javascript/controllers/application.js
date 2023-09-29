@@ -1,8 +1,12 @@
-import { Application } from "@hotwired/stimulus"
+// Import Bootstrap JavaScript
+import "bootstrap/dist/js/bootstrap";
 
-const application = Application.start()
+// Start and configure Stimulus
+import { Application } from "@hotwired/stimulus";
+
+const application = Application.start();
 
 // Configure Stimulus development experience
 application.debug = true;
 window.Stimulus = application;
-export { application }
+export { application };

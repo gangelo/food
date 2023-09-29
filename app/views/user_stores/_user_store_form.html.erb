@@ -1,0 +1,89 @@
+<% if !user_store.store&.unique_store? %>
+  <div data-controller="modal"
+       data-modal-title="<%= user_store.store_already_exists_modal[:title] %>"
+       data-modal-body="<%= user_store.store_already_exists_modal[:body] %>"
+  >
+    <div class="modal" tabindex="-1" data-modal-target="modal">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" data-modal-target="modalTitle">Modal title</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body" data-modal-target="modalBody">
+            <p>Modal body text goes here.</p>
+          </div>
+          <div class="modal-footer" data-modal-target="modalFooter">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end%>
+<div data-controller="zip-code">
+  <main class="form form-user-store">
+    <%= simple_form_for(user_store, url: user_stores_path, wrapper: :horizontal_form) do |f| %>
+      <div class="h1 mb-3 fw-normal"><%= header_text %></div>
+
+      <%= f.error_notification %>
+      <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+      <%= f.simple_fields_for :store do |store_form| %>
+        <%= store_form.error_notification message: store_form.object.errors[:base].to_sentence if store_form.object.errors[:base].present? %>
+        <%= store_form.input :store_name,
+                    label: "Name",
+                    autofocus: true
+        %>
+        <%= store_form.input :address,
+                    label: "Address"
+        %>
+        <%= store_form.input :address2,
+                    label: "Address 2"
+        %>
+        <%= store_form.input :zip_code,
+                    required: true,
+                    input_html: {
+                      data: {
+                        "zip-code-target": "zipCode",
+                        action: "blur->zip-code#fetchCityAndStateFromZipCode"
+                      }
+                    }
+        %>
+        <%= store_form.input :city,
+                    input_html: {
+                      data: {
+                        "zip-code-target": "city"
+                      }
+                    }
+        %>
+        <%= store_form.association :state,
+                          wrapper: :horizontal_form,
+                          label_method: lambda { |state|
+                            "#{state.state_name} (#{state.postal_abbreviation})"
+                          },
+                          prompt: "Select a state",
+                          input_html: {
+                            data: {
+                              "zip-code-target": "state"
+                            }
+                          }
+        %>
+      <% end %>
+      <div class="form-actions">
+        <%= f.button :submit,
+                    "Create store",
+                     class: "btn btn-primary",
+                     data: {
+                      "zip-code-target": "submitButton"
+                     }
+        %>
+
+        <div class="help-links marginized">
+          <%= link_to "Back", back_path %>
+        </div>
+      </div>
+    <% end %>
+  </main>
+</div>

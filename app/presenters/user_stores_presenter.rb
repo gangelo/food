@@ -2,16 +2,10 @@
 
 # The user_stores presenter to display a collection of
 # StorePresenter objects.
-class UserStoresPresenter < SimpleDelegator
-  def initialize(user_stores, current_user)
-    super(user_stores)
-
-    @current_user = current_user
-  end
-
+class UserStoresPresenter < Presenter
   def presenters
     @presenters ||= map do |user_store|
-      UserStorePresenter.new(user_store.store, current_user)
+      UserStorePresenter.new(resource: user_store.store, view_context: view_context, user: user, options: options)
     end.sort_by(&:store_name)
   end
 
@@ -22,16 +16,4 @@ class UserStoresPresenter < SimpleDelegator
   def stores?
     count.positive?
   end
-
-  # def name
-  #   @name ||= model.name.pluralize
-  # end
-
-  # def to_partial_path
-  #   'shared/stores'
-  # end
-
-  private
-
-  attr_reader :current_user
 end

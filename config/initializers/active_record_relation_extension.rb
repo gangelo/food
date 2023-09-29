@@ -3,8 +3,10 @@
 # The relation extensions for this application.
 # This extension adds a presenter method to all ActiveRecord::Relation objects.
 module RelationExtensions
-  def presenter(current_user)
-    presenter_klass.new(self, current_user)
+  def presenter(user:, view_context:, options: nil)
+    puts "RelationExtensions#presenter_klass_name: #{presenter_klass_name}" if Rails.env.development?
+    options ||= {}
+    presenter_klass.new(resource: self, view_context: view_context, user: user, options: options)
   rescue NameError => e
     Rails.logger.warn("No presenter found for \"#{presenter_klass_name}\": #{e.message}")
   end

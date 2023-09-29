@@ -10,8 +10,11 @@ application.register("filter", FilterController);
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
-import NavBarController from "./nav_bar_controller"
-application.register("nav-bar", NavBarController)
+import ModalController from "./modal_controller";
+application.register("modal", ModalController);
+
+import NavBarController from "./nav_bar_controller";
+application.register("nav-bar", NavBarController);
 
 import ZipCodeController from "./zip_code_controller";
 application.register("zip-code", ZipCodeController);

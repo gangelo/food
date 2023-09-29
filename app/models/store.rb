@@ -4,6 +4,10 @@
 class Store < ApplicationRecord
   before_save :before_save_edits
 
+  scope :where_name_and_zip_case_insensitive, lambda { |store_name, zip_code|
+    where('LOWER(store_name) = LOWER(?) AND zip_code = ?', store_name, zip_code)
+  }
+
   belongs_to :state
 
   has_many :user_stores
@@ -15,8 +19,30 @@ class Store < ApplicationRecord
   # Validates :zip_code which could be 5 digits with optional 4 digit extension.
   validates :zip_code, format: { with: /\A\d{5}(-\d{4})?\z/ }
 
-  # Validates uniqueness of store_name within a zip code, case insensitive
-  validates :store_name, uniqueness: { scope: :zip_code, case_sensitive: false }
+  validate :store_name_and_zip_code_uniqueness, if: -> { store_name_and_zip_code? }
+
+  def unique_store?
+    return true unless store_name_and_zip_code?
+
+    store = self.class.where_name_and_zip_case_insensitive(store_name, zip_code).first
+    return true unless store
+
+    store.id == id
+  end
+
+  private
+
+  def store_name_and_zip_code_uniqueness
+    return true if unique_store?
+
+    store = t('activerecord.attributes.store.base')
+    errors.add(:base, "#{store} \"#{store_name}\" " \
+                      "already exists in zip code #{zip_code}")
+  end
+
+  def store_name_and_zip_code?
+    store_name.present? && zip_code.present?
+  end
 
   def before_save_edits
     self.store_name = store_name.titleize

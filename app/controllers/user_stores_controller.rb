@@ -16,7 +16,7 @@ class UserStoresController < ApplicationController
 
   # GET /user/stores/new
   def new
-    @resource = Store.new
+    @resource = current_user.user_stores.build(store: Store.new)
   end
 
   # GET /user/stores/1/edit
@@ -24,17 +24,12 @@ class UserStoresController < ApplicationController
 
   # POST /user/stores or /user/stores.json
   def create
-    success = UserStore.new(user_id: current_user.id, store_id: create_params[:store_id]).save
-    @resource = all_user_stores
-    if success
+    @resource = current_user.user_stores.create(create_params).presenter(user: current_user, view_context: view_context)
+    if @resource.persisted?
       redirect_to add_user_stores_path, notice: 'Store was successfully added.'
     else
-      # You might want to handle the error differently, perhaps redirecting back with a flash message.
-      redirect_to add_user_stores_path, alert: 'There was an error adding the store.'
+      render :new, status: :unprocessable_entity
     end
-  rescue StandardError => e
-    @resource = all_user_stores
-    redirect_to add_user_stores_path, alert: e.message
   end
 
   # PATCH/PUT /user/stores/1 or /user/stores/1.json
@@ -62,7 +57,7 @@ class UserStoresController < ApplicationController
 
   # GET /user/stores/add
   def add
-    @resource = Store.all.presenter(current_user)
+    @resource = Store.all.presenter(user: current_user, view_context: view_context)
   end
 
   private
@@ -73,7 +68,7 @@ class UserStoresController < ApplicationController
   end
 
   def all_user_stores
-    current_user.user_stores.presenter(current_user)
+    current_user.user_stores.presenter(user: current_user, view_context: view_context)
   end
 
   # Only allow a list of trusted parameters through.
@@ -82,6 +77,16 @@ class UserStoresController < ApplicationController
   end
 
   def create_params
-    params.require(:store).permit(:store_id)
+    store_attributes = {
+      store_attributes: [
+        :store_name,
+        :address,
+        :address2,
+        :zip_code,
+        :city,
+        :state_id
+      ]
+    }
+    params.require(:user_store).permit(store_attributes)
   end
 end

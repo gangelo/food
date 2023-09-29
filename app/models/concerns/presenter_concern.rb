@@ -6,13 +6,14 @@ module PresenterConcern
 
   included do
     class << self
-      def presenter_for(object, current_user)
-        "#{object.class.name}Presenter".constantize.new(object, current_user)
+      def presenter_for(resource:, user:, view_context:, options: nil)
+        options ||= {}
+        "#{resource.class.name}Presenter".constantize.new(resource: resource, user: user, view_context: view_context, options: options)
       end
     end
   end
 
-  def presenter(current_user)
-    self.class.presenter_for(self, current_user)
+  def presenter(user:, view_context:, options: nil)
+    self.class.presenter_for(resource: self, user: user, view_context: view_context, options: options)
   end
 end
