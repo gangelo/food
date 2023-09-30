@@ -24,6 +24,8 @@ class UserStoresController < ApplicationController
 
   # POST /user/stores or /user/stores.json
   def create
+    Rails.logger.debug("xyzzy: #{params[:non_unique_store_id]}")
+
     @resource = current_user.user_stores.create(create_params).presenter(user: current_user, view_context: view_context)
     if @resource.persisted?
       redirect_to add_user_stores_path, notice: 'Store was successfully added.'
@@ -87,6 +89,7 @@ class UserStoresController < ApplicationController
         :state_id
       ]
     }
+    #params.fetch(:user_store, {}).permit(:non_unique_store_id, store_attributes)
     params.require(:user_store).permit(store_attributes)
   end
 end

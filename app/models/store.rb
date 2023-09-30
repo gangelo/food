@@ -4,6 +4,8 @@
 class Store < ApplicationRecord
   before_save :before_save_edits
 
+  attr_reader :non_unique_store_id
+
   scope :where_name_and_zip_case_insensitive, lambda { |store_name, zip_code|
     where('LOWER(store_name) = LOWER(?) AND zip_code = ?', store_name, zip_code)
   }
@@ -21,16 +23,26 @@ class Store < ApplicationRecord
 
   validate :store_name_and_zip_code_uniqueness, if: -> { store_name_and_zip_code? }
 
+  def non_unique_store?
+    !unique_store?
+  end
+
   def unique_store?
     return true unless store_name_and_zip_code?
 
     store = self.class.where_name_and_zip_case_insensitive(store_name, zip_code).first
     return true unless store
 
-    store.id == id
+    # This attribute (id) will be populated with the id of the
+    # store that already exists with the same name and zip code.
+    self.non_unique_store_id = store.id unless store.id == id
+
+    non_unique_store_id.nil?
   end
 
   private
+
+  attr_writer :non_unique_store_id
 
   def store_name_and_zip_code_uniqueness
     return true if unique_store?

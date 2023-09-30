@@ -1,7 +1,4 @@
-<% if !user_store.unique_store? %>
-  <%
-  data_controller = "new-user-store-modal"
-  %>
+<% if user_store&.store&.non_unique_store? %>
   <%= render partial: "shared/modal",
       locals: {
         data_controller: "new-user-store-modal",
@@ -21,6 +18,9 @@
       <%= f.error_notification %>
       <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
+      <%= f.hidden_field :non_unique_store_id,
+                    value: user_store&.store&.non_unique_store_id
+      %>
       <%= f.simple_fields_for :store do |store_form| %>
         <%= store_form.error_notification message: store_form.object.errors[:base].to_sentence if store_form.object.errors[:base].present? %>
         <%= store_form.input :store_name,

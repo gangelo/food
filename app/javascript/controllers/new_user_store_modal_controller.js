@@ -7,8 +7,6 @@ export default class extends ModalController {
   connect() {
     super.connect();
 
-    console.log("Derived controller connected");
-
     this.modalButtonPrimaryTarget.addEventListener("click", () => {
       console.log("Primary button clicked");
     });

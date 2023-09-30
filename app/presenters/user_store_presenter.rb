@@ -3,12 +3,6 @@
 # The user store presenter to display the store associated with
 # a user's user_store association.
 class UserStorePresenter < StorePresenter
-  def unique_store?
-    return true if store.nil?
-
-    store.unique_store?
-  end
-
   def store_already_exists_modal
     {
       title: I18n.t('views.user_stores.store_already_exists_modal.title'),

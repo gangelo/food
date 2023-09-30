@@ -7,8 +7,6 @@ export default class extends Controller {
     "modalTitle", "modalFooter"];
 
   connect() {
-    console.log("Base controller connected");
-
     // NOTE: Use caution when using the data attribute API in concert with
     // any call to element.innerHTML as this is vulnerable to XSS attacks!
     this.modalTitleTarget.innerHTML = this.data.get("title");
