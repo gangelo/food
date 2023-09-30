@@ -4,12 +4,12 @@
   %>
   <%= render partial: "shared/modal",
       locals: {
+        data_controller: "new-user-store-modal",
         modal_id: "modal",
         title_text: user_store.store_already_exists_modal[:title],
         body_text: user_store.store_already_exists_modal[:body],
         primary_button_text: user_store.store_already_exists_modal[:primary_button],
-        secondary_button_text: user_store.store_already_exists_modal[:secondary_button],
-        data_controller: data_controller
+        secondary_button_text: user_store.store_already_exists_modal[:secondary_button]
       }
   %>
 <% end %>
