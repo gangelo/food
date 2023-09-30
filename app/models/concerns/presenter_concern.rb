@@ -8,7 +8,10 @@ module PresenterConcern
     class << self
       def presenter_for(resource:, user:, view_context:, options: nil)
         options ||= {}
-        "#{resource.class.name}Presenter".constantize.new(resource: resource, user: user, view_context: view_context, options: options)
+        "#{resource.class.name}Presenter".constantize.new(resource: resource,
+                                                          user: user,
+                                                          view_context: view_context,
+                                                          options: options)
       end
     end
   end

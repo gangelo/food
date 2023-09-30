@@ -37,8 +37,11 @@ en:
         title: "Awesome!"
         body: >
           A store with the name you entered already exists in zip code you specified.
-          To use this store, click the OK button. To add a different store, click the
-          Cancel button and enter a different store name and/or zip code.
+          To use this store, click the <i>OK</i> button. To add a different store, click the
+          <i>Cancel</i> button and enter a different store name and/or zip code.
+        buttons:
+          primary: "OK"
+          secondary: "Cancel"
   activerecord:
     attributes:
       user:

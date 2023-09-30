@@ -3,11 +3,19 @@ import { Modal } from "bootstrap";
 
 // Connects to data-controller="modal"
 export default class extends Controller {
-  static targets = ["modal", "modalBody", "modalTitle", "modalFooter"];
+  static targets = ["modal", "modalBody", "modalButtonPrimary", "modalButtonSecondary",
+    "modalTitle", "modalFooter"];
 
   connect() {
-    this.modalTitleTarget.textContent = this.data.get("title");
-    this.modalBodyTarget.textContent = this.data.get("body");
+    console.log("Base controller connected");
+
+    // NOTE: Use caution when using the data attribute API in concert with
+    // any call to element.innerHTML as this is vulnerable to XSS attacks!
+    this.modalTitleTarget.innerHTML = this.data.get("title");
+    this.modalBodyTarget.innerHTML = this.data.get("body");
+    this.modalButtonPrimaryTarget.innerHTML = this.data.get("buttonPrimary");
+    this.modalButtonSecondaryTarget.innerHTML =
+      this.data.get("buttonSecondary");
     this.bootstrapModal = new Modal(this.modalTarget);
 
     this.showModal();

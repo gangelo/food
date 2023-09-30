@@ -16,5 +16,8 @@ application.register("modal", ModalController);
 import NavBarController from "./nav_bar_controller";
 application.register("nav-bar", NavBarController);
 
+import NewUserStoreModalController from "./new_user_store_modal_controller";
+application.register("new-user-store-modal", NewUserStoreModalController);
+
 import ZipCodeController from "./zip_code_controller";
 application.register("zip-code", ZipCodeController);

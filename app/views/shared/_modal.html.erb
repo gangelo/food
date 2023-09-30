@@ -1,0 +1,31 @@
+<%
+data_controller_target = data_controller.underscore.camelize(:lower)
+%>
+<div data-controller="<%= data_controller %>"
+      data-<%= data_controller %>-title="<%= title_text %>"
+      data-<%= data_controller %>-body="<%= body_text %>"
+      data-<%= data_controller %>-button-primary="<%= primary_button_text %>"
+      data-<%= data_controller %>-button-secondary="<%= secondary_button_text %>"
+  >
+  <div id="<%= modal_id %>" class="modal" tabindex="-1" data-<%= data_controller %>-target="modal">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" data-<%= data_controller %>-target="modalTitle">
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" data-<%= data_controller %>-target="modalBody">
+        </div>
+        <div class="modal-footer" data-<%= data_controller %>-target="modalFooter">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-<%= data_controller %>-target="modalButtonSecondary">
+          </button>
+          <button type="button" class="btn btn-primary" data-<%= data_controller %>-target="modalButtonPrimary">
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div data-<%= data_controller %>-target="modalTarget"></div>
+  <div data-<%= data_controller %>-target="<%= data_controller_target %>"></div>
+</div>

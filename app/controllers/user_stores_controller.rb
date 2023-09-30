@@ -16,7 +16,7 @@ class UserStoresController < ApplicationController
 
   # GET /user/stores/new
   def new
-    @resource = current_user.user_stores.build(store: Store.new)
+    @resource = current_user.user_stores.build(store: Store.new).presenter(user: current_user, view_context: view_context)
   end
 
   # GET /user/stores/1/edit

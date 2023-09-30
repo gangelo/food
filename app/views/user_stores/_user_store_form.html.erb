@@ -1,27 +1,18 @@
-<% if !user_store.store&.unique_store? %>
-  <div data-controller="modal"
-       data-modal-title="<%= user_store.store_already_exists_modal[:title] %>"
-       data-modal-body="<%= user_store.store_already_exists_modal[:body] %>"
-  >
-    <div class="modal" tabindex="-1" data-modal-target="modal">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" data-modal-target="modalTitle">Modal title</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body" data-modal-target="modalBody">
-            <p>Modal body text goes here.</p>
-          </div>
-          <div class="modal-footer" data-modal-target="modalFooter">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-<% end%>
+<% if !user_store.unique_store? %>
+  <%
+  data_controller = "new-user-store-modal"
+  %>
+  <%= render partial: "shared/modal",
+      locals: {
+        modal_id: "modal",
+        title_text: user_store.store_already_exists_modal[:title],
+        body_text: user_store.store_already_exists_modal[:body],
+        primary_button_text: user_store.store_already_exists_modal[:primary_button],
+        secondary_button_text: user_store.store_already_exists_modal[:secondary_button],
+        data_controller: data_controller
+      }
+  %>
+<% end %>
 <div data-controller="zip-code">
   <main class="form form-user-store">
     <%= simple_form_for(user_store, url: user_stores_path, wrapper: :horizontal_form) do |f| %>
