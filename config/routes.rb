@@ -22,6 +22,7 @@ Rails.application.routes.draw do
       end
     end
   end
+  post 'user/stores/link', to: 'user_stores#link', as: :link_user_store
 
   # Define routes for the Api::ZipCodesController
   namespace :api, defaults: { format: 'json' } do

@@ -4,20 +4,23 @@
 
 import { application } from "./application"
 
-import FilterController from "./filter_controller";
-application.register("filter", FilterController);
+import FilterController from "./filter_controller"
+application.register("filter", FilterController)
+
+import FlashController from "./flash_controller"
+application.register("flash", FlashController)
 
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
-import ModalController from "./modal_controller";
-application.register("modal", ModalController);
+import ModalController from "./modal_controller"
+application.register("modal", ModalController)
 
-import NavBarController from "./nav_bar_controller";
-application.register("nav-bar", NavBarController);
+import NavBarController from "./nav_bar_controller"
+application.register("nav-bar", NavBarController)
 
-import NewUserStoreModalController from "./new_user_store_modal_controller";
-application.register("new-user-store-modal", NewUserStoreModalController);
+import NewUserStoreModalController from "./new_user_store_modal_controller"
+application.register("new-user-store-modal", NewUserStoreModalController)
 
-import ZipCodeController from "./zip_code_controller";
-application.register("zip-code", ZipCodeController);
+import ZipCodeController from "./zip_code_controller"
+application.register("zip-code", ZipCodeController)

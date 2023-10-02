@@ -2,12 +2,22 @@
 data_controller_target = data_controller.underscore.camelize(:lower)
 %>
 <div data-controller="<%= data_controller %>"
-      data-<%= data_controller %>-title="<%= title_text %>"
-      data-<%= data_controller %>-body="<%= body_text %>"
-      data-<%= data_controller %>-button-primary="<%= primary_button_text %>"
-      data-<%= data_controller %>-button-secondary="<%= secondary_button_text %>"
+      data-<%= data_controller %>-title="<%= text[:title] %>"
+      data-<%= data_controller %>-body="<%= text[:body] %>"
+      data-<%= data_controller %>-button-primary="<%= text[:primary_button] %>"
+      data-<%= data_controller %>-button-secondary="<%= text[:secondary_button] %>"
+      data-<%= data_controller %>-form-id="<%= form_id %>"
   >
+  <%
+  hidden.each do |key, value|
+  %>
+    <%= hidden_field_tag key, value %>
+  <%
+  end
+  %>
   <div id="<%= modal_id %>" class="modal" tabindex="-1" data-<%= data_controller %>-target="modal">
+    <div data-<%= data_controller %>-target="modalTarget"></div>
+    <div data-<%= data_controller %>-target="<%= data_controller_target %>"></div>
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
@@ -26,6 +36,4 @@ data_controller_target = data_controller.underscore.camelize(:lower)
       </div>
     </div>
   </div>
-  <div data-<%= data_controller %>-target="modalTarget"></div>
-  <div data-<%= data_controller %>-target="<%= data_controller_target %>"></div>
 </div>

@@ -1,0 +1,18 @@
+<div data-controller="flash"
+      class="hot-alert alert d-none fade d-flex justify-content-between align-items-center"
+      data-flash-target="container"
+      data-flash-flash-json="<%= { flash_type => flash_message }.to_json %>"
+>
+  <!-- Icon -->
+  <div>
+    <i data-flash-target="icon" class="hot-alert-icon bi"></i>
+  </div>
+
+  <!-- Body (left-aligned) -->
+  <div class="hot-alert-body flex-grow-1 text-left" data-flash-target="body"></div>
+
+  <!-- Close button -->
+  <div>
+    <i data-flash-target="close" class="hot-alert-close-icon bi"></i>
+  </div>
+</div>

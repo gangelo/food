@@ -1,19 +1,24 @@
 <main class="form form-add-stores m-auto">
   <div data-controller="filter">
     <div class="h1 mb-3 fw-normal"><i class="bi bi-building-fill-check"></i> Add a Store</div>
+    <p>Stores you've already added will not appear here.</p>
     <%= render partial: "shared/stores", locals: { stores: @resource, mode: :add } %>
   </div>
   <% unless @resource.any? %>
     <div>
-      The <%= render partial: "shared/site_name", locals: { mode: :dark } %>
-      universe currently has no stores! Save the world and add some!
+      <% if @resource.model_class.any? %>
+        You have already added all the stores in the <%= render partial: "shared/site_name", locals: { mode: :dark } %> universe!
+      <% else %>
+        The <%= render partial: "shared/site_name", locals: { mode: :dark } %>
+        universe currently has no stores! Save the world and add some!
+      <% end %>
     </div>
   <% end %>
 </main>
 
 <div class="help-links">
   <%= link_to new_user_store_path, class: "btn btn-primary" do %>
-    <i class="bi bi-building-fill-add"></i> New store
+    <i class="bi bi-building-fill-add"></i>New store
   <% end %>
 </div>
 

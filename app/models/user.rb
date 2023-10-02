@@ -48,6 +48,10 @@ class User < ApplicationRecord
     end
   end
 
+  def user_store_exists?(store_id)
+    user_stores.where(store_id: store_id).exists?
+  end
+
   private
 
   def password_complexity

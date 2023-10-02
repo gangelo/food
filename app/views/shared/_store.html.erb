@@ -7,10 +7,10 @@
   <td><%= store.zip_code %></th>
   <td>
     <% if mode == :add %>
-      <%= simple_form_for :store, url: user_stores_path, method: :post do |f| %>
+      <%= simple_form_for store, url: user_stores_path, method: :post do |f| %>
         <%= f.input :store_id, as: :hidden, input_html: { value: store.id } %>
         <button type="submit" class="btn btn-outline-primary btn-sm">
-          <i class="bi bi-building-fill-add"></i> Add
+          <i class="bi bi-building-fill-check"></i> Add
         </button>
       <% end %>
     <% elsif mode == :list %>

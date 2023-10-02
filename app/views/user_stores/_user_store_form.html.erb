@@ -1,28 +1,73 @@
-<% if user_store&.store&.non_unique_store? %>
-  <%= render partial: "shared/modal",
-      locals: {
-        data_controller: "new-user-store-modal",
-        modal_id: "modal",
-        title_text: user_store.store_already_exists_modal[:title],
-        body_text: user_store.store_already_exists_modal[:body],
-        primary_button_text: user_store.store_already_exists_modal[:primary_button],
-        secondary_button_text: user_store.store_already_exists_modal[:secondary_button]
-      }
-  %>
+<%
+=begin
+This is a modal that is rendered when the user tries to create
+a store that exists in the database, but does not exist in the
+user's list of stores in their profile. The modal gives them
+the option to add the store to their profile or cancel try again.
+=end
+%>
+<% if !user_store.user_store_exists? && user_store.store.non_unique_store? %>
+  <% form_id = "link_user_store" %>
+  <%= simple_form_for(user_store, html: { id: form_id }, url: link_user_store_path) do |f| %>
+    <%= render partial: "shared/modal",
+        locals: {
+          data_controller: "new-user-store-modal",
+          form_id: form_id,
+          modal_id: "modal",
+          text: {
+            title: user_store.store_already_exists_modal[:title],
+            body: user_store.store_already_exists_modal[:body],
+            primary_button: user_store.store_already_exists_modal[:primary_button],
+            secondary_button: user_store.store_already_exists_modal[:secondary_button],
+          },
+          hidden: {
+            "data-new-user-store-modal-store-id": user_store.store.non_unique_store_id,
+          }
+        }
+    %>
+    <%= f.simple_fields_for :store do |store_form| %>
+      <%= store_form.input :id,
+                      as: :hidden,
+                      input_html: {
+                        value: user_store.store.non_unique_store_id
+                      }
+      %>
+    <% end %>
+  <% end %>
 <% end %>
+
 <div data-controller="zip-code">
   <main class="form form-user-store">
     <%= simple_form_for(user_store, url: user_stores_path, wrapper: :horizontal_form) do |f| %>
-      <div class="h1 mb-3 fw-normal"><%= header_text %></div>
+      <div class="h1 mb-3 fw-normal">
+        <i class="bi <%= header_icon %>"></i>
+        <%= header_text %>
+      </div>
 
-      <%= f.error_notification %>
-      <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+      <%#= f.error_notification %>
+      <%#= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-      <%= f.hidden_field :non_unique_store_id,
-                    value: user_store&.store&.non_unique_store_id
-      %>
+      <% if f.object.errors[:base].present? %>
+        <%= render partial: "shared/flash_message",
+                    locals: {
+                      flash_type: "alert",
+                      flash_message: f.object.errors[:base].to_sentence
+                    }
+        %>
+      <% end %>
+
       <%= f.simple_fields_for :store do |store_form| %>
-        <%= store_form.error_notification message: store_form.object.errors[:base].to_sentence if store_form.object.errors[:base].present? %>
+        <%#= store_form.error_notification message: store_form.object.errors[:base].to_sentence if store_form.object.errors[:base].present? %>
+
+        <% if store_form.object.errors[:base].present? %>
+          <%= render partial: "shared/flash_message",
+                        locals: {
+                          flash_type: "alert",
+                          flash_message: store_form.object.errors[:base].to_sentence
+                        }
+          %>
+        <% end %>
+
         <%= store_form.input :store_name,
                     label: "Name",
                     autofocus: true

@@ -13,4 +13,12 @@ class Presenter < SimpleDelegator
     @view_context = view_context
     @options = options || {}
   end
+
+  def model_class
+    model_object.respond_to?(:klass) ? model_object.klass : model_object.class
+  end
+
+  def model_object
+    __getobj__
+  end
 end

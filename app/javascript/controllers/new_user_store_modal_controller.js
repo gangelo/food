@@ -8,7 +8,8 @@ export default class extends ModalController {
     super.connect();
 
     this.modalButtonPrimaryTarget.addEventListener("click", () => {
-      console.log("Primary button clicked");
+      let formId = this.data.get("formId");
+      document.getElementById(formId).submit();
     });
   }
 }

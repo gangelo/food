@@ -1,15 +1,17 @@
-<% if notice %>
-  <div class="alert alert-success">
-    <i class="bi bi-check-circle-fill float-start"></i>
-    &nbsp;<%= notice %>
-    <i class="bi bi-x-circle-fill float-end"></i>
-  </div>
-<% end %>
-
-<% if alert %>
-  <div class="alert alert-danger">
-    <i class="bi bi-exclamation-circle-fill float-start"></i>
-    &nbsp;<%= alert %>
-    <i class="bi bi-x-circle-fill float-end"></i>
-  </div>
+<% flash_hash = flash.to_h.each_pair do |flash_type, value| %>
+  <% if value.is_a?(Array) %>
+    <%= render partial: "shared/flash_message",
+               collection: value,
+               locals: {
+                  flash_type: flash_type
+               }
+    %>
+  <% else %>
+    <%= render partial: "shared/flash_message",
+               locals: {
+                  flash_type: flash_type,
+                  flash_message: value
+               }
+    %>
+  <% end %>
 <% end %>

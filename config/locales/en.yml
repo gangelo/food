@@ -44,14 +44,22 @@ en:
           secondary: "Cancel"
   activerecord:
     attributes:
+      store:
+        base: "Store"
+        store_name: "Store name"
       user:
         email: "Email"
         password: "Password"
         password_confirmation: "Password confirmation"
         username: "Username"
-      store:
+      user_store:
         base: "Store"
-        store_name: "Store name"
+    errors:
+      models:
+        store:
+          already_exists: "Store already exists within the zip code"
+        user_store:
+          already_added: "Store is already a  user store"
   errors:
     messages:
       password_complexity: "must include at least one upper and lowercase letter, one number, and one special character (!, @, #, $, %, ^, &, or *)"

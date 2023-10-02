@@ -2,6 +2,8 @@
 
 # The application controller for this application.
 class ApplicationController < ActionController::Base
+  add_flash_types :info, :warn
+
   rescue_from ActionController::InvalidAuthenticityToken, with: :handle_session_timeout
   before_action :configure_permitted_parameters, if: :devise_controller?
 

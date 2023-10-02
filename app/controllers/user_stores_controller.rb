@@ -24,9 +24,25 @@ class UserStoresController < ApplicationController
 
   # POST /user/stores or /user/stores.json
   def create
-    Rails.logger.debug("xyzzy: #{params[:non_unique_store_id]}")
-
     @resource = current_user.user_stores.create(create_params).presenter(user: current_user, view_context: view_context)
+    redirect_to add_user_stores_path, notice: 'Store was successfully added.' and return if @resource.persisted?
+
+    store_name = create_params[:store_attributes][:store_name]
+    zip_code = create_params[:store_attributes][:zip_code]
+    store = Store.where_name_and_zip_case_insensitive(store_name, zip_code).first
+    if store && current_user.user_stores.exists?(store_id: store.id)
+      flash.now[:info] = 'This store is already in your stores list!'
+      render :new, status: :conflict
+    elsif @resource.store&.non_unique_store?
+      render :new, status: :conflict
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+
+  # POST /user/stores/link
+  def link
+    @resource = current_user.user_stores.create(store_id: link_store_params[:store_attributes][:id]).presenter(user: current_user, view_context: view_context)
     if @resource.persisted?
       redirect_to add_user_stores_path, notice: 'Store was successfully added.'
     else
@@ -59,7 +75,8 @@ class UserStoresController < ApplicationController
 
   # GET /user/stores/add
   def add
-    @resource = Store.all.presenter(user: current_user, view_context: view_context)
+    store_ids = current_user.stores.pluck(:id)
+    @resource = Store.where.not(id: store_ids).presenter(user: current_user, view_context: view_context)
   end
 
   private
@@ -73,13 +90,13 @@ class UserStoresController < ApplicationController
     current_user.user_stores.presenter(user: current_user, view_context: view_context)
   end
 
-  # Only allow a list of trusted parameters through.
   def user_store_params
-    params.require(:store).permit(:user_story_id)
+    params.require(:store).permit(:user_store_id)
   end
 
   def create_params
-    store_attributes = {
+    params.require(:user_store).permit(
+      :non_unique_store_id,
       store_attributes: [
         :store_name,
         :address,
@@ -88,8 +105,26 @@ class UserStoresController < ApplicationController
         :city,
         :state_id
       ]
-    }
-    #params.fetch(:user_store, {}).permit(:non_unique_store_id, store_attributes)
-    params.require(:user_store).permit(store_attributes)
+    ).slice(:store_attributes)
+  end
+
+  def link_store_params
+    params.require(:user_store).permit(
+      store_attributes: [:id]
+    )
+  end
+
+  def non_unique_store_id_param
+    params.require(:user_store).permit(
+      :non_unique_store_id,
+      store_attributes: [
+        :store_name,
+        :address,
+        :address2,
+        :zip_code,
+        :city,
+        :state_id
+      ]
+    )[:non_unique_store_id]
   end
 end

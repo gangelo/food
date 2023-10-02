@@ -47,9 +47,7 @@ class Store < ApplicationRecord
   def store_name_and_zip_code_uniqueness
     return true if unique_store?
 
-    store = t('activerecord.attributes.store.base')
-    errors.add(:base, "#{store} \"#{store_name}\" " \
-                      "already exists in zip code #{zip_code}")
+    errors.add(:base, I18n.t('activerecord.errors.models.store.already_exists'))
   end
 
   def store_name_and_zip_code?
