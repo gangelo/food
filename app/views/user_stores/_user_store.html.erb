@@ -20,12 +20,12 @@ store_presenter = user_store.store.presenter(user: current_user, view_context: n
         <% end %>
       </div>
     <% else %>
-      <div class="d-flex align-items-center justify-content-between">
-        <%= link_to user_store_path(user_store), class: "btn btn-outline-primary btn-sm" do %>
+      <div class="d-flex align-items-center justify-content-center">
+        <%= link_to user_store_path(user_store), class: "btn btn-outline-primary btn-sm me-1" do %>
           <i class="bi bi-eye-fill"></i> View
         <% end %>
         <%= simple_form_for user_store, url: user_store_path(user_store), method: :delete do |f| %>
-          <%= button_tag(type: :submit, class: "btn btn-outline-danger btn-sm") do %>
+          <%= button_tag(type: :submit, class: "btn btn-outline-danger btn-sm ms-1") do %>
             <i class="bi bi-trash-fill"></i> Remove
           <% end %>
         <% end %>
