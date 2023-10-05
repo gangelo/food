@@ -1,0 +1,35 @@
+<%#= content_tag(:div, "_user_store.html.erb: user_store.class: #{user_store.class.name}, inspect: #{user_store.inspect}") %>
+<%
+store_presenter = user_store.store.presenter(user: current_user, view_context: nil)
+%>
+<tr id="<%= dom_id user_store %>" >
+  <th scope="row"><%= user_store_counter + 1 %></th>
+  <td><%= store_presenter.store_name %></td>
+  <td><%= store_presenter.address_with_address2 %></td>
+  <td><%= store_presenter.city %></td>
+  <td><%= store_presenter.state.postal_abbreviation %></td>
+  <td><%= store_presenter.zip_code %></td>
+  <td>
+    <% if user_store.new_record? %>
+      <div class="d-flex justify-content-center">
+        <%= simple_form_for user_store, url: add_user_stores_path, method: :post  do |f| %>
+          <%= button_tag(type: :submit, class: "btn btn-outline-primary btn-sm") do %>
+            <i class="bi bi-building-fill-check"></i> Add
+          <% end %>
+          <%= f.association :store, as: :hidden, input_html: { value: user_store.store_id } %>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="d-flex align-items-center justify-content-between">
+        <%= link_to user_store_path(user_store), class: "btn btn-outline-primary btn-sm" do %>
+          <i class="bi bi-eye-fill"></i> View
+        <% end %>
+        <%= simple_form_for user_store, url: user_store_path(user_store), method: :delete do |f| %>
+          <%= button_tag(type: :submit, class: "btn btn-outline-danger btn-sm") do %>
+            <i class="bi bi-trash-fill"></i> Remove
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  </td>
+</tr>

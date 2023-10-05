@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     resources :stores, controller: 'user_stores', as: 'user_stores' do
       collection do
         get 'add'
-        post 'add', action: :create
+        post 'add'
       end
     end
   end

@@ -2,11 +2,11 @@
   <div data-controller="filter">
     <div class="h1 mb-3 fw-normal"><i class="bi bi-building-fill-check"></i> Add a Store</div>
     <p>Stores you've already added will not appear here.</p>
-    <%= render partial: "shared/stores", locals: { stores: @resource, mode: :add } %>
+    <%= render partial: "user_stores", object: @resource, locals: { mode: :add } %>
   </div>
   <% unless @resource.any? %>
     <div>
-      <% if @resource.model_class.any? %>
+      <% if Store.any? %>
         You have already added all the stores in the <%= render partial: "shared/site_name", locals: { mode: :dark } %> universe!
       <% else %>
         The <%= render partial: "shared/site_name", locals: { mode: :dark } %>

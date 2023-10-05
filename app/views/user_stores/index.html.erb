@@ -1,7 +1,8 @@
+<%#= content_tag(:div, "index.html.erb: #{@resource.class.name}") %>
 <main class="form form-list-stores m-auto">
   <div data-controller="filter">
     <div class="h1 mb-3 fw-normal"><i class="bi bi-building-fill"></i>My Stores</div>
-    <%= render partial: 'shared/stores', locals: { stores: @resource, mode: :list } %>
+    <%= render partial: "user_stores", object: @resource, locals: { mode: :list } %>
   </div>
   <% unless @resource.any? %>
     <div>

@@ -68,18 +68,35 @@ class UserStoresController < ApplicationController
     @resource.destroy
 
     respond_to do |format|
-      format.html { redirect_to stores_url, notice: 'Store was successfully destroyed.' }
+      format.html { redirect_to user_stores_url, notice: 'Store was successfully removed.' }
       format.json { head :no_content }
     end
   end
 
   # GET /user/stores/add
   def add
-    store_ids = current_user.stores.pluck(:id)
-    @resource = Store.where.not(id: store_ids).presenter(user: current_user, view_context: view_context)
+    if request.post?
+      Rails.logger.info "xyzzy: add_params: #{add_params.inspect}"
+
+      store = current_user.user_stores.create(store_id: add_params[:store_id])
+      @resource = user_stores_store_build_for_add
+
+      flash[:alert] = store.errors.full_messages unless store.persisted?
+      flash[:notice] = 'Store was successfully added.' if store.persisted?
+      redirect_to add_user_stores_url, status: :see_other
+    else
+      @resource = user_stores_store_build_for_add
+    end
   end
 
   private
+
+  def user_stores_store_build_for_add
+    store_ids = current_user.stores.pluck(:id)
+    Store.where.not(id: store_ids).pluck(:id).map do |store_id|
+      current_user.user_stores.build(store_id: store_id)
+    end
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_resource
@@ -88,6 +105,10 @@ class UserStoresController < ApplicationController
 
   def all_user_stores
     current_user.user_stores.presenter(user: current_user, view_context: view_context)
+  end
+
+  def add_params
+    params.require(:user_store).permit(:store_id)
   end
 
   def user_store_params
