@@ -4,7 +4,7 @@
 # this application.
 class UserStoresController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_resource, only: %i[show edit update destroy]
+  before_action :set_resource, only: %i[edit update destroy]
 
   # GET /user/stores or /user/stores.json
   def index
@@ -12,7 +12,9 @@ class UserStoresController < ApplicationController
   end
 
   # GET /user/stores/1 or /user/stores/1.json
-  def show; end
+  def show
+  @resource = UserStore.find(params[:id]).presenter(user: current_user, view_context: view_context)
+  end
 
   # GET /user/stores/new
   def new

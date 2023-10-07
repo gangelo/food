@@ -3,6 +3,10 @@
 # The user store presenter to display the store associated with
 # a user's user_store association.
 class UserStorePresenter < StorePresenter
+  def store_presenter
+    store.presenter(user: user, view_context: view_context)
+  end
+
   def user_store_exists?
     return false unless store.store_name.present? && store.zip_code.present?
 

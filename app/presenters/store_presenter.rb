@@ -8,7 +8,7 @@ class StorePresenter < Presenter
     user.user_stores.exists?(store_id: id)
   end
 
-  def address_with_address2
+  def display_address
     "#{address} #{address2}".strip
   end
 end

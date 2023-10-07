@@ -5,7 +5,7 @@ store_presenter = user_store.store.presenter(user: current_user, view_context: n
 <tr id="<%= dom_id user_store %>" >
   <th scope="row"><%= user_store_counter + 1 %></th>
   <td><%= store_presenter.store_name %></td>
-  <td><%= store_presenter.address_with_address2 %></td>
+  <td><%= store_presenter.display_address %></td>
   <td><%= store_presenter.city %></td>
   <td><%= store_presenter.state.postal_abbreviation %></td>
   <td><%= store_presenter.zip_code %></td>
