@@ -52,6 +52,10 @@ class User < ApplicationRecord
     user_stores.where(store_id: store_id).exists?
   end
 
+  def user_stores_by_name_and_zip_code
+    user_stores.joins(:store).order(:store_name, :zip_code)
+  end
+
   private
 
   def password_complexity

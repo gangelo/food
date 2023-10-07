@@ -76,8 +76,6 @@ class UserStoresController < ApplicationController
   # GET /user/stores/add
   def add
     if request.post?
-      Rails.logger.info "xyzzy: add_params: #{add_params.inspect}"
-
       store = current_user.user_stores.create(store_id: add_params[:store_id])
       @resource = user_stores_store_build_for_add
 
@@ -104,7 +102,7 @@ class UserStoresController < ApplicationController
   end
 
   def all_user_stores
-    current_user.user_stores.presenter(user: current_user, view_context: view_context)
+    current_user.user_stores_by_name_and_zip_code.presenter(user: current_user, view_context: view_context)
   end
 
   def add_params
