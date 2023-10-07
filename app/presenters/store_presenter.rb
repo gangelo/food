@@ -11,4 +11,12 @@ class StorePresenter < Presenter
   def display_address
     "#{address} #{address2}".strip
   end
+
+  def display_state
+    "#{state.state_name} (#{state.postal_abbreviation})"
+  end
+
+  def display_full_address
+    "#{display_address}, #{display_state} #{zip_code}"
+  end
 end
