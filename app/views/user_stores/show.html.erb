@@ -1,14 +1,8 @@
-<main class="container form m-auto">
-  <div class="h1 mb-3 fw-normal"><i class="bi bi-building"></i>Store</div>
+<main class="form m-auto">
+  <div class="h1 mb-3 fw-normal"><i class="bi bi-building-fill"></i>Store</div>
   <%= render partial: 'shared/store', object: @resource.store_presenter %>
+
+  <div class="help-links">
+    <%= link_to "Back", user_stores_path %>
+  </div>
 </main>
-
-<div class="help-links">
-  <%#= link_to "Edit this store", edit_store_path(@store) %>
-  <%#= link_to "Back to stores", stores_path %>
-  <%#= button_to "Destroy this store", @store, method: :delete %>
-</div>
-
-<div class="form-actions mt-3">
-  <%#= link_to "Back", back_path, class: "btn btn-secondary" %>
-</div>
