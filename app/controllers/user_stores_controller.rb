@@ -8,7 +8,16 @@ class UserStoresController < ApplicationController
 
   # GET /user/stores or /user/stores.json
   def index
-    @resource = all_user_stores
+    user_stores = all_user_stores
+
+    page = params[:page].to_i
+    pager_params = pager_params_for(
+      user_stores,
+      page: page,
+      pages_between: pager_pages_between,
+      items_per_page: pager_items_per_page)
+    @pager_params = PagerPresenter.new(pager_params: pager_params, user: current_user, view_context: view_context)
+    @resource = page_for(user_stores, page: page, order_by: %i[store_name zip_code], items_per_page: pager_items_per_page)
   end
 
   # GET /user/stores/1 or /user/stores/1.json

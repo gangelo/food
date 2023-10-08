@@ -53,7 +53,7 @@ class User < ApplicationRecord
   end
 
   def user_stores_by_name_and_zip_code
-    user_stores.joins(:store).order(:store_name, :zip_code)
+    UserStore.user_stores_by_name_and_zip_code_for self
   end
 
   private

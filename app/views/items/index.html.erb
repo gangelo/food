@@ -18,10 +18,10 @@ add_an_item_button_text = "Add an item"
   <% end %>
 </main>
 
+<%= render partial: "shared/pager", object: @pager_params %>
+
 <div class="help-links">
   <%= link_to new_item_path, class: "btn btn-primary" do %>
     <i class="bi bi-cart-fill-check"></i> <%= add_an_item_button_text %>
   <% end %>
 </div>
-
-<%= render partial: "shared/pager", object: @pager_params %>

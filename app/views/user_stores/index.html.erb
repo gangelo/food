@@ -12,6 +12,8 @@
   <% end %>
 </main>
 
+<%= render partial: "shared/pager", object: @pager_params %>
+
 <div class="help-links">
   <%= link_to add_user_stores_path, class: "btn btn-primary" do %>
     <i class="bi bi-building-fill-check"></i> Add a store

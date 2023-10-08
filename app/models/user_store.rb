@@ -2,10 +2,16 @@
 
 # The user_store model for this application.
 class UserStore < ApplicationRecord
+  include PagableConcern
+
   belongs_to :user
   belongs_to :store
 
   accepts_nested_attributes_for :store
+
+  scope :user_stores_by_name_and_zip_code_for, lambda { |user|
+    user.user_stores.joins(:store).order(:store_name, :zip_code)
+  }
 
   scope :where_case_insensitive_for, lambda { |user, store_name:, zip_code:|
     user.stores.where(id: Store.where_name_and_zip_case_insensitive(store_name, zip_code).pluck(:id))
