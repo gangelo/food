@@ -29,7 +29,8 @@ Rails.application.routes.draw do
     get 'zip_codes/zip_code_data/:zip_code', to: 'zip_codes#zip_code_data', as: :zip_code_data
   end
 
-  resources :items, except: [:destroy] do
+  get 'items(/:page)', to: 'items#index', as: :paged_items
+  resources :items, except: %i[index destroy] do
     post 'archive', on: :member
     post 'unarchive', on: :member
   end

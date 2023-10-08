@@ -4,7 +4,7 @@ add_an_item_button_text = "Add an item"
 <main class="form form-list-items m-auto">
   <div data-controller="filter">
     <div class="h1 mb-3 fw-normal"><i class="bi bi-cart-fill"></i> Items</div>
-    <%= render partial: "items", object: @items, as: :items, locals: { mode: :list } %>
+    <%= render partial: "items", object: @items, locals: { pager_params: @pager_params } %>
   </div>
   <% unless @items.any? %>
   <div>
@@ -23,3 +23,5 @@ add_an_item_button_text = "Add an item"
     <i class="bi bi-cart-fill-check"></i> <%= add_an_item_button_text %>
   <% end %>
 </div>
+
+<%= render partial: "shared/pager", object: @pager_params %>

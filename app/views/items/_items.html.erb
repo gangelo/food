@@ -21,6 +21,6 @@
     </tr>
   </thead>
   <tbody data-target="filter">
-    <%= render partial: 'item', collection: items.presenters, locals: { mode: mode } %>
+    <%= render partial: 'item', collection: items.presenters, locals: { pager_params: pager_params } %>
   </tbody>
 </table>

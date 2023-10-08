@@ -9,6 +9,17 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  # Pagination default items per page.
+  def pager_items_per_page
+    10
+  end
+
+  # Pagination default number of pages between the
+  # Previous and Next buttons.
+  def pager_pages_between
+    3
+  end
+
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up) do |user|
       user.permit(:first_name, :last_name, :username, :email, :password, :password_confirmation)
