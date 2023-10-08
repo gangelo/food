@@ -10,9 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_20_005823) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_07_235606) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "items", force: :cascade do |t|
+    t.string "item_name", limit: 64, default: "", null: false
+    t.boolean "archived", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index "lower((item_name)::text)", name: "index_items_on_lower_item_name", unique: true
+  end
 
   create_table "states", force: :cascade do |t|
     t.string "state_name", limit: 14, default: "", null: false
@@ -30,6 +38,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_20_005823) do
     t.string "address2", limit: 64
     t.string "city", limit: 64, default: "", null: false
     t.string "zip_code", limit: 10, default: "", null: false
+    t.boolean "archived", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["state_id"], name: "index_stores_on_state_id"

@@ -2,6 +2,8 @@
 
 # The store model for this application.
 class Store < ApplicationRecord
+  include ArchivableConcern
+
   before_save :before_save_edits
 
   attr_reader :non_unique_store_id
@@ -55,7 +57,7 @@ class Store < ApplicationRecord
   end
 
   def before_save_edits
-    self.store_name = store_name.titleize
+    store_name[0] = store_name[0].upcase
     self.address = address.titleize
     self.address2 = address2.titleize if address2.present?
   end

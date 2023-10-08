@@ -7,6 +7,7 @@ class CreateStores < ActiveRecord::Migration[7.0]
       t.string :address2,   limit: 64, default: nil
       t.string :city,       limit: 64, null: false, default: ''
       t.string :zip_code,   limit: 10, null: false, default: ''
+      t.boolean :archived,             null: false, default: false
       t.timestamps
     end
 

@@ -74,3 +74,14 @@ abbr[title] {
   cursor: help;
   color: var(--bs-red);
 }
+
+// Archive/unarchive
+.archived {
+  color: var(--bs-red);
+}
+
+.fixed-width-buttons {
+  .btn {
+    width: 8.5em;
+  }
+}

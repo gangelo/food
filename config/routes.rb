@@ -29,5 +29,10 @@ Rails.application.routes.draw do
     get 'zip_codes/zip_code_data/:zip_code', to: 'zip_codes#zip_code_data', as: :zip_code_data
   end
 
+  resources :items, except: [:destroy] do
+    post 'archive', on: :member
+    post 'unarchive', on: :member
+  end
+
   devise_for :users
 end
