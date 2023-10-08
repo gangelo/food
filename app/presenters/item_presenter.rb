@@ -7,6 +7,7 @@ class ItemPresenter < Presenter
   end
 
   def display_archived
+    archived = archived? ? 'Archived' : 'Active'
     vc.content_tag(:span, archived, class: css_class)
   end
 

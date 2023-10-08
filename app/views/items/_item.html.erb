@@ -2,7 +2,7 @@
 <tr id="<%= dom_id item %>" >
   <th scope="row"><%= item_counter + 1 %></th>
   <td><%= item.display_name %></td>
-  <td><%= item.display_archived %></td>
+  <td class="text-center"><%= item.display_archived %></td>
   <td>
     <div class="fixed-width-buttons d-flex justify-content-center">
       <% if item.archived? %>
