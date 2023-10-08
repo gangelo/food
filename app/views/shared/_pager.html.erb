@@ -5,7 +5,7 @@
         <%= link_to "Previous", paged_items_path(page: pager.prev_page), class: "page-link" %>
       </li>
       <% pager.pages_between_range.each do |page| %>
-        <li class="page-item">
+        <li class="page-item <%= pager.page_css(page) %>">
            <%= link_to page, paged_items_path(page: page), class: "page-link" %>
         </li>
       <% end %>

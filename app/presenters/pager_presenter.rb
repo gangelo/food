@@ -13,6 +13,18 @@ class PagerPresenter
     @options = options || {}
   end
 
+  def current_page
+    pager_params[:current_page]
+  end
+
+  def current_page?(page)
+    page == current_page
+  end
+
+  def page_css(page)
+    'disabled' if current_page?(page)
+  end
+
   def page_offset
     pager_params[:page_offset]
   end
