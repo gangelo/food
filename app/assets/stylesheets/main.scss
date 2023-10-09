@@ -92,3 +92,9 @@ abbr[title] {
     width: 100%;
   }
 }
+
+
+// Pagination
+.active.no-action {
+  pointer-events: none;
+}

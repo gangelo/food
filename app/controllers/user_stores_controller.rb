@@ -4,7 +4,7 @@
 # this application.
 class UserStoresController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_resource, only: %i[edit update archive unarchive]
+  before_action :set_resource, only: %i[edit update destroy]
 
   # GET /user/stores or /user/stores.json
   def index
@@ -24,7 +24,7 @@ class UserStoresController < ApplicationController
 
   # GET /user/stores/1 or /user/stores/1.json
   def show
-  @resource = UserStore.find(params[:id]).presenter(user: current_user, view_context: view_context)
+    @resource = UserStore.find(params[:id]).presenter(user: current_user, view_context: view_context)
   end
 
   # GET /user/stores/new
@@ -76,25 +76,35 @@ class UserStoresController < ApplicationController
     end
   end
 
-  # POST /user/stores/1 or /user/stores/1.json
-  def archive
-    @resource.archive!
+  # DELETE /user/stores/1 or /user/stores/1.json
+  def destroy
+    @resource.destroy
 
     respond_to do |format|
-      format.html { redirect_to user_stores_url, notice: 'User store was successfully archived.' }
+      format.html { redirect_to user_stores_url, notice: 'User store was successfully deleted.' }
       format.json { head :no_content }
     end
   end
 
-  # POST /user/stores/1 or /user/stores/1.json
-  def unarchive
-    @resource.unarchive!
+  # # POST /user/stores/1 or /user/stores/1.json
+  # def archive
+  #   @resource.archive!
 
-    respond_to do |format|
-      format.html { redirect_to user_stores_url, notice: 'User store was successfully unarchived.' }
-      format.json { head :no_content }
-    end
-  end
+  #   respond_to do |format|
+  #     format.html { redirect_to user_stores_url, notice: 'User store was successfully archived.' }
+  #     format.json { head :no_content }
+  #   end
+  # end
+
+  # # POST /user/stores/1 or /user/stores/1.json
+  # def unarchive
+  #   @resource.unarchive!
+
+  #   respond_to do |format|
+  #     format.html { redirect_to user_stores_url, notice: 'User store was successfully unarchived.' }
+  #     format.json { head :no_content }
+  #   end
+  # end
 
   # GET /user/stores/add
   def add
