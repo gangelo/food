@@ -14,8 +14,12 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'user/stores(/:page)', to: 'user_stores#index', as: :paged_user_stores
   scope path: 'user' do
-    resources :stores, controller: 'user_stores', as: 'user_stores' do
+    resources :stores, except: %i[index destroy], controller: 'user_stores', as: 'user_stores' do
+      post 'archive', on: :member
+      post 'unarchive', on: :member
+
       collection do
         get 'add'
         post 'add'

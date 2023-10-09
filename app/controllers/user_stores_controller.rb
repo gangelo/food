@@ -4,7 +4,7 @@
 # this application.
 class UserStoresController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_resource, only: %i[edit update destroy]
+  before_action :set_resource, only: %i[edit update archive unarchive]
 
   # GET /user/stores or /user/stores.json
   def index
@@ -15,7 +15,9 @@ class UserStoresController < ApplicationController
       user_stores,
       page: page,
       pages_between: pager_pages_between,
-      items_per_page: pager_items_per_page)
+      items_per_page: pager_items_per_page,
+      pager_path: paged_user_stores_path
+    )
     @pager_params = PagerPresenter.new(pager_params: pager_params, user: current_user, view_context: view_context)
     @resource = page_for(user_stores, page: page, order_by: %i[store_name zip_code], items_per_page: pager_items_per_page)
   end
@@ -74,12 +76,22 @@ class UserStoresController < ApplicationController
     end
   end
 
-  # DELETE /user/stores/1 or /user/stores/1.json
-  def destroy
-    @resource.destroy
+  # POST /user/stores/1 or /user/stores/1.json
+  def archive
+    @resource.archive!
 
     respond_to do |format|
-      format.html { redirect_to user_stores_url, notice: 'Store was successfully removed.' }
+      format.html { redirect_to user_stores_url, notice: 'User store was successfully archived.' }
+      format.json { head :no_content }
+    end
+  end
+
+  # POST /user/stores/1 or /user/stores/1.json
+  def unarchive
+    @resource.unarchive!
+
+    respond_to do |format|
+      format.html { redirect_to user_stores_url, notice: 'User store was successfully unarchived.' }
       format.json { head :no_content }
     end
   end

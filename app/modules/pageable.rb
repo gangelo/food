@@ -8,7 +8,7 @@ module Pageable
     ar_object.order(order_by).offset(pager_offset_for(page: page, items_per_page: items_per_page)).limit(items_per_page)
   end
 
-  def pager_params_for(ar_object, page:, pages_between:, items_per_page:)
+  def pager_params_for(ar_object, page:, pages_between:, items_per_page:, pager_path:)
     total_pages = (ar_object.count.to_f / items_per_page).ceil
 
     # Ensure the page and pages_between are within valid range
@@ -40,7 +40,8 @@ module Pageable
       page_offset: page_offset,
       prev_page: prev_page,
       pages_between_range: pages_between_range,
-      next_page: next_page
+      next_page: next_page,
+      pager_path: pager_path
     }
   end
 

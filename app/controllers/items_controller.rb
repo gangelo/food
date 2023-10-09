@@ -9,7 +9,8 @@ class ItemsController < ApplicationController
     page = params[:page].to_i
     pager_params = Item.pager_params_for(page: page,
                                          pages_between: pager_pages_between,
-                                         items_per_page: pager_items_per_page)
+                                         items_per_page: pager_items_per_page,
+                                         pager_path: paged_items_path)
     @pager_params = PagerPresenter.new(pager_params: pager_params, user: current_user, view_context: view_context)
     items = Item.page_for(page: page, order_by: :item_name, items_per_page: pager_items_per_page)
     @items = items.presenter(user: current_user, view_context: view_context)

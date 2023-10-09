@@ -13,6 +13,10 @@ class PagerPresenter
     @options = options || {}
   end
 
+  def pager_path(page:)
+    "#{pager_params[:pager_path]}/#{page}"
+  end
+
   def current_page
     pager_params[:current_page]
   end
