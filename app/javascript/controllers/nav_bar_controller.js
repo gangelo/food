@@ -7,8 +7,6 @@ export default class extends Controller {
   connect() {}
 
   navigate(e) {
-    //debugger;
-    console.log("NavBarController#navigate", e.target);
     const activeButton = this.element.querySelector(".active");
 
     if (activeButton) {

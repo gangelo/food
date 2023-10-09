@@ -19,7 +19,7 @@ class PagerPresenter
   def pager_href_for(page:)
     return nil if current_page?(page)
 
-    "#{pager_params[:pager_path]}/#{page}"
+    "#{pager_params[:pager_path]}?page=#{page}"
   end
 
   def page_css(page)

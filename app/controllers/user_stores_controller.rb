@@ -16,7 +16,7 @@ class UserStoresController < ApplicationController
       page: page,
       pages_between: pager_pages_between,
       items_per_page: pager_items_per_page,
-      pager_path: paged_user_stores_path
+      pager_path: user_stores_path
     )
     @pager_params = PagerPresenter.new(pager_params: pager_params, user: current_user, view_context: view_context)
     @resource = page_for(user_stores, page: page, order_by: %i[store_name zip_code], items_per_page: pager_items_per_page)
@@ -108,6 +108,8 @@ class UserStoresController < ApplicationController
 
   # GET /user/stores/add
   def add
+    Rails.logger.debug("xyzzy: params: #{params.inspect}")
+
     if request.post?
       store = current_user.user_stores.create(store_id: add_params[:store_id])
       @resource = user_stores_store_build_for_add

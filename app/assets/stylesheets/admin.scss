@@ -1,16 +1,17 @@
+.admin-menu {
+  background-color: var(--bs-red) !important;
+  color: var(--bs-white) !important;
 
-.admin-menu-item {
-  background-color: var(--bs-red);
-  color: var(--bs-white);
-
-  .nav-link {
-    color: #495057;
-    &:hover {
+  .admin-menu-item {
+    .nav-link {
+      color: #495057;
+      &:hover {
+        color: #212529;
+      }
+    }
+    .nav-link.active {
+      background-color: #e9ecef;
       color: #212529;
     }
-  }
-  .nav-link.active {
-    background-color: #e9ecef;
-    color: #212529;
   }
 }

@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
 
   # Pagination default items per page.
   def pager_items_per_page
-    10
+    8
   end
 
   # Pagination default number of pages between the

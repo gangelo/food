@@ -14,9 +14,8 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'user/stores(/:page)', to: 'user_stores#index', as: :paged_user_stores
   scope path: 'user' do
-    resources :stores, except: %i[index], controller: 'user_stores', as: 'user_stores' do
+    resources :stores, controller: 'user_stores', as: 'user_stores' do
       # post 'archive', on: :member
       # post 'unarchive', on: :member
 
@@ -33,8 +32,7 @@ Rails.application.routes.draw do
     get 'zip_codes/zip_code_data/:zip_code', to: 'zip_codes#zip_code_data', as: :zip_code_data
   end
 
-  get 'items(/:page)', to: 'items#index', as: :paged_items
-  resources :items, except: %i[index destroy] do
+  resources :items, except: %i[destroy] do
     post 'archive', on: :member
     post 'unarchive', on: :member
   end

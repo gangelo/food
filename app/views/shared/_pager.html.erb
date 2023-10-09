@@ -5,10 +5,10 @@
     <nav aria-label="Page navigation">
       <ul class="pagination pagination-lg" data-pager-target="pagerLinks">
         <li class="page-item <%= pager.previous_page_css %>">
-          <%= link_to "Previous", paged_items_path(page: pager.prev_page), class: "page-link" %>
+          <%= link_to "Previous", pager.pager_href_for(page: pager.prev_page), class: "page-link" %>
         </li>
         <li class="page-item <%= pager.prev_page_jump_css %>">
-          <%= link_to "...", paged_items_path(page: pager.prev_page_jump), class: "page-link" %>
+          <%= link_to "...", pager.pager_href_for(page: pager.prev_page_jump), class: "page-link" %>
         </li>
         <% pager.pages_between_range.each do |page| %>
           <li class="page-item">
@@ -16,7 +16,7 @@
           </li>
         <% end %>
         <li class="page-item <%= pager.next_page_jump_css %>">
-          <%= link_to "...", paged_items_path(page: pager.next_page_jump), class: "page-link" %>
+          <%= link_to "...", pager.pager_href_for(page: pager.next_page_jump), class: "page-link" %>
         </li>
         <li class="page-item <%= pager.next_page_css %>">
           <%= link_to "Next", pager.pager_href_for(page: pager.next_page), class: "page-link" %>
