@@ -7,6 +7,9 @@ class User < ApplicationRecord
   has_many :user_stores
   has_many :stores, through: :user_stores, source: :store
 
+  has_many :user_shopping_lists
+  has_many :shopping_lists, through: :user_shopping_lists
+
   # Include default devise modules. Others available are: :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,

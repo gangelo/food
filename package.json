@@ -14,6 +14,7 @@
     "@popperjs/core": "^2.11.8",
     "autoprefixer": "^10.4.15",
     "bootstrap": "^5.3.1",
+    "bootstrap-datepicker": "^1.10.0",
     "bootstrap-icons": "^1.11.0",
     "esbuild": "^0.19.2",
     "nodemon": "^3.0.1",
@@ -21,5 +22,7 @@
     "postcss-cli": "^10.1.0",
     "sass": "^1.66.1"
   },
-  "browserslist": ["defaults"]
+  "browserslist": [
+    "defaults"
+  ]
 }

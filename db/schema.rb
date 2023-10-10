@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_07_235606) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_09_203230) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,6 +20,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_07_235606) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index "lower((item_name)::text)", name: "index_items_on_lower_item_name", unique: true
+  end
+
+  create_table "shopping_lists", force: :cascade do |t|
+    t.string "shopping_list_name", limit: 64, default: "", null: false
+    t.date "week_of"
+    t.text "notes"
+    t.boolean "template", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["shopping_list_name", "week_of"], name: "index_shopping_lists_on_shopping_list_name_and_week_of", unique: true
   end
 
   create_table "states", force: :cascade do |t|
@@ -43,6 +53,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_07_235606) do
     t.datetime "updated_at", null: false
     t.index ["state_id"], name: "index_stores_on_state_id"
     t.index ["store_name", "zip_code"], name: "index_stores_on_store_name_and_zip_code", unique: true
+  end
+
+  create_table "user_shopping_lists", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "shopping_list_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["shopping_list_id"], name: "index_user_shopping_lists_on_shopping_list_id"
+    t.index ["user_id"], name: "index_user_shopping_lists_on_user_id"
   end
 
   create_table "user_stores", force: :cascade do |t|
@@ -86,6 +105,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_07_235606) do
   end
 
   add_foreign_key "stores", "states"
+  add_foreign_key "user_shopping_lists", "shopping_lists"
+  add_foreign_key "user_shopping_lists", "users"
   add_foreign_key "user_stores", "stores"
   add_foreign_key "user_stores", "users"
 end

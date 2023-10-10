@@ -37,5 +37,7 @@ Rails.application.routes.draw do
     post 'unarchive', on: :member
   end
 
+  resources :shopping_lists
+
   devise_for :users
 end

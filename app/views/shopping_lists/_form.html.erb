@@ -1,0 +1,23 @@
+
+<%= simple_form_for(@shopping_list) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div data-controller="date-picker" class="form-inputs">
+    <%= f.input :shopping_list_name %>
+    <%= f.input :week_of, as: :string,
+                input_html: {
+                  class: 'datepicker form-control',
+                  data: {
+                    provide: "datepicker"
+                  }
+                }
+    %>
+    <%= f.input :notes %>
+    <%= f.input :template %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

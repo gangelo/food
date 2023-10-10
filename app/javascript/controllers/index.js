@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import DatePickerController from "./date_picker_controller"
+application.register("date-picker", DatePickerController)
+
 import FilterController from "./filter_controller"
 application.register("filter", FilterController)
 
@@ -22,8 +25,8 @@ application.register("nav-bar", NavBarController)
 import NewUserStoreModalController from "./new_user_store_modal_controller"
 application.register("new-user-store-modal", NewUserStoreModalController)
 
-import PagerController from "./pager_controller";
-application.register("pager", PagerController);
+import PagerController from "./pager_controller"
+application.register("pager", PagerController)
 
 import ZipCodeController from "./zip_code_controller"
 application.register("zip-code", ZipCodeController)

@@ -13,6 +13,10 @@ RSpec.describe User do
     end
   end
 
+  describe 'associations' do
+    it 'has many shopping lists through user shopping lists'
+  end
+
   describe 'validations' do
     describe '#first_name' do
       it 'validates presence' do
