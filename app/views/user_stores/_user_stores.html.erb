@@ -33,6 +33,6 @@
     </tr>
   </thead>
   <tbody data-target="filter">
-    <%= render partial: 'user_store', collection: user_stores, locals: { mode: mode } %>
+    <%= render partial: 'user_store', collection: user_stores, locals: { pager_params: @pager_params } %>
   </tbody>
 </table>

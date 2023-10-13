@@ -2,7 +2,7 @@
   <div data-controller="filter">
     <div class="h1 mb-3 fw-normal"><i class="bi bi-building-fill-check"></i> Add a Store</div>
     <p>Stores you've already added will not appear here.</p>
-    <%= render partial: "user_stores", object: @resource, locals: { mode: :add } %>
+    <%= render partial: "user_stores", object: @resource, locals: { pager_params: @pager_params } %>
   </div>
   <% unless @resource.any? %>
     <div>
@@ -15,6 +15,8 @@
     </div>
   <% end %>
 </main>
+
+<%= render partial: "shared/pager", object: @pager_params %>
 
 <div class="help-links">
   <%= link_to new_user_store_path, class: "btn btn-primary" do %>

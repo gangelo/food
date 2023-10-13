@@ -98,3 +98,12 @@ abbr[title] {
 .active.no-action {
   pointer-events: none;
 }
+
+
+// Shopping list
+.shopping-lists {
+  .badge.rounded-pill {
+    font-size: 1em !important;
+    font-weight: 400 !important;
+  }
+}

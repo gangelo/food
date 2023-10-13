@@ -1,14 +1,27 @@
-<p style="color: green"><%= notice %></p>
+<%
+create_a_shopping_list_button_text = "Create a shopping list"
+%>
+<main class="form form-shopping-list m-auto">
+  <div data-controller="filter">
+    <div class="h1 mb-3 fw-normal"><i class="bi bi-journal-text"></i> Shopping Lists</div>
+    <%= render partial: "shopping_lists", object: @shopping_lists, locals: { pager_params: @pager_params } %>
+  </div>
+  <% unless @shopping_lists.any? %>
+  <div>
+    There are currently no shopping lists.
+    You can add one by clicking the
+    <strong>
+      <i class="bi bi-journal-journal-plus"></i> <%= create_a_shopping_list_button_text %>
+    </strong>
+    button below.
+  </div>
+  <% end %>
+</main>
 
-<h1>Shopping lists</h1>
+<%= render partial: "shared/pager", object: @pager_params %>
 
-<div id="shopping_lists">
-  <% @shopping_lists.each do |shopping_list| %>
-    <%= render shopping_list %>
-    <p>
-      <%= link_to "Show this shopping list", shopping_list %>
-    </p>
+<div class="help-links">
+  <%= link_to new_shopping_list_path, class: "btn btn-primary" do %>
+    <i class="bi bi-journal-plus"></i> <%= create_a_shopping_list_button_text %>
   <% end %>
 </div>
-
-<%= link_to "New shopping list", new_shopping_list_path %>

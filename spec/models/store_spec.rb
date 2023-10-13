@@ -34,8 +34,8 @@ RSpec.describe Store do
       end
 
       let(:store_name) { 'store name' }
-      let(:address) { 'street 1' } # rubocop:disable RSpec/IndexedLet
-      let(:address2) { 'street 2' } # rubocop:disable RSpec/IndexedLet
+      let(:address) { 'street 1' }
+      let(:address2) { 'street 2' }
 
       it 'titleizes store_name' do
         expect(store.store_name).to eq(store_name.titleize)

@@ -56,6 +56,11 @@ en:
         base: "Store"
     errors:
       models:
+        shopping_list:
+          attributes:
+            week_of:
+              in_the_past: "can't be in the past"
+              in_the_future: "can't be more then 1 month in the future"
         store:
           already_exists: "Store already exists within the zip code"
         user_store:

@@ -1,11 +1,20 @@
 <% if debug? %>
-  <div>
-    <%= "@resource.class.name: #{@resource.class.name}" %>
-  </div>
-  <div>
-    <%= "@resource.to_s: #{@resource.to_s}" %>
-  </div>
-  <div>
-    <%= "@resource.inspect: #{@resource.inspect}" %>
+  <div class="container">
+    <div class="row mb-3">
+      <div class="col-md-2">
+        @pager_params
+      </div>
+      <div class="col-md-10">
+        <%= @pager_params.inspect %>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-2">
+        @resource.inspect
+      </div>
+      <div class="col-md-10">
+        <%= @resource.inspect %>
+      </div>
+    </div>
   </div>
 <% end %>

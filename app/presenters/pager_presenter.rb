@@ -15,6 +15,18 @@ class PagerPresenter
     @options = options || {}
   end
 
+  def current_page
+    pager_params[:current_page]
+  end
+
+  def pages?
+    total_pages.positive?
+  end
+
+  def multiple_pages?
+    total_pages > 1
+  end
+
   # The href for the <a> tags used for paginination.
   def pager_href_for(page:)
     return nil if current_page?(page)
@@ -28,6 +40,10 @@ class PagerPresenter
 
   def no_action_css
     NO_ACTION_CSS_CLASS
+  end
+
+  def total_pages
+    pager_params[:total_pages]
   end
 
   # Use this value to determine the row number for the currently
@@ -76,10 +92,6 @@ class PagerPresenter
   private
 
   attr_reader :pager_params
-
-  def current_page
-    pager_params[:current_page]
-  end
 
   def current_page?(page)
     page == current_page

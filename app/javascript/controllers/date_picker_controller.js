@@ -1,3 +1,4 @@
+// https://github.com/Nerian/bootstrap-datepicker-rails
 import { Controller } from "@hotwired/stimulus";
 import $ from "jquery";
 import "bootstrap-datepicker";
@@ -14,10 +15,12 @@ export default class extends Controller {
       let cssClass = ".datepicker";
 
       $(this.element.querySelectorAll(cssClass)).datepicker({
-        todayBtn: true,
+        todayBtn: "linked",
         daysOfWeekHighlighted: "0,6",
         todayHighlight: true,
-        // defaultViewDate: { year: "1977", month: "04", day: "25" },
+        orientation: "bottom left",
+        clearBtn: true,
+        autoClose: true,
       });
     } else {
       console.error("Datepicker library is not loaded.");

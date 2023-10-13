@@ -3,7 +3,7 @@
 store_presenter = user_store.store.presenter(user: current_user, view_context: nil)
 %>
 <tr id="<%= dom_id user_store %>" >
-  <th scope="row"><%= user_store_counter + 1 %></th>
+  <th scope="row"><%= pager_params.page_offset + user_store_counter + 1 %></th>
   <td><%= store_presenter.store_name %></td>
   <td><%= store_presenter.display_address %></td>
   <td><%= store_presenter.city %></td>
@@ -16,6 +16,7 @@ store_presenter = user_store.store.presenter(user: current_user, view_context: n
           <%= button_tag(type: :submit, class: "btn btn-outline-primary btn-sm") do %>
             <i class="bi bi-building-fill-check"></i> Add
           <% end %>
+          <%= hidden_field_tag :page, pager_params.current_page %>
           <%= f.association :store, as: :hidden, input_html: { value: user_store.store_id } %>
         <% end %>
       </div>

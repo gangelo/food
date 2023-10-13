@@ -10,16 +10,17 @@ class UserStoresController < ApplicationController
   def index
     user_stores = all_user_stores
 
-    page = params[:page].to_i
-    pager_params = pager_params_for(
-      user_stores,
-      page: page,
-      pages_between: pager_pages_between,
-      items_per_page: pager_items_per_page,
-      pager_path: user_stores_path
-    )
-    @pager_params = PagerPresenter.new(pager_params: pager_params, user: current_user, view_context: view_context)
-    @resource = page_for(user_stores, page: page, order_by: %i[store_name zip_code], items_per_page: pager_items_per_page)
+    # page = params[:page].to_i
+    # pager_params = pager_params_for(
+    #   user_stores,
+    #   page: page,
+    #   pages_between: pager_pages_between,
+    #   items_per_page: pager_items_per_page,
+    #   pager_path: user_stores_path
+    # )
+    # @pager_params = PagerPresenter.new(pager_params: pager_params, user: current_user, view_context: view_context)
+    @pager_params = pager_params_for(resource: user_stores, pager_path: user_stores_path)
+    @resource = page_for(resource: user_stores, page: @pager_params.current_page, order_by: %i[store_name zip_code])
   end
 
   # GET /user/stores/1 or /user/stores/1.json
@@ -29,7 +30,8 @@ class UserStoresController < ApplicationController
 
   # GET /user/stores/new
   def new
-    @resource = current_user.user_stores.build(store: Store.new).presenter(user: current_user, view_context: view_context)
+    @resource = current_user.user_stores.build(store: Store.new).presenter(user: current_user,
+                                                                           view_context: view_context)
   end
 
   # GET /user/stores/1/edit
@@ -55,7 +57,9 @@ class UserStoresController < ApplicationController
 
   # POST /user/stores/link
   def link
-    @resource = current_user.user_stores.create(store_id: link_store_params[:store_attributes][:id]).presenter(user: current_user, view_context: view_context)
+    @resource = current_user.user_stores.create(store_id: link_store_params[:store_attributes][:id]).presenter(
+      user: current_user, view_context: view_context
+    )
     if @resource.persisted?
       redirect_to add_user_stores_path, notice: 'Store was successfully added.'
     else
@@ -108,15 +112,16 @@ class UserStoresController < ApplicationController
 
   # GET /user/stores/add
   def add
-    Rails.logger.debug("xyzzy: params: #{params.inspect}")
-
     if request.post?
-      store = current_user.user_stores.create(store_id: add_params[:store_id])
       @resource = user_stores_store_build_for_add
 
+      store = current_user.user_stores.create(store_id: add_params[:store_id])
       flash[:alert] = store.errors.full_messages unless store.persisted?
       flash[:notice] = 'Store was successfully added.' if store.persisted?
-      redirect_to add_user_stores_url, status: :see_other
+
+      page = params[:page].to_i
+      #redirect_to add_user_stores_url(page), status: :see_other
+      redirect_to add_user_stores_path(page: page), status: :see_other
     else
       @resource = user_stores_store_build_for_add
     end
@@ -126,8 +131,13 @@ class UserStoresController < ApplicationController
 
   def user_stores_store_build_for_add
     store_ids = current_user.stores.pluck(:id)
-    Store.where.not(id: store_ids).pluck(:id).map do |store_id|
-      current_user.user_stores.build(store_id: store_id)
+    user_stores = Store.where.not(id: store_ids)
+
+    @pager_params = pager_params_for(resource: user_stores, pager_path: add_user_stores_path)
+    paged_user_stores = page_for(resource: user_stores, page: @pager_params.current_page, order_by: %i[store_name zip_code])
+
+    paged_user_stores.map do |store|
+      current_user.user_stores.build(store_id: store.id)
     end
   end
 
@@ -151,13 +161,13 @@ class UserStoresController < ApplicationController
   def create_params
     params.require(:user_store).permit(
       :non_unique_store_id,
-      store_attributes: [
-        :store_name,
-        :address,
-        :address2,
-        :zip_code,
-        :city,
-        :state_id
+      store_attributes: %i[
+        store_name
+        address
+        address2
+        zip_code
+        city
+        state_id
       ]
     ).slice(:store_attributes)
   end
@@ -171,13 +181,13 @@ class UserStoresController < ApplicationController
   def non_unique_store_id_param
     params.require(:user_store).permit(
       :non_unique_store_id,
-      store_attributes: [
-        :store_name,
-        :address,
-        :address2,
-        :zip_code,
-        :city,
-        :state_id
+      store_attributes: %i[
+        store_name
+        address
+        address2
+        zip_code
+        city
+        state_id
       ]
     )[:non_unique_store_id]
   end

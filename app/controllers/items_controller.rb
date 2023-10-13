@@ -2,6 +2,7 @@
 
 # The controller for Items.
 class ItemsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_item, only: %i[show edit update archive unarchive]
 
   # GET /items or /items.json
@@ -33,8 +34,8 @@ class ItemsController < ApplicationController
 
     respond_to do |format|
       if @item.save
-        format.html { redirect_to item_url(@item), notice: 'Item was successfully created.' }
-        format.json { render :show, status: :created, location: @item }
+        format.html { redirect_to shopping_lists, notice: 'Item was successfully created.' }
+        format.json { render :index, status: :created }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @item.errors, status: :unprocessable_entity }

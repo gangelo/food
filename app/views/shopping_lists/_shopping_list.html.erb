@@ -1,22 +1,19 @@
-<div id="<%= dom_id shopping_list %>">
-  <p>
-    <strong>Shopping list name:</strong>
-    <%= shopping_list.shopping_list_name %>
-  </p>
+<div class="mb-3">
+  <h4 class="mb-1">Name</h4>
+  <p><%= shopping_list.display_name %></p>
+</div>
 
-  <p>
-    <strong>Week of:</strong>
-    <%= shopping_list.week_of %>
-  </p>
+<div class="mb-3">
+  <h4 class="mb-1">Week of</h4>
+  <p><%= shopping_list.display_week_of %></p>
+</div>
 
-  <p>
-    <strong>Notes:</strong>
-    <%= shopping_list.notes %>
-  </p>
+<div class="mb-3">
+  <h4 class="mb-1">Type</h4>
+  <p><%= shopping_list.display_type %></p>
+</div>
 
-  <p>
-    <strong>Template:</strong>
-    <%= shopping_list.template %>
-  </p>
-
+<div class="mb-3">
+  <h4 class="mb-1">Notes</h4>
+  <p><%= shopping_list.notes %></p>
 </div>
