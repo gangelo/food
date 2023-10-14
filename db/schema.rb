@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_09_203230) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_14_121952) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -53,6 +53,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_09_203230) do
     t.datetime "updated_at", null: false
     t.index ["state_id"], name: "index_stores_on_state_id"
     t.index ["store_name", "zip_code"], name: "index_stores_on_store_name_and_zip_code", unique: true
+  end
+
+  create_table "user_shopping_list_items", force: :cascade do |t|
+    t.bigint "user_shopping_list_id", null: false
+    t.bigint "item_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_user_shopping_list_items_on_item_id"
+    t.index ["user_shopping_list_id"], name: "index_user_shopping_list_items_on_user_shopping_list_id"
   end
 
   create_table "user_shopping_lists", force: :cascade do |t|
@@ -105,6 +114,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_09_203230) do
   end
 
   add_foreign_key "stores", "states"
+  add_foreign_key "user_shopping_list_items", "items"
+  add_foreign_key "user_shopping_list_items", "user_shopping_lists"
   add_foreign_key "user_shopping_lists", "shopping_lists"
   add_foreign_key "user_shopping_lists", "users"
   add_foreign_key "user_stores", "stores"
