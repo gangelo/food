@@ -107,3 +107,10 @@ abbr[title] {
     font-weight: 400 !important;
   }
 }
+
+
+// Forms
+:root {
+  --bs-border-color: var(--bs-black) !important;
+  // --bs-border-width: 2px !important;
+}

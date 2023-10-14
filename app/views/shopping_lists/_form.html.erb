@@ -1,5 +1,5 @@
 <main class="form form-shopping-list">
-  <%= simple_form_for(shopping_list) do |f| %>
+  <%= simple_form_for(shopping_list, wrapper: :horizontal_form) do |f| %>
     <div class="h1 mb-3 fw-normal">
       <i class="bi <%= header_icon %>"></i>
       <%= header_text %>
@@ -26,8 +26,13 @@
                     class: 'datepicker form-control'
                   }
       %>
+      <div class="form-group row">
+        <%= f.label :template, class: 'col-sm-2 col-md-2 col-lg-2 col-form-label' %>
+        <div class="col-sm-9">
+          <%= f.input :template, as: :boolean, label: false, wrapper: false, class: 'form-check-input' %>
+        </div>
+      </div>
       <%= f.input :notes %>
-      <%= f.input :template %>
     </div>
 
     <div class="form-actions">
