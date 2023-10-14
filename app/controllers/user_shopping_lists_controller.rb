@@ -3,7 +3,7 @@
 # The controller for shopping lists.
 class UserShoppingListsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_user_shopping_list, only: %i[edit update destroy]
+  before_action :set_shopping_list, only: %i[edit update destroy]
 
   # GET /user/user_shopping_lists or /user/user_shopping_lists.json
   def index
@@ -26,7 +26,8 @@ class UserShoppingListsController < ApplicationController
 
   # GET /user/user_shopping_lists/1 or /user/user_shopping_lists/1.json
   def show
-    @user_shopping_list = ShoppingList.find(params[:id]).presenter(user: current_user, view_context: view_context)
+    shopping_list = ShoppingList.find(params[:id])
+    @shopping_list = PresenterDecorator.new(resource: shopping_list, user: current_user, view_context: view_context)
   end
 
   # GET /user/user_shopping_lists/new
@@ -53,13 +54,15 @@ class UserShoppingListsController < ApplicationController
 
   # PATCH/PUT /user/user_shopping_lists/1 or /user/user_shopping_lists/1.json
   def update
+    Rails.logger.debug("xyzzy: params: #{params.inspect}")
     respond_to do |format|
-      if @user_shopping_list.update(user_shopping_list_params)
-        format.html { redirect_to user_shopping_list_url(@user_shopping_list), notice: 'Shopping list was successfully updated.' }
-        format.json { render :show, status: :ok, location: @user_shopping_list }
+      if @shopping_list.update(shopping_list_params)
+        format.html {
+          redirect_to user_shopping_list_url(@shopping_list),
+                      notice: 'Shopping list was successfully updated.'
+        }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @user_shopping_list.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -77,8 +80,9 @@ class UserShoppingListsController < ApplicationController
   private
 
   # Use callbacks to share common setup or constraints between actions.
-  def set_user_shopping_list
-    @user_shopping_list = ShoppingList.find(params[:id])
+  def set_shopping_list
+    shopping_list = UserShoppingList.find(params[:id]).shopping_list
+    @shopping_list = PresenterDecorator.new(resource: shopping_list, user: current_user, view_context: view_context)
   end
 
   # Only allow a list of trusted parameters through.

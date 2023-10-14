@@ -1,6 +1,9 @@
+<%
+method ||= :post
+%>
 <main class="form form-shopping-list">
   <%= simple_form_for(shopping_list, url: postback_path,
-                                     method: :post,
+                                     method: method,
                                      wrapper: :horizontal_form) do |f| %>
     <div class="h1 mb-3 fw-normal">
       <i class="bi <%= header_icon %>"></i>
