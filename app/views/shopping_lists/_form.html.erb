@@ -13,12 +13,12 @@
                   }
       %>
     <% end %>
+    <%= f.input :shopping_list_name,
+            required: true,
+            label: "Name",
+            autofocus: true
+    %>
     <div data-controller="date-picker" class="form-inputs">
-      <%= f.input :shopping_list_name,
-                  required: true,
-                  label: "Name",
-                  autofocus: true
-      %>
       <%= f.input :week_of, as: :string,
                   required: true,
                   input_html: {
@@ -32,8 +32,8 @@
           <%= f.input :template, as: :boolean, label: false, wrapper: false, class: 'form-check-input' %>
         </div>
       </div>
-      <%= f.input :notes %>
     </div>
+    <%= f.input :notes %>
 
     <div class="form-actions">
       <%= f.button :submit,
