@@ -4,7 +4,7 @@
 class ShoppingList < ApplicationRecord
   include PagableConcern
 
-  has_many :user_shopping_lists
+  has_many :user_shopping_lists, dependent: :destroy
   has_many :users, through: :user_shopping_lists
 
   validates :shopping_list_name, presence: true, length: { maximum: 512 }
@@ -20,6 +20,16 @@ class ShoppingList < ApplicationRecord
 
   def shopping_list?
     !template?
+  end
+
+  def week_of=(date)
+    return if date.is_a?(Date)
+
+    self[:week_of] = begin
+      Date.strptime(date, '%m/%d/%Y')
+    rescue StandardError
+      nil
+    end
   end
 
   private

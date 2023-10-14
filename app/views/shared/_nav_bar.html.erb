@@ -10,10 +10,10 @@
           <li><%= link_to "Home", root_path, class: "nav-link px-2 text-secondary" %></li>
           <% if user_signed_in? %>
           <li><%= link_to "My Stores", user_stores_path, class: "nav-link px-2 text-white" %></li>
-          <li><%= link_to "Shopping lists", shopping_lists_path, class: "nav-link px-2 text-white" %></li>
+          <li><%= link_to "Shopping lists", user_shopping_lists_path, class: "nav-link px-2 text-white" %></li>
           <li><%= link_to "Items", items_path, class: "nav-link px-2 text-white" %></li>
           <li><a href="#" class="nav-link px-2 text-white">Labels</a></li>
-          <li class="admin-menu-item"><a href="#" class="menu-item nav-link px-2 text-white">Admin</a></li>
+          <!-- li class="admin-menu-item"><%= link_to "Admin Shopping lists", shopping_lists_path, class: "nav-link px-2 text-white" %></li -->
           <% else %>
           <li><a href="#" class="nav-link px-2 text-white">Features</a></li>
           <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>

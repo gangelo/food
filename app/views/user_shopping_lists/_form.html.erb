@@ -1,0 +1,52 @@
+<main class="form form-shopping-list">
+  <%= simple_form_for(shopping_list, url: postback_path,
+                                     method: :post,
+                                     wrapper: :horizontal_form) do |f| %>
+    <div class="h1 mb-3 fw-normal">
+      <i class="bi <%= header_icon %>"></i>
+      <%= header_text %>
+    </div>
+
+    <% if f.object.errors[:base].present? %>
+      <%= render partial: "shared/flash_message",
+                  locals: {
+                    flash_type: "alert",
+                    flash_message: f.object.errors[:base].to_sentence
+                  }
+      %>
+    <% end %>
+    <%= f.input :shopping_list_name,
+            required: true,
+            label: "Name",
+            autofocus: true
+    %>
+    <div data-controller="date-picker" data-date-picker-init-date="<%#= shopping_list.display_week_of %>" class="form-inputs">
+      <%= f.input :week_of, as: :string,
+                  required: true,
+                  input_html: {
+                    value: shopping_list.display_week_of,
+                    autocomplete: "off",
+                    class: 'datepicker form-control'
+                  }
+      %>
+      <div class="form-group row">
+        <%= f.label :template, class: 'col-sm-2 col-md-2 col-lg-2 col-form-label' %>
+        <div class="col-sm-9">
+          <%= f.input :template, as: :boolean, label: false, wrapper: false, class: 'form-check-input' %>
+        </div>
+      </div>
+    </div>
+    <%= f.input :notes %>
+
+    <div class="form-actions">
+      <%= f.button :submit,
+                    submit_button_text,
+                    class: "btn btn-primary"
+      %>
+    </div>
+  <% end %>
+
+  <div class="help-links">
+    <%= link_to "Back", back_path %>
+  </div>
+</main>

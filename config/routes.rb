@@ -39,5 +39,14 @@ Rails.application.routes.draw do
 
   resources :shopping_lists
 
+  scope path: 'user' do
+    resources :shopping_lists, controller: 'user_shopping_lists', as: :user_shopping_lists do
+      collection do
+        get 'add'
+        post 'add'
+      end
+    end
+  end
+
   devise_for :users
 end

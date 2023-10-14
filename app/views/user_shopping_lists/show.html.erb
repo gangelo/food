@@ -1,0 +1,9 @@
+<main class="form show-shopping-list m-auto">
+  <div data-controller="filter">
+    <div class="h1 mb-3 fw-normal"><i class="bi bi-journal-text"></i> Shopping List</div>
+    <%= render @user_shopping_list %>
+  </div>
+  <div class="help-links marginized">
+    <%= link_to "Back", user_shopping_lists_path %>
+  </div>
+</main>

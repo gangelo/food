@@ -1,0 +1,8 @@
+<%= render "form",
+    postback_path: user_shopping_lists_path,
+    shopping_list: @shopping_list.presenter,
+    header_text: "New Shopping List",
+    header_icon: "bi-journal-plus",
+    submit_button_text: "Create shopping list",
+    back_path: user_shopping_lists_path
+%>

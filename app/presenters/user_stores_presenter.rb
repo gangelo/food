@@ -9,10 +9,6 @@ class UserStoresPresenter < Presenter
     end.sort_by(&:store_name)
   end
 
-  def presenter_for(store_id)
-    presenters.find { |presenter| presenter.id == store_id }
-  end
-
   def stores?
     count.positive?
   end

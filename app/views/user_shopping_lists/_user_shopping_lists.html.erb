@@ -1,0 +1,45 @@
+<table class="shopping-lists table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Week of</th>
+      <th scope="col" class="text-center">Type</th>
+      <th scope="col">Notes</th>
+      <th scope="col" class="text-center">Actions</th>
+    </tr>
+  </thead>
+  <tbody data-target="filter">
+    <% user_shopping_lists.presenters.each_with_index do |user_shopping_list, index| %>
+      <%
+      user_shopping_list_presenter = user_shopping_list.shopping_list_presenter
+      %>
+      <tr id="<%= dom_id user_shopping_list_presenter %>" >
+        <th scope="row"><%= pager_params.page_offset + index + 1 %></th>
+        <td><%= user_shopping_list_presenter.display_name %></td>
+        <td><%= user_shopping_list_presenter.display_week_of %></td>
+        <td class="text-center"><%= user_shopping_list_presenter.display_type %></td>
+        <td><%= user_shopping_list_presenter.notes %></td>
+        <td>
+          <div class="fixed-width-buttons d-flex justify-content-center">
+            <%= form_tag edit_user_shopping_list_path(user_shopping_list_presenter), method: :get  do |f| %>
+              <%= button_tag(type: :submit, class: "btn btn-outline-primary btn-sm ms-1") do %>
+                <i class="bi bi-journal-text"></i> Edit
+              <% end %>
+            <% end %>
+            <%= form_tag user_shopping_list_path(user_shopping_list_presenter), method: :get  do |f| %>
+              <%= button_tag(type: :submit, class: "btn btn-outline-primary btn-sm ms-1") do %>
+                <i class="bi bi-journal-bookmark-fill"></i> View
+              <% end %>
+            <% end %>
+            <%= form_tag user_shopping_list_path(user_shopping_list_presenter), method: :delete do |f| %>
+              <%= button_tag(type: :submit, class: "btn btn-outline-danger btn-sm ms-1") do %>
+                <i class="bi bi-trash-fill"></i> Delete
+              <% end %>
+            <% end %>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

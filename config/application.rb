@@ -34,6 +34,7 @@ module Food
     # config.eager_load_paths << Rails.root.join("extras")
 
     config.autoload_paths << Rails.root.join('app/modules')
+    config.autoload_paths << Rails.root.join('app/decorators')
 
     config.action_mailer.default_url_options = { host: 'localhost:3000' }
 

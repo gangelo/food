@@ -6,6 +6,8 @@ import "bootstrap-datepicker";
 // Connects to data-controller="date-picker"
 export default class extends Controller {
   connect() {
+    // let initDate = this.data.get("initDate");
+
     this.initializeDatepicker();
   }
 
@@ -21,6 +23,7 @@ export default class extends Controller {
         orientation: "bottom left",
         clearBtn: true,
         autoClose: true,
+        // defaultViewDate: { year: 1977, month: 04, day: 25 },
       });
     } else {
       console.error("Datepicker library is not loaded.");

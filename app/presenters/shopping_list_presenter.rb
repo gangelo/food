@@ -7,6 +7,8 @@ class ShoppingListPresenter < Presenter
   end
 
   def display_week_of
+    return '' unless week_of.present?
+
     week_of.strftime('%m/%d/%Y')
   end
 
