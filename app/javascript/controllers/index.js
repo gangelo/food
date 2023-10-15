@@ -28,5 +28,8 @@ application.register("new-user-store-modal", NewUserStoreModalController)
 import PagerController from "./pager_controller"
 application.register("pager", PagerController)
 
+import ShoppingListItemsController from "./shopping_list_items_controller"
+application.register("shopping-list-items", ShoppingListItemsController)
+
 import ZipCodeController from "./zip_code_controller"
 application.register("zip-code", ZipCodeController)

@@ -114,3 +114,13 @@ abbr[title] {
   --bs-border-color: var(--bs-black) !important;
   // --bs-border-width: 2px !important;
 }
+
+
+// Type ahead
+.items-type-ahead {
+  width: 100%;
+
+  .list-group-item {
+    width: 66.66%;
+  }
+}

@@ -76,6 +76,12 @@ class ItemsController < ApplicationController
     end
   end
 
+  # GET /items/search
+  def search
+    @items = Item.where('item_name ILIKE ?', "%#{params[:query]}%").order(:item_name)
+    render partial: 'items/results', locals: { items: @items }, layout: false
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.

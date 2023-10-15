@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   resources :items, except: %i[destroy] do
     post 'archive', on: :member
     post 'unarchive', on: :member
+    get 'search', on: :collection
   end
 
   resources :shopping_lists

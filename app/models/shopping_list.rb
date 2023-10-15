@@ -14,6 +14,9 @@ class ShoppingList < ApplicationRecord
   validates :notes, length: { maximum: 512 }
   validates :shopping_list_name, uniqueness: { scope: :week_of, case_sensitive: false }
 
+
+  attr_accessor :query
+
   def template?
     template
   end
