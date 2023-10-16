@@ -5,5 +5,3 @@ import "./controllers";
 // bootstrap-datepicker
 // import $ from "jquery";
 // import "bootstrap-datepicker";
-
-import "select2";

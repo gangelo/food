@@ -5,23 +5,6 @@ export default class extends Controller {
   static targets = ["input", "results", "selectedItems"];
 
   connect() {
-    // this.initializeSelect();
-  }
-
-  initializeSelect() {
-    // Ensure the jQuery and datepicker library are loaded
-    if (typeof $ !== "undefined" && $.fn && $.fn.select2) {
-      let cssClass = ".select2";
-
-      $(this.element.querySelectorAll(cssClass)).select2({
-        ajax: {
-          url: self.data.get("url"),
-          dataType: "json",
-        },
-      });
-    } else {
-      console.error("select2 library is not loaded.");
-    }
   }
 
   search() {
@@ -30,6 +13,7 @@ export default class extends Controller {
       .then((response) => response.text())
       .then((html) => {
         this.resultsTarget.innerHTML = html;
+        this.checkSelectedItems();
       });
   }
 
@@ -38,79 +22,77 @@ export default class extends Controller {
     const itemId = checkbox.value;
     const itemName = checkbox.dataset.itemName;
 
-    console.log(
-      "ShoppingListItemsController#select: checkbox checked: ",
-      checkbox,
-      itemId,
-      itemName
-    );
-
     if (checkbox.checked) {
-      this.addSelectedItem(itemId, itemName);
+      this.addItem(itemId, itemName);
     } else {
-      this.removeSelectedItem(itemId);
+      this.removeItem(itemId);
     }
   }
 
-  addSelectedItem(itemId, itemName) {
-    const buttonGroupContainer = this.createButtonGroupContainer();
-    this.selectedItemsTarget.appendChild(buttonGroupContainer);
+  addItem(itemId, itemName) {
+    const selectedItemId = this.selectedItemIdFrom(itemId);
 
-    const buttonGroupDropdownContainer =
-      this.createButtonGroupDropdownContainer(buttonGroupContainer);
-    buttonGroupContainer.appendChild(buttonGroupDropdownContainer);
+    const htmlString = `
+      <div id="${selectedItemId}" class="btn-group" role="group">
+        <div class="btn-group" role="group">
+          <button type="button"
+                  class="m-1 btn btn-sm btn-primary dropdown-toggle"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                  data-item-id="${itemId}">
+            ${itemName}
+          </button>
+          <ul class="dropdown-menu">
+            <li>
+              <a class="dropdown-item"
+                  href="#"
+                  data-action="click->shopping-list-items#removeItemEvent"
+                  data-item-id="${itemId}">
+                Remove
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    `;
 
-    const buttonItem = document.createElement("button");
-    buttonItem.textContent = itemName;
-    buttonItem.classList.add(
-      "m-1",
-      "btn",
-      "btn-sm",
-      "btn-primary",
-      "dropdown-toggle"
-    );
-    buttonItem.dataset.itemId = itemId;
-    buttonItem.setAttribute('data-bs-toggle', 'dropdown');
-    buttonItem.setAttribute('aria-expanded', 'false');
-    buttonGroupDropdownContainer.appendChild(buttonItem);
+    this.selectedItemsTarget.innerHTML += htmlString;
+  }
 
-    const dropdownList = document.createElement("ul");
-    dropdownList.classList.add("dropdown-menu");
-    buttonGroupDropdownContainer.appendChild(dropdownList);
+  removeItemEvent(event) {
+    this.removeItem(event.target.dataset.itemId);
+    this.uncheckSelectedItem(event.target.dataset.itemId);
+  }
 
-    const listItem = document.createElement("li");
-    dropdownList.appendChild(listItem);
+  removeItem(itemId) {
+    const selectedItemId = this.selectedItemIdFrom(itemId);
 
-    const dropdownLink = document.createElement("a");
-    dropdownLink.classList.add("dropdown-item");
-    dropdownLink.href = "#";
-    dropdownLink.textContent = "Remove";
-    listItem.appendChild(dropdownLink);
+    event.preventDefault();
+    document.getElementById(selectedItemId)?.remove();
+  }
 
-    dropdownLink.addEventListener("click", (event) => {
-      event.preventDefault();
-      buttonGroupContainer.remove();
+  uncheckSelectedItem(itemId) {
+    const checkbox = document.getElementById(`item_ids_${itemId}`);
+
+    if (!checkbox) return;
+
+    checkbox.checked = false;
+  }
+
+  checkSelectedItems() {
+    const selectedItems = this.selectedItemsTarget.querySelectorAll("button");
+
+    selectedItems.forEach((selectedItem) => {
+      const itemId = selectedItem.dataset.itemId;
+      const checkbox = document.getElementById(`item_ids_${itemId}`);
+
+      if (!checkbox) return;
+
+      checkbox.checked = true;
     });
   }
 
-  createButtonGroupContainer() {
-    const buttonGroupContainer = document.createElement("div");
-    buttonGroupContainer.classList.add("btn-group");
-    buttonGroupContainer.setAttribute("role", "group");
-    return buttonGroupContainer;
-  }
-
-  createButtonGroupDropdownContainer(buttonGroupContainer) {
-    const buttonGroupDropdownContainer = document.createElement("div");
-    buttonGroupDropdownContainer.classList.add("btn-group");
-    buttonGroupDropdownContainer.setAttribute("role", "group");
-    return buttonGroupDropdownContainer;
-  }
-
-  removeSelectedItem(itemId) {
-    const buttonItem = this.selectedItemsTarget.querySelector(
-      `[data-item-id="${itemId}"]`
-    );
-    buttonItem.remove();
+  selectedItemIdFrom(itemId) {
+    return `selected-shopping-list-item-${itemId}`;
   }
 }

@@ -41,55 +41,23 @@ method ||= :post
     </div>
     <%= f.input :notes %>
 
-    <!-- Type Ahead Search -->
-    <div data-controller="shopping-list-items">
-      <%= f.input :query,
-                  label: "Items <abbr title='required'>*</abbr>".html_safe,
-                  label_html: { class: "required" },
-                  placeholder: "Search for items to add to your shopping list",
-                  autocomplete: "off",
-                  input_html: {
-                    data: {
-                      action: "input->shopping-list-items#search",
-                      shopping_list_items_target: "input"
-                    }
+    <!-- Type ahead search -->
+    <%= f.input :query,
+                label: "Items <abbr title='required'>*</abbr>".html_safe,
+                label_html: { class: "required" },
+                placeholder: "Search for items to add to your shopping list",
+                autocomplete: "off",
+                input_html: {
+                  data: {
+                    action: "input->shopping-list-items#search",
+                    shopping_list_items_target: "input"
                   }
-      %>
+                }
+    %>
 
-       <!-- Search Results -->
-      <div data-shopping-list-items-target="results">
-        <!-- Search results appear here -->
-      </div>
-
-      <div class="row mb-3 string required">
-        <label class="invisible col-sm-2 col-md-2 col-lg-2 col-form-label string required"
-          for="shopping_list_shopping_list_items">Items <abbr title="required">*</abbr>
-        </label>
-        <div class="col-sm-10 col-md-7 col-lg-5">
-          <div class="accordion" id="selectedItems">
-            <div class="accordion-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#collapseOne"
-                        aria-expanded="true"
-                        aria-controls="collapseOne">
-                  Selected items
-                </button>
-              </h2>
-              <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#selectedItems">
-                <div class="accordion-body">
-                  <!-- Selected Items -->
-                  <ol data-shopping-list-items-target="selectedItems">
-                    <!-- Selected items appear here -->
-                  </ol>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <!-- Search Results -->
+    <div data-shopping-list-items-target="results">
+      <!-- Search results appear here -->
     </div>
 
     <div class="form-actions">

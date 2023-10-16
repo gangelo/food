@@ -1,23 +1,4 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Foodme</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
-  </head>
-
-  <body>
-    <div data-controller="nav-bar">
-      <%= render partial: 'shared/nav_bar' %>
-    </div>
-    <%= render partial: 'shared/flash' %>
-    <div class="body">
-      <%= yield %>
-    </div>
-    <%= render partial: "shared/debug" if debug? %>
-  </body>
-</html>
+<%= content_for :main_content do %>
+  <%= yield %>
+<% end %>
+<%= render partial: 'layouts/base_layout' %>
