@@ -4,6 +4,7 @@
 class UserShoppingListsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_shopping_list, only: %i[edit update destroy]
+  before_action :set_user_shopping_list_items_json, only: %i[edit update]
 
   # GET /user/user_shopping_lists or /user/user_shopping_lists.json
   def index
@@ -37,35 +38,28 @@ class UserShoppingListsController < ApplicationController
   end
 
   # GET /user/user_shopping_lists/1/edit
-  def edit; end
+  def edit
+    render layout: 'shopping_list'
+  end
 
   # POST /user/user_shopping_lists or /user/user_shopping_lists.json
   def create
-    Rails.logger.debug("xyzzy: params: #{params.inspect}")
-
     shopping_list = nil
 
     results = ActiveRecord::Base.transaction do
       shopping_list = ShoppingList.new(shopping_list_params)
       shopping_list.save!
-      shopping_list.reload
 
       user_shopping_list = current_user.user_shopping_lists.build(shopping_list: shopping_list)
       user_shopping_list.save!
-      user_shopping_list.reload
 
-      Rails.logger.debug("xyzzy: user_shopping_list: #{user_shopping_list.inspect}")
-
-      # Assuming you're trying to add items to the user_shopping_list
       user_shopping_list.user_shopping_list_items = []
       params[:item_ids].each do |item_id|
-        Rails.logger.debug("xyzzy: creating user_shopping_list_item for item_id: #{item_id}")
         user_shopping_list_item = user_shopping_list.user_shopping_list_items.build(item_id: item_id, user_shopping_list: user_shopping_list)
-        Rails.logger.debug("xyzzy: user_shopping_list_item: #{user_shopping_list_item.inspect}")
         user_shopping_list_item.save!
       end
 
-      true # Return true at the end of the transaction to signify success
+      true
     rescue StandardError => e
       Rails.logger.debug('xyzzy: An error occurred and a rollback is being initiated.')
       Rails.logger.debug("xyzzy: class: #{e.class}, error: #{e.message}")
@@ -77,33 +71,40 @@ class UserShoppingListsController < ApplicationController
     if results
       redirect_to user_shopping_lists_url, notice: 'Shopping list was successfully created.'
     else
-      render :new, status: :unprocessable_entity, error: 'There was a problem creating the user shopping list.'
+      render :new, status: :unprocessable_entity, layout: 'shopping_list'
     end
-
-    # user_shopping_list = current_user.user_shopping_lists.build(shopping_list_attributes: shopping_list_params)
-
-    # respond_to do |format|
-    #   if user_shopping_list.save
-    #     format.html { redirect_to user_shopping_lists_url, notice: 'Shopping list was successfully created.' }
-    #   else
-    #     @shopping_list = PresenterDecorator.new(resource: user_shopping_list.shopping_list, user: current_user, view_context: view_context)
-    #     format.html { render :new, status: :unprocessable_entity }
-    #   end
-    # end
   end
 
   # PATCH/PUT /user/user_shopping_lists/1 or /user/user_shopping_lists/1.json
   def update
-    Rails.logger.debug("xyzzy: params: #{params.inspect}")
-    respond_to do |format|
-      if @shopping_list.update(shopping_list_params)
-        format.html {
-          redirect_to user_shopping_list_url(@shopping_list),
-                      notice: 'Shopping list was successfully updated.'
-        }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
+    Rails.logger.debug("xyzzy: UserShoppingListsController#update: params: #{params.inspect}")
+
+    results = ActiveRecord::Base.transaction do
+      @shopping_list.update!(shopping_list_params)
+      @shopping_list.reload
+
+      user_shopping_list = current_user.user_shopping_lists.find(params[:id])
+
+      user_shopping_list.user_shopping_list_items = []
+      params[:selected_item_ids]&.each do |item_id|
+        user_shopping_list_item = user_shopping_list.user_shopping_list_items
+                                                    .build(item_id: item_id,
+                                                           user_shopping_list: user_shopping_list)
+        user_shopping_list_item.save!
       end
+
+      true
+    rescue StandardError => e
+      Rails.logger.debug('xyzzy: An error occurred and a rollback is being initiated.')
+      Rails.logger.debug("xyzzy: class: #{e.class}, error: #{e.message}")
+
+      raise ActiveRecord::Rollback
+    end
+
+    if results
+      redirect_to user_shopping_lists_url, notice: 'Shopping list was successfully created.'
+    else
+      render :edit, status: :unprocessable_entity, layout: 'shopping_list'
     end
   end
 
@@ -123,6 +124,13 @@ class UserShoppingListsController < ApplicationController
   def set_shopping_list
     shopping_list = UserShoppingList.find(params[:id]).shopping_list
     @shopping_list = PresenterDecorator.new(resource: shopping_list, user: current_user, view_context: view_context)
+  end
+
+  def set_user_shopping_list_items_json
+    @user_shopping_list_items_json = []
+    return if params[:id].blank?
+
+    @user_shopping_list_items_json = UserShoppingList.find(params[:id]).to_hash[:user_shopping_list_items].to_json
   end
 
   # Only allow a list of trusted parameters through.
