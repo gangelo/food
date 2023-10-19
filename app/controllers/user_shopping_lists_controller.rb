@@ -77,14 +77,14 @@ class UserShoppingListsController < ApplicationController
 
   # PATCH/PUT /user/user_shopping_lists/1 or /user/user_shopping_lists/1.json
   def update
+    user_shopping_list = nil
+
     Rails.logger.debug("xyzzy: UserShoppingListsController#update: params: #{params.inspect}")
 
     results = ActiveRecord::Base.transaction do
       @shopping_list.update!(shopping_list_params)
-      @shopping_list.reload
 
       user_shopping_list = current_user.user_shopping_lists.find(params[:id])
-
       user_shopping_list.user_shopping_list_items = []
       params[:selected_item_ids]&.each do |item_id|
         user_shopping_list_item = user_shopping_list.user_shopping_list_items
@@ -92,6 +92,8 @@ class UserShoppingListsController < ApplicationController
                                                            user_shopping_list: user_shopping_list)
         user_shopping_list_item.save!
       end
+
+      user_shopping_list.save!
 
       true
     rescue StandardError => e
@@ -104,6 +106,7 @@ class UserShoppingListsController < ApplicationController
     if results
       redirect_to user_shopping_lists_url, notice: 'Shopping list was successfully created.'
     else
+      flash[:alert] = user_shopping_list.errors.full_messages
       render :edit, status: :unprocessable_entity, layout: 'shopping_list'
     end
   end

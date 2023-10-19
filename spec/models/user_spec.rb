@@ -189,4 +189,70 @@ RSpec.describe User do
       end
     end
   end
+
+  describe '#user_stores_by_name_and_zip_code?' do
+    subject(:user) { create(:user) }
+
+    before do
+      user_stores.each do |store|
+        user.user_stores.create(store: store)
+      end
+    end
+
+    let(:user_stores) do
+      stores = []
+
+      stores << create(:store, store_name: 'CCC', zip_code: '55555')
+      stores << create(:store, store_name: 'CCA', zip_code: '66666')
+      stores << create(:store, store_name: 'BBB', zip_code: '44444')
+      stores << create(:store, store_name: 'BBB', zip_code: '33333')
+      stores << create(:store, store_name: 'AAA', zip_code: '22222')
+      stores << create(:store, store_name: 'AAA', zip_code: '11111')
+
+      stores
+    end
+
+    it 'returns the user stores by name and zip code' do
+      sorted_user_stores = user.user_stores_by_name_and_zip_code
+      expect(user_stores_eq?(sorted_user_stores[0].store, user_stores[5])).to be true
+      expect(user_stores_eq?(sorted_user_stores[1].store, user_stores[4])).to be true
+      expect(user_stores_eq?(sorted_user_stores[2].store, user_stores[3])).to be true
+      expect(user_stores_eq?(sorted_user_stores[3].store, user_stores[2])).to be true
+      expect(user_stores_eq?(sorted_user_stores[4].store, user_stores[1])).to be true
+      expect(user_stores_eq?(sorted_user_stores[5].store, user_stores[0])).to be true
+    end
+  end
+
+  describe '#user_store_exists?' do
+    subject(:user) { create(:user, :with_stores) }
+
+    it do
+      expect(user.stores.count).not_to eq 0
+    end
+
+    context 'when the user store exists' do
+      it 'returns true' do
+        store = user.stores.first
+        expect(user.user_store_exists?(store.id)).to be true
+      end
+    end
+
+    context 'when the user store does not exist' do
+      let(:another_user) { create(:user, :with_stores) }
+
+      it do
+        expect(another_user.stores.count).not_to eq 0
+      end
+
+      it 'returns true' do
+        store = another_user.stores.first
+        expect(user.user_store_exists?(store.id)).to be false
+      end
+    end
+  end
+
+  def user_stores_eq?(store1, store2)
+    store1.store_name == store2.store_name &&
+      store1.zip_code == store2.zip_code
+  end
 end

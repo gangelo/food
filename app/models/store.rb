@@ -23,7 +23,7 @@ class Store < ApplicationRecord
   # Validates :zip_code which could be 5 digits with optional 4 digit extension.
   validates :zip_code, format: { with: /\A\d{5}(-\d{4})?\z/ }
 
-  validate :store_name_and_zip_code_uniqueness, if: -> { store_name_and_zip_code? }
+  validate :store_name_within_zip_code_unique, if: -> { store_name_and_zip_code? }
 
   def non_unique_store?
     !unique_store?
@@ -46,7 +46,7 @@ class Store < ApplicationRecord
 
   attr_writer :non_unique_store_id
 
-  def store_name_and_zip_code_uniqueness
+  def store_name_within_zip_code_unique
     return true if unique_store?
 
     errors.add(:base, I18n.t('activerecord.errors.models.store.already_exists'))
@@ -57,7 +57,7 @@ class Store < ApplicationRecord
   end
 
   def before_save_edits
-    store_name[0] = store_name[0].upcase
+    store_name[0] = store_name[0].upcase if store_name.present?
     self.address = address.titleize
     self.address2 = address2.titleize if address2.present?
   end

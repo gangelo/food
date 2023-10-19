@@ -9,7 +9,10 @@ export default class extends Controller {
   DESC = "desc";
 
   connect() {
-    const shoppingListItems = JSON.parse(this.data.get("shoppingListItems"));
+    const json = this.data.get("shoppingListItems");
+    if (!json) return;
+
+    const shoppingListItems = JSON.parse(json);
 
     console.log("shoppingListItems", shoppingListItems);
 
@@ -149,10 +152,8 @@ export default class extends Controller {
       const bButton = b.querySelector("button");
       if (sortOrder === this.ASC) {
         return aButton.innerText.localeCompare(bButton.innerText);
-        //return a.innerText.localeCompare(b.innerText);
       } else {
         return bButton.innerText.localeCompare(aButton.innerText);
-        //return b.innerText.localeCompare(a.innerText);
       }
     });
 

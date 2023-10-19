@@ -34,7 +34,7 @@ class ItemsController < ApplicationController
 
     respond_to do |format|
       if @item.save
-        format.html { redirect_to shopping_lists, notice: 'Item was successfully created.' }
+        format.html { redirect_to items_url, notice: 'Item was successfully created.' }
         format.json { render :index, status: :created }
       else
         format.html { render :new, status: :unprocessable_entity }
