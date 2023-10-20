@@ -1,13 +1,39 @@
+<main class="form form-user-store">
+  <%= simple_form_for(item, id: "new-item") do |f| %>
+    <div class="h1 mb-3 fw-normal">
+      <i class="bi <%= header_icon %>"></i>
+      <%= header_text %>
+    </div>
 
-<%= simple_form_for(@item) do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+    <% if f.object.errors[:base].present? %>
+      <%= render partial: "shared/flash_message",
+                  locals: {
+                    flash_type: "alert",
+                    flash_message: f.object.errors[:base].to_sentence
+                  }
+      %>
+    <% end %>
+    <div class="col-4">
+      <%= f.input :item_name,
+                  label: "Name",
+                  autofocus: true,
+                  input_html: {
+                    autocomplete: "off"
+                  }
+      %>
+      <%= f.input :archived,
+                  label: "Archive"
+      %>
+    </div>
+    <div class="form-actions">
+      <%= f.button :submit,
+                  submit_button_text,
+                  class: "btn btn-primary"
+      %>
 
-  <div class="form-inputs">
-    <%= f.input :item_name %>
-  </div>
-
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
-<% end %>
+      <div class="help-links marginized">
+        <%= link_to "Back", back_path %>
+      </div>
+    </div>
+  <% end %>
+</main>

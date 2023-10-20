@@ -7,5 +7,5 @@ class Item < ApplicationRecord
 
   has_many :user_shopping_list_items, dependent: :destroy
 
-  validates :item_name, uniqueness: { case_sensitive: false }
+  validates :item_name, presence: true, uniqueness: { case_sensitive: false }
 end

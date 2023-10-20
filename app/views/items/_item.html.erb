@@ -5,6 +5,11 @@
   <td class="text-center"><%= item.display_archived %></td>
   <td>
     <div class="fixed-width-buttons d-flex justify-content-center">
+      <%= form_tag edit_item_path(item), method: :get do |f| %>
+        <%= button_tag(type: :submit, class: "btn-archive btn btn-outline-primary btn-sm ms-1") do %>
+          <i class="bi bi-cart-fill"></i> Edit
+        <% end %>
+      <% end %>
       <% if item.archived? %>
         <%= form_tag unarchive_item_path(item), method: :post  do |f| %>
           <%= button_tag(type: :submit, class: "btn-unarchive btn btn-outline-success btn-sm ms-1") do %>

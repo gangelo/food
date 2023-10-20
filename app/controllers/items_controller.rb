@@ -47,8 +47,8 @@ class ItemsController < ApplicationController
   def update
     respond_to do |format|
       if @item.update(item_params)
-        format.html { redirect_to item_url(@item), notice: 'Item was successfully updated.' }
-        format.json { render :show, status: :ok, location: @item }
+        format.html { redirect_to items_url, notice: 'Item was successfully updated.' }
+        format.json { render :index, status: :ok, location: @item }
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @item.errors, status: :unprocessable_entity }
@@ -91,6 +91,6 @@ class ItemsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def item_params
-    params.require(:item).permit(:item_name, :content)
+    params.require(:item).permit(:item_name, :archived)
   end
 end

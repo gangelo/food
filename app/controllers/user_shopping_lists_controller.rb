@@ -3,7 +3,7 @@
 # The controller for shopping lists.
 class UserShoppingListsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_shopping_list, only: %i[edit update destroy]
+  before_action :set_shopping_list, only: %i[edit update]
   before_action :set_user_shopping_list_items_json, only: %i[edit update]
 
   # GET /user/user_shopping_lists or /user/user_shopping_lists.json
@@ -25,19 +25,19 @@ class UserShoppingListsController < ApplicationController
                                                   view_context: view_context)
   end
 
-  # GET /user/user_shopping_lists/1 or /user/user_shopping_lists/1.json
+  # GET /user/shopping_lists/1 or /user/shopping_lists/1.json
   def show
     shopping_list = ShoppingList.find(params[:id])
     @shopping_list = PresenterDecorator.new(resource: shopping_list, user: current_user, view_context: view_context)
   end
 
-  # GET /user/user_shopping_lists/new
+  # GET /user/shopping_lists/new
   def new
     @shopping_list = PresenterDecorator.new(resource: ShoppingList.new, user: current_user, view_context: view_context)
     render layout: 'shopping_list'
   end
 
-  # GET /user/user_shopping_lists/1/edit
+  # GET /user/shopping_lists/1/edit
   def edit
     render layout: 'shopping_list'
   end
@@ -75,7 +75,7 @@ class UserShoppingListsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /user/user_shopping_lists/1 or /user/user_shopping_lists/1.json
+  # PATCH/PUT /user/shopping_lists/1 or /user/shopping_lists/1.json
   def update
     user_shopping_list = nil
 
@@ -111,13 +111,16 @@ class UserShoppingListsController < ApplicationController
     end
   end
 
-  # DELETE /user/user_shopping_lists/1 or /user/user_shopping_lists/1.json
+  # DELETE /user/shopping_lists/1 or /user/shopping_lists/1.json
   def destroy
-    @user_shopping_list.destroy
-
-    respond_to do |format|
-      format.html { redirect_to user_shopping_lists_url, notice: 'Shopping list was successfully destroyed.' }
-      format.json { head :no_content }
+    user_shopping_list = UserShoppingList.find_by(id: params[:id])
+    if user_shopping_list
+      user_shopping_list.destroy
+      redirect_to user_shopping_lists_url, notice: 'Shopping list was successfully destroyed.'
+    else
+      redirect_to user_shopping_lists_url,
+                  status: :not_found,
+                  alert: 'The shopping list could not not found.'
     end
   end
 

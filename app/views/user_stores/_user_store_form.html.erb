@@ -44,9 +44,6 @@ the option to add the store to their profile or cancel try again.
         <%= header_text %>
       </div>
 
-      <%#= f.error_notification %>
-      <%#= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-
       <% if f.object.errors[:base].present? %>
         <%= render partial: "shared/flash_message",
                     locals: {
@@ -57,8 +54,6 @@ the option to add the store to their profile or cancel try again.
       <% end %>
 
       <%= f.simple_fields_for :store do |store_form| %>
-        <%#= store_form.error_notification message: store_form.object.errors[:base].to_sentence if store_form.object.errors[:base].present? %>
-
         <% if store_form.object.errors[:base].present? %>
           <%= render partial: "shared/flash_message",
                         locals: {
