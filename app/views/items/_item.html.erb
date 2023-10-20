@@ -6,19 +6,24 @@
   <td>
     <div class="fixed-width-buttons d-flex justify-content-center">
       <%= form_tag edit_item_path(item), method: :get do |f| %>
-        <%= button_tag(type: :submit, class: "btn-archive btn btn-outline-primary btn-sm ms-1") do %>
+        <%= button_tag(type: :submit, class: "btn btn-outline-primary btn-sm ms-1") do %>
           <i class="bi bi-cart-fill"></i> Edit
+        <% end %>
+      <% end %>
+      <%= form_tag item_path(item), method: :get do |f| %>
+        <%= button_tag(type: :submit, class: "btn btn-outline-primary btn-sm ms-1") do %>
+          <i class="bi bi-eye-fill"></i> View
         <% end %>
       <% end %>
       <% if item.archived? %>
         <%= form_tag unarchive_item_path(item), method: :post  do |f| %>
-          <%= button_tag(type: :submit, class: "btn-unarchive btn btn-outline-success btn-sm ms-1") do %>
+          <%= button_tag(type: :submit, class: "btn btn-outline-success btn-sm ms-1") do %>
             <i class="bi bi-cart-check-fill"></i> Unarchive
           <% end %>
         <% end %>
       <% else %>
         <%= form_tag archive_item_path(item), method: :post do |f| %>
-          <%= button_tag(type: :submit, class: "btn-archive btn btn-outline-danger btn-sm ms-1") do %>
+          <%= button_tag(type: :submit, class: "btn btn-outline-danger btn-sm ms-1") do %>
             <i class="bi bi-archive-fill"></i> Archive
           <% end %>
         <% end %>

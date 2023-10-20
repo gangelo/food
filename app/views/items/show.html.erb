@@ -1,10 +1,8 @@
-<p style="color: green"><%= notice %></p>
+<main class="form m-auto">
+  <div class="h1 mb-3 fw-normal"><i class="bi bi-cart-fill"></i>Item</div>
+  <%= render partial: 'shared/item', object: @item.presenter %>
 
-<%= render @item %>
-
-<div>
-  <%= link_to "Edit this item", edit_item_path(@item) %> |
-  <%= link_to "Back to items", items_path %>
-
-  <%= button_to "Destroy this item", @item, method: :delete %>
-</div>
+  <div class="help-links">
+    <%= link_to "Back", items_path %>
+  </div>
+</main>

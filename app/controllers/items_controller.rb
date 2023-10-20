@@ -18,7 +18,9 @@ class ItemsController < ApplicationController
   end
 
   # GET /items/1 or /items/1.json
-  def show; end
+  def show
+    @item = PresenterDecorator.new(resource: @item, user: current_user, view_context: view_context)
+  end
 
   # GET /items/new
   def new

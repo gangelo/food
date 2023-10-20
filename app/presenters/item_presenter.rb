@@ -11,6 +11,11 @@ class ItemPresenter < Presenter
     vc.content_tag(:span, archived, class: css_class)
   end
 
+  def display_archived_yes_no
+    archived = archived? ? 'Yes' : 'No'
+    vc.content_tag(:span, archived, class: css_class)
+  end
+
   private
 
   def css_class
