@@ -1,0 +1,43 @@
+<%
+shopping_list = user_shopping_list.shopping_list_presenter
+%>
+<div class="mb-3">
+  <h4 class="mb-1">Name</h4>
+  <p><%= shopping_list.display_name %></p>
+</div>
+
+<div class="mb-3">
+  <h4 class="mb-1">Week of</h4>
+  <p><%= shopping_list.display_week_of %></p>
+</div>
+
+<div class="mb-3">
+  <h4 class="mb-1">Type</h4>
+  <p><%= shopping_list.display_type %></p>
+</div>
+
+<div class="mb-3">
+  <h4 class="mb-1">Notes</h4>
+  <p><%= shopping_list.notes %></p>
+</div>
+
+<div class="mb-3">
+  <h4 class="mb-1">Shopping list items (<%= user_shopping_list.items.count %>)</h4>
+  <p>
+    <% user_shopping_list.items.order(item_name: :ASC).each_slice(5).with_index do |items, slice_index| %>
+      <div class="row">
+        <% items.each_with_index do |item, index| %>
+          <%
+          item_number = (slice_index * 5) + index + 1
+          %>
+          <div class="col">
+            <span class="badge text-bg-primary"><%= "#{item_number}. #{item.item_name}" %></span>
+          </div>
+        <% end %>
+        <% (5 - items.length).times do %> <!-- Add extra columns if less than 5 items -->
+          <div class="col"></div>
+        <% end %>
+      </div>
+    <% end %>
+  </p>
+</div>

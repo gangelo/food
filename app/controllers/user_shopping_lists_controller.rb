@@ -27,8 +27,8 @@ class UserShoppingListsController < ApplicationController
 
   # GET /user/shopping_lists/1 or /user/shopping_lists/1.json
   def show
-    shopping_list = ShoppingList.find(params[:id])
-    @shopping_list = PresenterDecorator.new(resource: shopping_list, user: current_user, view_context: view_context)
+    user_shopping_list = UserShoppingList.find(params[:id])
+    @user_shopping_list = PresenterDecorator.new(resource: user_shopping_list, user: current_user, view_context: view_context)
   end
 
   # GET /user/shopping_lists/new
@@ -78,9 +78,6 @@ class UserShoppingListsController < ApplicationController
   # PATCH/PUT /user/shopping_lists/1 or /user/shopping_lists/1.json
   def update
     user_shopping_list = nil
-
-    Rails.logger.debug("xyzzy: UserShoppingListsController#update: params: #{params.inspect}")
-
     results = ActiveRecord::Base.transaction do
       @shopping_list.update!(shopping_list_params)
 

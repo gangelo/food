@@ -1,7 +1,7 @@
 <main class="form show-shopping-list m-auto">
   <div data-controller="filter">
     <div class="h1 mb-3 fw-normal"><i class="bi bi-journal-text"></i> Shopping List</div>
-    <%= render partial: "shopping_lists/shopping_list", object: @shopping_list.presenter %>
+    <%= render partial: "user_shopping_list", object: @user_shopping_list.presenter %>
   </div>
   <div class="help-links marginized">
     <%= link_to "Back", user_shopping_lists_path %>

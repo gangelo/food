@@ -27,7 +27,7 @@
                 <i class="bi bi-journal-text"></i> Edit
               <% end %>
             <% end %>
-            <%= form_tag user_shopping_list_path(user_shopping_list.shopping_list), method: :get  do |f| %>
+            <%= form_tag user_shopping_list_path(user_shopping_list), method: :get  do |f| %>
               <%= button_tag(type: :submit, class: "btn btn-outline-primary btn-sm ms-1") do %>
                 <i class="bi bi-journal-bookmark-fill"></i> View
               <% end %>
