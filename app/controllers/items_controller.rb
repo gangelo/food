@@ -81,7 +81,7 @@ class ItemsController < ApplicationController
   # GET /items/search
   def search
     @items = Item.where('item_name ILIKE ?', "%#{params[:query]}%").order(:item_name)
-    render partial: 'items/results', locals: { items: @items }, layout: false
+    render partial: 'shared/item_search_results', locals: { items: @items }, layout: false
   end
 
   private

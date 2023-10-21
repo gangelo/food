@@ -11,8 +11,11 @@ class UserShoppingList < ApplicationRecord
   has_many :items, through: :user_shopping_list_items, source: :item
 
   accepts_nested_attributes_for :shopping_list
+  accepts_nested_attributes_for :user_shopping_list_items
 
-  validate :shopping_list_items_required
+  # validate :shopping_list_items_required
+
+  attr_accessor :query
 
   def to_hash
     {
@@ -21,13 +24,17 @@ class UserShoppingList < ApplicationRecord
         id: shopping_list.id,
         shopping_list_name: shopping_list.shopping_list_name
       },
-      user_shopping_list_items: sorted_user_shopping_list_items
+      items: sorted_items
     }
+  end
+
+  def to_json(*args)
+    to_hash.to_json(*args)
   end
 
   private
 
-  def sorted_user_shopping_list_items
+  def sorted_items
     items.order(item_name: :asc).map do |item|
       {
         id: item.id,
@@ -37,9 +44,9 @@ class UserShoppingList < ApplicationRecord
     end
   end
 
-  def shopping_list_items_required
-    if items.empty?
-      errors.add(:base, 'Shopping lists must have at least one item')
-    end
-  end
+  # def shopping_list_items_required
+  #   return unless items.empty?
+
+  #   errors.add(:base, 'Shopping lists must have at least one item')
+  # end
 end

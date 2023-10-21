@@ -12,6 +12,8 @@ export default class extends Controller {
     const json = this.data.get("shoppingListItems");
     if (!json) return;
 
+    console.log("json", json);
+
     const shoppingListItems = JSON.parse(json);
 
     console.log("shoppingListItems", shoppingListItems);
@@ -123,11 +125,12 @@ export default class extends Controller {
 
   addSelectedItemId(itemId) {
     const selectedItemIdsContainer = this.selectedItemIdsContainerTarget;
+    const selectedItemId = this.selectedItemIdFrom(itemId);
 
     selectedItemIdsContainer.innerHTML += `
       <input type="hidden"
-             name="selected_item_ids[]"
-             id="selected_item_id_${itemId}"
+             name="user_shopping_list[user_shopping_list_items_attributes][][item_id]"
+             id="${selectedItemId}"
              value="${itemId}"
       >
     `;
@@ -135,11 +138,12 @@ export default class extends Controller {
 
   removeSelectedItemId(itemId) {
     const selectedItemIdsContainer = this.selectedItemIdsContainerTarget;
-    selectedItemIdsContainer.querySelector(`#selected_item_id_${itemId}`)?.remove();
+    const selectedItemId = this.selectedItemIdFrom(itemId);
+    selectedItemIdsContainer.querySelector(`#${selectedItemId}`)?.remove();
   }
 
   selectedItemIdFrom(itemId) {
-    return `selected-shopping-list-item-${itemId}`;
+    return `user_shopping_list_user_shopping_list_items_attributes_${itemId}_item_id`;
   }
 
   sortSelectedItemButtons(sortOrder) {

@@ -1,7 +1,7 @@
 <%= render "form",
     postback_path: user_shopping_list_path,
     method: :patch,
-    shopping_list: @shopping_list.presenter,
+    user_shopping_list: @user_shopping_list,
     header_text: "Edit Shopping List",
     header_icon: "bi-journal-text",
     submit_button_text: "Save shopping list",

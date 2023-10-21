@@ -6,4 +6,9 @@ class UserShoppingListPresenter < Presenter
   def shopping_list_presenter
     shopping_list.presenter(user: user, view_context: view_context)
   end
+
+  def items_json
+    #items.select(:id, :item_name, :archived)
+    to_hash[:items].to_json
+  end
 end
