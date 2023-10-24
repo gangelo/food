@@ -94,98 +94,170 @@ def seed_stores
 end
 
 def seed_items
-  Item.find_or_create_by(item_name: 'Almonds')
-  Item.find_or_create_by(item_name: 'Artichoke')
-  Item.find_or_create_by(item_name: 'Arugula')
-  Item.find_or_create_by(item_name: 'Bacon')
-  Item.find_or_create_by(item_name: 'Banana')
-  Item.find_or_create_by(item_name: 'Beef, chuck roast')
-  Item.find_or_create_by(item_name: 'Beef, ground')
-  Item.find_or_create_by(item_name: 'Beet, canned')
-  Item.find_or_create_by(item_name: 'Beet')
-  Item.find_or_create_by(item_name: 'Black pepper')
-  Item.find_or_create_by(item_name: 'Black pepper, corns')
-  Item.find_or_create_by(item_name: 'Broccoli')
-  Item.find_or_create_by(item_name: 'Broccoli, raab')
-  Item.find_or_create_by(item_name: 'Cabbage, napa')
-  Item.find_or_create_by(item_name: 'Carrot')
-  Item.find_or_create_by(item_name: 'Cauliflower')
-  Item.find_or_create_by(item_name: 'Cayenne pepper')
-  Item.find_or_create_by(item_name: 'Chicken, breast')
-  Item.find_or_create_by(item_name: 'Chicken, legs')
-  Item.find_or_create_by(item_name: 'Chicken, thighs')
-  Item.find_or_create_by(item_name: 'Chicken, whole')
-  Item.find_or_create_by(item_name: 'Chicken, wings')
-  Item.find_or_create_by(item_name: 'Chili powder')
-  Item.find_or_create_by(item_name: 'Chili powder, anchio')
-  Item.find_or_create_by(item_name: 'Cilantro, dried')
-  Item.find_or_create_by(item_name: 'Daikon')
-  Item.find_or_create_by(item_name: 'Dill, dried')
-  Item.find_or_create_by(item_name: 'Eggplant')
-  Item.find_or_create_by(item_name: 'Fennel')
-  Item.find_or_create_by(item_name: 'Fish, salmon')
-  Item.find_or_create_by(item_name: 'Fish, tilapia')
-  Item.find_or_create_by(item_name: 'Garlic powder')
-  Item.find_or_create_by(item_name: 'Garlic')
-  Item.find_or_create_by(item_name: 'Garlic, chopped')
-  Item.find_or_create_by(item_name: 'Garlic, fresh')
-  Item.find_or_create_by(item_name: 'Ginger, ground')
-  Item.find_or_create_by(item_name: 'Horseradish')
-  Item.find_or_create_by(item_name: 'Hot dogs')
-  Item.find_or_create_by(item_name: 'Iceberg Lettuce')
-  Item.find_or_create_by(item_name: 'Jicama')
-  Item.find_or_create_by(item_name: 'Kale')
-  Item.find_or_create_by(item_name: 'Lamb, chops')
-  Item.find_or_create_by(item_name: 'Lamb, leg')
-  Item.find_or_create_by(item_name: 'Leek')
-  Item.find_or_create_by(item_name: 'Macadamia nuts')
-  Item.find_or_create_by(item_name: 'Mushroom')
-  Item.find_or_create_by(item_name: 'Onion powder')
-  Item.find_or_create_by(item_name: 'Onion')
-  Item.find_or_create_by(item_name: 'Onion, purple')
-  Item.find_or_create_by(item_name: 'Onion, vadalia')
-  Item.find_or_create_by(item_name: 'Onion, white')
-  Item.find_or_create_by(item_name: 'Onion, yellow')
-  Item.find_or_create_by(item_name: 'Orgegano')
-  Item.find_or_create_by(item_name: 'Palenta')
-  Item.find_or_create_by(item_name: 'Parsley, dried')
-  Item.find_or_create_by(item_name: 'Pecans')
-  Item.find_or_create_by(item_name: 'Pepper')
-  Item.find_or_create_by(item_name: 'Pistachios')
-  Item.find_or_create_by(item_name: 'Pork, belly')
-  Item.find_or_create_by(item_name: 'Pork, chops')
-  Item.find_or_create_by(item_name: 'Pork, loin')
-  Item.find_or_create_by(item_name: 'Pork, ribs')
-  Item.find_or_create_by(item_name: 'Quinoa') # Technically a seed, but often used as a vegetable
-  Item.find_or_create_by(item_name: 'Radish')
-  Item.find_or_create_by(item_name: 'Red pepper, crushed')
-  Item.find_or_create_by(item_name: 'Romaine lettuce')
-  Item.find_or_create_by(item_name: 'Salt')
-  Item.find_or_create_by(item_name: 'Sausage, Italian hot')
-  Item.find_or_create_by(item_name: 'Sausage, Italian mild')
-  Item.find_or_create_by(item_name: 'Sausage, Italian sweet')
-  Item.find_or_create_by(item_name: 'Sausage, breakfast')
-  Item.find_or_create_by(item_name: 'Sesame seeds, black')
-  Item.find_or_create_by(item_name: 'Sesame seeds, white')
-  Item.find_or_create_by(item_name: 'Shrimp')
-  Item.find_or_create_by(item_name: 'Spinach')
-  Item.find_or_create_by(item_name: 'Steak, NY strip')
-  Item.find_or_create_by(item_name: 'Steak, T-bone')
-  Item.find_or_create_by(item_name: 'Steak, ribeye')
-  Item.find_or_create_by(item_name: 'Steak, sirloin')
-  Item.find_or_create_by(item_name: 'Turkey, ground')
-  Item.find_or_create_by(item_name: 'Turkey, whole')
-  Item.find_or_create_by(item_name: 'Turnip')
-  Item.find_or_create_by(item_name: 'Ugli Fruit') # Fruit, but used for the sake of example
-  Item.find_or_create_by(item_name: 'Vanilla bean')
-  Item.find_or_create_by(item_name: 'Vanilla extract')
-  Item.find_or_create_by(item_name: 'Walnuts')
-  Item.find_or_create_by(item_name: 'Watercress')
-  Item.find_or_create_by(item_name: 'Watermelon')
-  Item.find_or_create_by(item_name: 'White pepper')
-  Item.find_or_create_by(item_name: 'Yam')
-  Item.find_or_create_by(item_name: 'Zucchini')
+  items = {
+    'Almond' => %w[nuts],
+    'Artichoke' => %w[vegetables],
+    'Arugula' => %w[vegetables greens],
+    'Bacon' => %w[pork meat],
+    'Banana' => %w[fruits],
+    'Beef, chuck roast' => %w[beef meat],
+    'Beef, ground' => %w[beef meat],
+    'Beet, canned' => %w[vegetables canned],
+    'Beet' => %w[vegetables],
+    'Black pepper' => %w[spices],
+    'Black pepper, corns' => %w[spices],
+    'Broccoli' => %w[vegetables],
+    'Broccoli, raab' => %w[vegetables greens],
+    'Cabbage, napa' => %w[vegetables],
+    'Carrot' => %w[vegetables],
+    'Cauliflower' => %w[vegetables],
+    'Cayenne pepper' => %w[spices],
+    'Chicken, breast' => %w[chicken poultry meat],
+    'Chicken, legs' => %w[chicken poultry meat],
+    'Chicken, thighs' => %w[chicken poultry meat],
+    'Chicken, whole' => %w[chicken poultry meat],
+    'Chicken, wings' => %w[chicken poultry meat],
+    'Chili powder' => %w[spices],
+    'Chili powder, ancho' => %w[spices],
+    'Cilantro, dried' => %w[herbs spices],
+    'Daikon' => %w[vegetables],
+    'Dill, dried' => %w[herbs spices],
+    'Eggplant' => %w[vegetables],
+    'Fennel' => %w[vegetables herbs],
+    'Fish, salmon' => %w[fish seafood],
+    'Fish, tilapia' => %w[fish seafood],
+    'Garlic powder' => %w[spices],
+    'Garlic' => %w[vegetables spices],
+    'Garlic, chopped' => %w[vegetables spices],
+    'Garlic, fresh' => %w[vegetables spices],
+    'Ginger, ground' => %w[spices],
+    'Horseradish' => %w[spices condiments],
+    'Hot dogs' => %w[pork prepared meat],
+    'Iceberg lettuce' => %w[vegetables greens],
+    'Jicama' => %w[vegetables],
+    'Kale' => %w[vegetables greens],
+    'Lamb, chops' => %w[lamb meat],
+    'Lamb, leg' => %w[lamb meat],
+    'Leek' => %w[vegetables],
+    'Macadamia nuts' => %w[nuts],
+    'Mushroom' => %w[vegetables],
+    'Onion powder' => %w[spices],
+    'Onion' => %w[vegetables],
+    'Onion, purple' => %w[vegetables],
+    'Onion, vadalia' => %w[vegetables],
+    'Onion, white' => %w[vegetables],
+    'Onion, yellow' => %w[vegetables],
+    'Oregano' => %w[herbs spices],
+    'Palenta' => %w[grains],
+    'Parsley, dried' => %w[herbs spices],
+    'Pecans' => %w[nuts],
+    'Pepper' => %w[vegetables spices],
+    'Pistachios' => %w[nuts],
+    'Pork, belly' => %w[pork meat],
+    'Pork, chops' => %w[pork meat],
+    'Pork, loin' => %w[pork meat],
+    'Pork, ribs' => %w[pork meat],
+    'Pretzels' => %w[breads snacks],
+    'Quinoa' => %w[grains],
+    'Radish' => %w[vegetables],
+    'Red pepper, crushed' => %w[spices],
+    'Romaine lettuce' => %w[vegetables greens],
+    'Salt' => %w[spices],
+    'Sausage, Italian hot' => %w[pork prepared meat],
+    'Sausage, Italian mild' => %w[pork prepared meat],
+    'Sausage, Italian sweet' => %w[pork prepared meat],
+    'Sausage, breakfast' => %w[pork prepared meat],
+    'Sesame seeds, black' => %w[seeds],
+    'Sesame seeds, white' => %w[seeds],
+    'Shrimp' => %w[shellfish seafood],
+    'Spinach' => %w[vegetables greens],
+    'Steak, NY strip' => %w[beef meat],
+    'Steak, T-bone' => %w[beef meat],
+    'Steak, ribeye' => %w[beef meat],
+    'Steak, sirloin' => %w[beef meat],
+    'Turkey, ground' => %w[turkey poultry meat],
+    'Turkey, breast' => %w[turkey poultry meat],
+    'Walnuts' => %w[nuts],
+    'Wasabi' => %w[spices condiments],
+    'Yam' => %w[vegetables],
+    'Yogurt, Almond' => %w[yogurt vegan],
+    'Yogurt, Cashew' => %w[yogurt vegan],
+    'Yogurt, Coconut' => %w[yogurt vegan],
+    'Yogurt, Greek' => %w[dairy yogurt],
+    'Yogurt, plain' => %w[dairy yogurt],
+    'Yogurt, vanilla' => %w[dairy yogurt],
+    'Zucchini' => %w[vegetables]
+  }
+
+  items.each_pair do |item_name, item_labels|
+    new_item = Item.find_or_create_by(item_name: item_name)
+    new_item.item_labels = []
+    new_item.labels << Label.where(label_name: item_labels)
+  end
 end
+
+def seed_labels
+  food = %w[
+    baking
+    beans
+    beef
+    beverages
+    breads
+    canned
+    cereals
+    cheeses
+    chicken
+    condiments
+    dairy
+    deli
+    desserts
+    dried
+    edibles
+    eggs
+    fish
+    food
+    frozen
+    fruits
+    grains
+    herbs
+    lamb
+    legumes
+    meat
+    nuts
+    oils
+    organic
+    pasta
+    pork
+    prepared
+    produce
+    sauces
+    seafood
+    seeds
+    shellfish
+    snacks
+    soups
+    spices
+    sweets
+    turkey
+    vegetables
+    wholefoods
+    yogurt
+  ]
+  non_food = %w[
+    cleaning
+    hygiene
+    soap
+    toiletries
+  ]
+  labels = [*food, *non_food].sort
+
+  labels.each do |label|
+    Label.find_or_create_by(label_name: label)
+  end
+end
+
+puts 'Seeding labels...'
+seed_labels
 
 puts 'Seeding items...'
 seed_items

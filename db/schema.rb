@@ -10,9 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_14_121952) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_23_233740) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "item_labels", force: :cascade do |t|
+    t.bigint "item_id", null: false
+    t.bigint "label_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_item_labels_on_item_id"
+    t.index ["label_id"], name: "index_item_labels_on_label_id"
+  end
 
   create_table "items", force: :cascade do |t|
     t.string "item_name", limit: 64, default: "", null: false
@@ -20,6 +29,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_14_121952) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index "lower((item_name)::text)", name: "index_items_on_lower_item_name", unique: true
+  end
+
+  create_table "labels", force: :cascade do |t|
+    t.string "label_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index "lower((label_name)::text)", name: "index_labels_on_lower_label_name", unique: true
+    t.index ["label_name"], name: "index_labels_on_label_name", unique: true
   end
 
   create_table "shopping_lists", force: :cascade do |t|
@@ -113,6 +130,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_14_121952) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  add_foreign_key "item_labels", "items"
+  add_foreign_key "item_labels", "labels"
   add_foreign_key "stores", "states"
   add_foreign_key "user_shopping_list_items", "items"
   add_foreign_key "user_shopping_list_items", "user_shopping_lists"
