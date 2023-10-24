@@ -1,0 +1,14 @@
+
+<%= content_for :main_content do %>
+  <div data-controller="item-labels"
+       data-item-labels-item-labels="<%= @items.presenter.labels_json %>">
+    <div class="p-3 float-start" style="width: 200px; height: 500px;">
+      <div class="h3">Labels</div>
+      <div data-item-labels-target="selectedLabels">
+        <!-- Selected labels appear here -->
+      </div>
+    </div>
+    <%= yield %>
+  </div>
+<% end %>
+<%= render partial: 'layouts/base_layout' %>

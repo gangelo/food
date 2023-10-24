@@ -16,6 +16,9 @@ application.register("flash", FlashController)
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
+import ItemLabelsController from "./item_labels_controller"
+application.register("item-labels", ItemLabelsController)
+
 import ModalController from "./modal_controller"
 application.register("modal", ModalController)
 
