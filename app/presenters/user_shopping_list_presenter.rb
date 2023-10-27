@@ -8,7 +8,6 @@ class UserShoppingListPresenter < Presenter
   end
 
   def items_json
-    #items.select(:id, :item_name, :archived)
     to_hash[:items].to_json
   end
 end

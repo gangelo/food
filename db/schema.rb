@@ -33,6 +33,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_23_233740) do
 
   create_table "labels", force: :cascade do |t|
     t.string "label_name"
+    t.boolean "archived", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index "lower((label_name)::text)", name: "index_labels_on_lower_label_name", unique: true

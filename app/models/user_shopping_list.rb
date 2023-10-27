@@ -13,8 +13,6 @@ class UserShoppingList < ApplicationRecord
   accepts_nested_attributes_for :shopping_list
   accepts_nested_attributes_for :user_shopping_list_items
 
-  # validate :shopping_list_items_required
-
   attr_accessor :query
 
   def to_hash
@@ -34,6 +32,7 @@ class UserShoppingList < ApplicationRecord
 
   private
 
+  # TODO: Put this in a mixin.
   def sorted_items
     items.order(item_name: :asc).map do |item|
       {
@@ -43,10 +42,4 @@ class UserShoppingList < ApplicationRecord
       }
     end
   end
-
-  # def shopping_list_items_required
-  #   return unless items.empty?
-
-  #   errors.add(:base, 'Shopping lists must have at least one item')
-  # end
 end

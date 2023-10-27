@@ -2,6 +2,8 @@
 
 # The controller for Items.
 class ItemsController < ApplicationController
+  include ItemSearchConcern
+
   before_action :authenticate_user!
   before_action :set_item, only: %i[show edit update archive unarchive]
 
@@ -80,8 +82,12 @@ class ItemsController < ApplicationController
 
   # GET /items/search
   def search
-    @items = Item.where('item_name ILIKE ?', "%#{params[:query]}%").order(:item_name)
-    render partial: 'shared/item_search_results', locals: { items: @items }, layout: false
+    locals = {
+      search_results: @search_results,
+      javascript_controller: 'shopping-list-items'
+    }
+    render partial: 'shared/item_search_results', locals: locals, layout: false
+
   end
 
   private

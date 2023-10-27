@@ -1,0 +1,33 @@
+<%#= content_tag(:div, "_label.html.erb: label.class: #{label.class.name}, inspect: #{label.inspect}") %>
+<tr id="<%= dom_id label %>" >
+  <th scope="row"><%= pager_params.page_offset + label_counter + 1 %></th>
+  <td><%= label.display_name %></td>
+  <td class="text-center"><%= label.display_archived %></td>
+  <td>
+    <div class="fixed-width-buttons d-flex justify-content-center">
+      <%= form_tag edit_label_path(label), method: :get do |f| %>
+        <%= button_tag(type: :submit, class: "btn btn-outline-primary btn-sm ms-1") do %>
+          <i class="bi bi-bookmark-fill"></i> Edit
+        <% end %>
+      <% end %>
+      <%= form_tag label_path(label), method: :get do |f| %>
+        <%= button_tag(type: :submit, class: "btn btn-outline-primary btn-sm ms-1") do %>
+          <i class="bi bi-eye-fill"></i> View
+        <% end %>
+      <% end %>
+      <% if label.archived? %>
+        <%= form_tag unarchive_label_path(label), method: :post  do |f| %>
+          <%= button_tag(type: :submit, class: "btn btn-outline-success btn-sm ms-1") do %>
+            <i class="bi bi-cart-check-fill"></i> Unarchive
+          <% end %>
+        <% end %>
+      <% else %>
+        <%= form_tag archive_label_path(label), method: :post do |f| %>
+          <%= button_tag(type: :submit, class: "btn btn-outline-danger btn-sm ms-1") do %>
+            <i class="bi bi-archive-fill"></i> Archive
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+  </td>
+</tr>

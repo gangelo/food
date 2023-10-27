@@ -1,6 +1,6 @@
 import { Controller } from "@hotwired/stimulus";
 
-// Connects to data-controller="label-labels"
+// Connects to data-controller="item-labels"
 export default class extends Controller {
   static targets = [
     "input",

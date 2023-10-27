@@ -1,0 +1,9 @@
+<%= render "labels/form",
+    postback_path: label_path,
+    method: :patch,
+    label: @label,
+    header_text: "Edit Label",
+    header_icon: "bi-bookmark-fill",
+    submit_button_text: "Save label",
+    back_path: labels_path
+%>

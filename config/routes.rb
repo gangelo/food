@@ -49,5 +49,11 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :labels, except: %i[destroy] do
+    post 'archive', on: :member
+    post 'unarchive', on: :member
+    get 'search', on: :collection
+  end
+
   devise_for :users
 end

@@ -1,0 +1,26 @@
+<%#= content_tag(:div, "_labels.html.erb: #{labels.class.name}") %>
+<table id="labels" class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col" class="text-center">Archived?</th>
+      <th scope="col" class="text-center">Actions</th>
+    </tr>
+  </thead>
+  <thead data-target="filter" class="d-none">
+    <tr>
+      <th scope="col"></th>
+      <th data-type="label_name" scope="col">
+        <!-- label_name search input box -->
+      </th>
+      <th data-type="archived" scope="col">
+        <!-- archived search input box -->
+      </th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody data-target="filter">
+    <%= render partial: 'label', collection: labels.presenters, locals: { pager_params: pager_params } %>
+  </tbody>
+</table>

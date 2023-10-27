@@ -1,14 +1,14 @@
-<% items.each_slice(2) do |slice| %>
+<% search_results.each_slice(2) do |slice| %>
   <div class="row">
     <% slice.each do |item| %>
       <div class="col">
         <%= check_box_tag 'item_ids[]',
                           item.id,
-                          @selected_item_ids&.include?(item.id),
+                          false,
                           id: "item_ids_#{item.id}",
 
               data: {
-                action: "change->shopping-list-items#select",
+                action: "change->#{javascript_controller}#select",
                 item_name: item.item_name
               }
         %>

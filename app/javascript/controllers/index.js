@@ -19,6 +19,9 @@ application.register("hello", HelloController)
 import ItemLabelsController from "./item_labels_controller"
 application.register("item-labels", ItemLabelsController)
 
+import LabelItemsController from "./label_items_controller"
+application.register("label-items", LabelItemsController)
+
 import ModalController from "./modal_controller"
 application.register("modal", ModalController)
 
