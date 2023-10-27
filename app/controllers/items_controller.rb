@@ -87,7 +87,6 @@ class ItemsController < ApplicationController
       javascript_controller: 'shopping-list-items'
     }
     render partial: 'shared/item_search_results', locals: locals, layout: false
-
   end
 
   private

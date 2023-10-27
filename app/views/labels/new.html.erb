@@ -1,7 +1,8 @@
-<%= render "items/form",
-    item: @item,
-    header_text: "New Item",
-    header_icon: "bi-cart-fill",
-    submit_button_text: "Create item",
-    back_path: items_path
+<%= render "labels/form",
+    postback_path: labels_path,
+    label: @label,
+    header_text: "New Label",
+    header_icon: "bi-bookmark",
+    submit_button_text: "Save label",
+    back_path: labels_path
 %>

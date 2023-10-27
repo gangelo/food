@@ -14,7 +14,7 @@ store_presenter = user_store.store.presenter(user: current_user, view_context: n
       <div class="d-flex justify-content-center">
         <%= simple_form_for user_store, url: add_user_stores_path, method: :post  do |f| %>
           <%= button_tag(type: :submit, class: "btn btn-outline-primary btn-sm") do %>
-            <i class="bi bi-building-fill-check"></i> Add
+            <i class="bi bi-building-check"></i> Add
           <% end %>
           <%= hidden_field_tag :page, pager_params.current_page %>
           <%= f.association :store, as: :hidden, input_html: { value: user_store.store_id } %>
@@ -23,11 +23,11 @@ store_presenter = user_store.store.presenter(user: current_user, view_context: n
     <% else %>
       <div class="d-flex align-items-center justify-content-center">
         <%= link_to user_store_path(user_store), class: "btn btn-outline-primary btn-sm me-1" do %>
-          <i class="bi bi-eye-fill"></i> View
+          <i class="bi bi-eye"></i> View
         <% end %>
         <%= simple_form_for user_store, url: user_store_path(user_store), method: :delete do |f| %>
           <%= button_tag(type: :submit, class: "btn btn-outline-danger btn-sm ms-1") do %>
-            <i class="bi bi-trash-fill"></i> Remove
+            <i class="bi bi-trash"></i> Remove
           <% end %>
         <% end %>
       </div>

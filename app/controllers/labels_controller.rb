@@ -5,7 +5,7 @@ class LabelsController < ApplicationController
   include ItemSearchConcern
 
   before_action :authenticate_user!
-  before_action :set_label, only: %i[edit update]
+  before_action :set_label, only: %i[edit update archive unarchive]
 
   # GET /labels or /labels.json
   def index
@@ -31,7 +31,7 @@ class LabelsController < ApplicationController
 
   # GET /labels/new
   def new
-    label = Label.build
+    label = Label.new
     @label = PresenterDecorator.new(resource: label, user: current_user, view_context: view_context)
     render layout: 'label'
   end
@@ -43,7 +43,7 @@ class LabelsController < ApplicationController
 
   # POST /labels or /labels.json
   def create
-    @label = Label.build(label_params)
+    @label = Label.new(label_params)
     if @label.save
       redirect_to labels_url, notice: 'Label was successfully created.'
     else
@@ -95,6 +95,26 @@ class LabelsController < ApplicationController
     render partial: 'shared/item_search_results', locals: locals, layout: false
   end
 
+  # POST /labels/1 or /labels/1.json
+  def archive
+    @label.archive!
+
+    respond_to do |format|
+      format.html { redirect_to labels_url, notice: 'Label was successfully archived.' }
+      format.json { head :no_content }
+    end
+  end
+
+  # POST /labels/1 or /labels/1.json
+  def unarchive
+    @label.unarchive!
+
+    respond_to do |format|
+      format.html { redirect_to labels_url, notice: 'Label was successfully unarchived.' }
+      format.json { head :no_content }
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -112,5 +132,4 @@ class LabelsController < ApplicationController
       item_labels_attributes: [:item_id]
     )
   end
-
 end

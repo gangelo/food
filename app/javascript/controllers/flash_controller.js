@@ -36,30 +36,30 @@ export default class extends Controller {
     if (flashJson.notice) {
       return {
         alertClass: "alert-success",
-        iconClass: "bi-check-circle-fill",
+        iconClass: "bi-check-circle",
         message: flashJson.notice,
-        closeClass: "bi-x-circle-fill",
+        closeClass: "bi-x-circle",
       };
     } else if (flashJson.warn) {
       return {
         alertClass: "alert-warning",
-        iconClass: "bi-exclamation-triangle-fill",
+        iconClass: "bi-exclamation-triangle",
         message: flashJson.warn,
-        closeClass: "bi-x-circle-fill",
+        closeClass: "bi-x-circle",
       };
     } else if (flashJson.alert) {
       return {
         alertClass: "alert-danger",
-        iconClass: "bi-exclamation-octagon-fill",
+        iconClass: "bi-exclamation-octagon",
         message: flashJson.alert,
-        closeClass: "bi-x-circle-fill",
+        closeClass: "bi-x-circle",
       };
     } else if (flashJson.info) {
       return {
         alertClass: "alert-info",
-        iconClass: "bi-info-circle-fill",
+        iconClass: "bi-info-circle",
         message: flashJson.info,
-        closeClass: "bi-x-circle-fill",
+        closeClass: "bi-x-circle",
       };
     }
   }

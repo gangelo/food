@@ -3,7 +3,7 @@ add_an_item_button_text = "Add an item"
 %>
 <main class="form form-list-items m-auto">
   <div data-controller="filter">
-    <div class="h1 mb-3 fw-normal"><i class="bi bi-cart-fill"></i> Items</div>
+    <div class="h1 mb-3 fw-normal"><i class="bi bi-cart"></i> Items</div>
     <%= render partial: "items", object: @items, locals: { pager_params: @pager_params } %>
   </div>
   <% unless @items.any? %>
@@ -11,7 +11,7 @@ add_an_item_button_text = "Add an item"
     There are currently no items.
     You can add one by clicking the
     <strong>
-      <i class="bi bi-cart-check-fill"></i> <%= add_an_item_button_text %>
+      <i class="bi bi-cart-check"></i> <%= add_an_item_button_text %>
     </strong>
     button below.
   </div>
@@ -22,6 +22,6 @@ add_an_item_button_text = "Add an item"
 
 <div class="help-links">
   <%= link_to new_item_path, class: "btn btn-primary" do %>
-    <i class="bi bi-cart-check-fill"></i> <%= add_an_item_button_text %>
+    <i class="bi bi-cart-check"></i> <%= add_an_item_button_text %>
   <% end %>
 </div>

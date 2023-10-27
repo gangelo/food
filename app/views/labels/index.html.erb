@@ -3,7 +3,7 @@ add_a_label_button_text = "Add a label"
 %>
 <main class="form form-list-labels m-auto">
   <div data-controller="filter">
-    <div class="h1 mb-3 fw-normal"><i class="bi bi-bookmark-fill"></i> Labels</div>
+    <div class="h1 mb-3 fw-normal"><i class="bi bi-bookmark"></i> Labels</div>
     <%= render partial: "labels", object: @labels, locals: { pager_params: @pager_params } %>
   </div>
   <% unless @labels.any? %>
@@ -11,7 +11,7 @@ add_a_label_button_text = "Add a label"
     There are currently no labels.
     You can add one by clicking the
     <strong>
-      <i class="bi bi-bookmark-check-fill"></i> <%= add_a_label_button_text %>
+      <i class="bi bi-bookmark-check"></i> <%= add_a_label_button_text %>
     </strong>
     button below.
   </div>
@@ -22,6 +22,6 @@ add_a_label_button_text = "Add a label"
 
 <div class="help-links">
   <%= link_to new_label_path, class: "btn btn-primary" do %>
-    <i class="bi bi-bookmark-check-fill"></i> <%= add_a_label_button_text %>
+    <i class="bi bi-bookmark-check"></i> <%= add_a_label_button_text %>
   <% end %>
 </div>

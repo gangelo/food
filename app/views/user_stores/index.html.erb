@@ -1,13 +1,13 @@
 <%#= content_tag(:div, "index.html.erb: #{@resource.class.name}") %>
 <main class="form form-list-stores m-auto">
   <div data-controller="filter">
-    <div class="h1 mb-3 fw-normal"><i class="bi bi-building-fill"></i>My Stores</div>
+    <div class="h1 mb-3 fw-normal"><i class="bi bi-building"></i>My Stores</div>
     <%= render partial: "user_stores", object: @resource, locals: { mode: :list } %>
   </div>
   <% unless @resource.any? %>
     <div>
       You currently have no stores. You can add one by clicking the
-      <strong><i class="bi bi-building-fill-check"></i> Add a store</strong> button below.
+      <strong><i class="bi bi-building-check"></i> Add a store</strong> button below.
     </div>
   <% end %>
 </main>
@@ -16,6 +16,6 @@
 
 <div class="help-links">
   <%= link_to add_user_stores_path, class: "btn btn-primary" do %>
-    <i class="bi bi-building-fill-check"></i> Add a store
+    <i class="bi bi-building-check"></i> Add a store
   <% end %>
 </div>

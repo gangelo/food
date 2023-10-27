@@ -26,12 +26,12 @@
             <% end %>
             <%= form_tag shopping_list_path(shopping_list), method: :get  do |f| %>
               <%= button_tag(type: :submit, class: "btn btn-outline-primary btn-sm ms-1") do %>
-                <i class="bi bi-journal-bookmark-fill"></i> View
+                <i class="bi bi-journal-bookmark"></i> View
               <% end %>
             <% end %>
             <%= form_tag shopping_list_path(shopping_list), method: :delete do |f| %>
               <%= button_tag(type: :submit, class: "btn btn-outline-danger btn-sm ms-1") do %>
-                <i class="bi bi-trash-fill"></i> Delete
+                <i class="bi bi-trash"></i> Delete
               <% end %>
             <% end %>
           </div>
