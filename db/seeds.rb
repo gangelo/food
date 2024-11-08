@@ -98,6 +98,7 @@ def seed_items
     'Almond' => %w[nuts],
     'Artichoke' => %w[vegetables],
     'Arugula' => %w[vegetables greens],
+    'Avocado' => %w[fruit berries],
     'Bacon' => %w[pork meat],
     'Banana' => %w[fruits],
     'Beef, chuck roast' => %w[beef meat],
@@ -201,6 +202,7 @@ def seed_labels
     baking
     beans
     beef
+    berries
     beverages
     breads
     canned
@@ -267,5 +269,17 @@ seed_us_states
 
 puts 'Seeding stores...'
 seed_stores
+
+if Rails.env.development?
+  puts 'Seeding users...'
+  User.find_or_create_by(username: 'gangelo').tap do |user|
+    user.first_name = 'Gene'
+    user.last_name = 'Angelo'
+    user.email = 'public.gma@gmail.com'
+    user.password = 'P@ssword1'
+    user.password_confirmation = user.password
+    user.save!
+  end
+end
 
 puts 'Done.'
