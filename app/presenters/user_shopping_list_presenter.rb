@@ -8,6 +8,10 @@ class UserShoppingListPresenter < Presenter
   end
 
   def items_json
-    to_hash[:items].to_json
+    items_hash.to_json
+  end
+
+  def items_hash
+    to_hash[:items]
   end
 end

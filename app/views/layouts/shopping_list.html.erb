@@ -1,14 +1,5 @@
 
 <%= content_for :main_content do %>
-  <div data-controller="shopping-list-items"
-       data-shopping-list-items-shopping-list-items="<%= @user_shopping_list.presenter.items_json %>">
-    <div class="p-3 float-start" style="width: 200px; height: 500px;">
-      <div class="h3">Items</div>
-      <div data-shopping-list-items-target="selectedItems">
-        <!-- Selected items appear here -->
-      </div>
-    </div>
-    <%= yield %>
-  </div>
+  <%= yield%>
 <% end %>
 <%= render partial: 'layouts/base_layout' %>

@@ -58,6 +58,8 @@ class UserShoppingListsController < ApplicationController
   # PATCH/PUT /user/shopping_lists/1 or /user/shopping_lists/1.json
   def update
     ActiveRecord::Base.transaction do
+      Rails.logger.info("xyzzy: user_shopping_list_params: #{user_shopping_list_params}")
+
       @user_shopping_list.user_shopping_list_items.clear
       if @user_shopping_list.update(user_shopping_list_params)
         redirect_to user_shopping_lists_url, notice: 'Shopping list was successfully updated.'

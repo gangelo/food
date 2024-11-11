@@ -9,23 +9,23 @@ export default class extends Controller {
   DESC = "desc";
 
   connect() {
-    const json = this.data.get("shoppingListItems");
-    if (!json) return;
+    // const json = this.data.get("shoppingListItems");
+    // if (!json) return;
 
-    console.log("json", json);
+    // console.log("json", json);
 
-    const shoppingListItems = JSON.parse(json);
+    // const shoppingListItems = JSON.parse(json);
 
-    console.log("shoppingListItems", shoppingListItems);
+    // console.log("shoppingListItems", shoppingListItems);
 
-    if (shoppingListItems) {
-      shoppingListItems.forEach((shoppingListItem) => {
-        this.addSelectedItemButton(
-          shoppingListItem.id,
-          shoppingListItem.item_name
-        );
-      });
-    }
+    // if (shoppingListItems) {
+    //   shoppingListItems.forEach((shoppingListItem) => {
+    //     this.addSelectedItemButton(
+    //       shoppingListItem.id,
+    //       shoppingListItem.item_name
+    //     );
+    //   });
+    // }
   }
 
   shoppingListItemsSearch() {

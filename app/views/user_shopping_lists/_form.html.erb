@@ -3,80 +3,126 @@ method ||= :post
 shopping_list_presenter = user_shopping_list.presenter.shopping_list_presenter
 %>
 <main class="form form-shopping-list">
-  <%= simple_form_for(user_shopping_list,
-                                    url: postback_path,
-                                    method: method,
-                                    wrapper: :horizontal_form) do |f| %>
-    <div class="h1 mb-3 fw-normal">
-      <i class="bi <%= header_icon %>"></i>
-      <%= header_text %>
-    </div>
+  <div data-controller="shopping-list-items"
+    data-shopping-list-items-shopping-list-items="<%= @user_shopping_list.presenter.items_json %>">
+    <%= simple_form_for(user_shopping_list,
+                                      url: postback_path,
+                                      method: method,
+                                      wrapper: :horizontal_form) do |f| %>
+      <div data-shopping-list-items-target="selectedItemIdsContainer" class="d-none">
+        <% @user_shopping_list.presenter.items_hash.each do |item| %>
+          <input type="hidden"
+              name="user_shopping_list[user_shopping_list_items_attributes][][item_id]"
+              id="user_shopping_list_user_shopping_list_items_attributes_<%=item[:id]%>_item_id"
+              value="<%=item[:id]%>"
+          >
+        <% end %>
+      </div>
+      <div class="h1 mb-3 fw-normal">
+        <i class="bi <%= header_icon %>"></i>
+        <%= header_text %>
+      </div>
 
-    <% if f.object.errors[:base].present? %>
-      <div class="row mb-3">
-        <div class="col-sm-12 col-md-9 col-lg-7">
-          <%= render partial: "shared/flash_message",
-                      locals: {
-                        flash_type: "alert",
-                        flash_message: f.object.errors[:base].to_sentence
+      <% if f.object.errors[:base].present? %>
+        <div class="row mb-3">
+          <div class="col-sm-12 col-md-9 col-lg-7">
+            <%= render partial: "shared/flash_message",
+                        locals: {
+                          flash_type: "alert",
+                          flash_message: f.object.errors[:base].to_sentence
+                        }
+            %>
+          </div>
+        </div>
+      <% end %>
+      <%= f.simple_fields_for :shopping_list do |shopping_list| %>
+        <%= shopping_list.input :shopping_list_name,
+                required: true,
+                label: "Name",
+                autofocus: true
+        %>
+        <div data-controller="date-picker" data-date-picker-init-date="<%#= shopping_list.display_week_of %>" class="form-inputs">
+          <%= shopping_list.input :week_of, as: :string,
+                      required: true,
+                      input_html: {
+                        value: shopping_list_presenter.display_week_of,
+                        autocomplete: "off",
+                        class: 'datepicker form-control'
                       }
           %>
+          <div class="form-group row">
+            <%= shopping_list.label :template, class: 'col-sm-2 col-md-2 col-lg-2 col-form-label' %>
+            <div class="col-sm-9">
+              <%= shopping_list.input :template, as: :boolean, label: false, wrapper: false, class: 'form-check-input' %>
+            </div>
+          </div>
+        </div>
+        <%= shopping_list.input :notes %>
+      <% end%>
+
+      <div class="row mb-3 string">
+        <div class="col-sm-2 col-md-2 col-lg-2 col-form-label string optional required">Items <abbr title='required'>*</abbr></div>
+        <div class="col-sm-10 col-md-7 col-lg-5">
+          <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#searchModal">
+            <i class="bi bi-search"></i>&nbsp;Search
+            <span class="visually-hidden">Open Search Modal</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="row mb-3 string">
+        <div class="col-sm-2 col-md-2 col-lg-2 col-form-label string optional required">&nbsp;</div>
+        <div class="col-sm-10 col-md-7 col-lg-5">
+          <div data-shopping-list-items-target="selectedItems">
+            <% @user_shopping_list.presenter.items_hash.each do |item| %>
+              <div id="user_shopping_list_user_shopping_list_items_attributes_<%=item[:id]%>_item_id" class="selected-item btn-group" role="group">
+                <div class="btn-group" role="group">
+                  <button type="button" class="m-1 btn btn-sm btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-item-id="<%=item[:id]%>">
+                    <%=item[:item_name]%>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a class="dropdown-item" href="#" data-action="click->shopping-list-items#removeSelectedItem" data-item-id="<%=item[:id]%>">
+                        Remove
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-sm-2 col-md-2 col-lg-2 col-form-label">
+            <%= f.button :submit,
+                          submit_button_text,
+                          class: "btn btn-primary"
+            %>
+            <div class="help-links">
+              <%= link_to "Back", back_path %>
+            </div>
         </div>
       </div>
     <% end %>
-    <%= f.simple_fields_for :shopping_list do |shopping_list| %>
-      <%= shopping_list.input :shopping_list_name,
-              required: true,
-              label: "Name",
-              autofocus: true
-      %>
-      <div data-controller="date-picker" data-date-picker-init-date="<%#= shopping_list.display_week_of %>" class="form-inputs">
-        <%= shopping_list.input :week_of, as: :string,
-                    required: true,
-                    input_html: {
-                      value: shopping_list_presenter.display_week_of,
-                      autocomplete: "off",
-                      class: 'datepicker form-control'
-                    }
-        %>
-        <div class="form-group row">
-          <%= shopping_list.label :template, class: 'col-sm-2 col-md-2 col-lg-2 col-form-label' %>
-          <div class="col-sm-9">
-            <%= shopping_list.input :template, as: :boolean, label: false, wrapper: false, class: 'form-check-input' %>
+
+    <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="searchModalLabel">Search Items</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3 search_query">
+              <input class="form-control string required" data-action="input->shopping-list-items#shoppingListItemsSearch" data-shopping-list-items-target="input" placeholder="Search for items to add to your shopping list" type="text" name="search[query]" id="search_query">
+            </div>
+            <div data-shopping-list-items-target="results" class="col-sm-10 col-md-7 col-lg-5">
+            </div>
           </div>
         </div>
       </div>
-      <%= shopping_list.input :notes %>
-    <% end%>
-
-    <!-- Type ahead search -->
-    <%= f.input :query,
-                label: "Items <abbr title='required'>*</abbr>".html_safe,
-                label_html: { class: "required" },
-                placeholder: "Search for items to add to your shopping list",
-                autocomplete: "off",
-                input_html: {
-                  data: {
-                    action: "input->shopping-list-items#shoppingListItemsSearch",
-                    shopping_list_items_target: "input"
-                  }
-                }
-    %>
-
-    <div class="row mb-3">
-      <div class="col-sm-2 col-md-2 col-lg-2 col-form-label">
-          <%= f.button :submit,
-                        submit_button_text,
-                        class: "btn btn-primary"
-          %>
-          <div class="help-links">
-            <%= link_to "Back", back_path %>
-          </div>
-      </div>
-      <div data-shopping-list-items-target="results" class="col-sm-10 col-md-7 col-lg-5">
-      </div>
     </div>
-    <div data-shopping-list-items-target="selectedItemIdsContainer" class="d-none">
-    </div>
-  <% end %>
+  </div>
 </main>
